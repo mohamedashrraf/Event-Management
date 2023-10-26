@@ -9,15 +9,16 @@ import { FooterComponent } from './footer/footer.component';
 @NgModule({
   declarations: [
     NavbarComponent,
-    NotfoundComponent,
-    FooterComponent
+    FooterComponent,
+    NotfoundComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
     NavbarComponent,
-    NotfoundComponent,
+    FooterComponent,
+    NotfoundComponent
   ]
 })
 export class SharedModule { }
