@@ -1,0 +1,33 @@
+
+// satrt header 
+.welcome-area{
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../../../assets/images/banner.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+}
+.text-content{
+    text-align: center;
+    color: var(--text-color);
+}
+.btn-feat{
+    padding: 11px 20px;
+    color: var(--text-color);
+    background-color: var(--main-color);
+    border: 0;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    transition: .3s;
+}
+.btn-feat:hover{
+    background-color: var(--main-alt-color) ;
+}
+// end header 
