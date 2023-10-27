@@ -1,3 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
-// @import 'bootstrap/dist/css/bootstrap.css';
 @import "~@fortawesome/fontawesome-free/css/all.css";
+
+:root{
+  --main-color : #ff0098;
+  --main-alt-color : #d60a84;
+  --green-color : #22c55e;
+  --red-color : #f44336;
+  --gray-color : #888;
+  --text-color : #FFF
+}
+* {
+  box-sizing: border-box;
+  font-family: "Berkshire Swash", serif;
+  font-family: "Open Sans", sans-serif;
+}
+::-webkit-scrollbar{
+  width: 15px;
+}
+::-webkit-scrollbar-track{
+  background-color: var(--text-color)
+}
+::-webkit-scrollbar-thumb{
+  background-color: var(--main-color);
+}
+::-webkit-scrollbar-thumb:hover{
+  background-color: var(--main-alt-color)
+}
