@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 
@@ -21,6 +23,40 @@ function passwordMatchValidator(control: AbstractControl): { [key: string]: bool
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit{
+   registrationForm!: FormGroup;
 
+  constructor(private fb: FormBuilder,private router: Router) { }
+
+  ngOnInit(): void {
+    this.registrationForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      username: ['', [Validators.required, Validators.pattern(/^\S*$/)]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@*%$#])[A-Za-z\d@*%$#]+$/)
+        ]
+      ],
+      confirmPassword: ['', Validators.required]
+    }, {
+      validator: passwordMatchValidator
+    });
+  }
+
+  onSubmit() {
+    if (this.registrationForm.valid) {
+      console.log('Registration successful!');
+      console.log(this.registrationForm.value);
+    } else {
+      console.log('Form has validation errors.');
+    }
+  }
+
+   redirectToLogin() {
+    this.router.navigate(['login']);
+  }
 }
