@@ -1,0 +1,72 @@
+<div class="login">
+  <div class="container w-50">
+    <form #loginForm="ngForm" (ngSubmit)="handleFormSubmit(loginForm)">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          ngModel
+          name="email"
+          #email="ngModel"
+          required
+          minlength="3"
+        />
+        <div
+          id="emailHelp"
+          class="form-text text-danger"
+          *ngIf="email.touched && email.invalid"
+        >
+          <span *ngIf="email.errors?.['required']">E-mail is required</span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+          ngModel
+          name="password"
+          #password="ngModel"
+          required
+          minlength="8"
+        />
+        <div
+          id="password"
+          class="form-text text-danger"
+          *ngIf="password.touched && password.invalid"
+        >
+          <span *ngIf="password.errors?.['required']"
+            >Password is required</span
+          >
+          <span *ngIf="password.errors?.['minlength']"
+            >Min Length is 8 characters</span
+          >
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="loginForm.invalid"
+      >
+        Submit
+      </button>
+    </form>
+
+    <div class="text-center" style="margin-top: 200px">
+      <h5>
+        Don't have accout?
+        <a
+          (click)="redirectToSignup()"
+          routerLinkActive="text-primary"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Signup</a
+        >
+      </h5>
+    </div>
+  </div>
+</div>
