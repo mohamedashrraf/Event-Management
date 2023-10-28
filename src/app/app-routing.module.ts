@@ -7,7 +7,7 @@ import { NotfoundComponent } from './shared/notfound/notfound.component';
 
 const routes: Routes = [
   {
-    path: "home",
+    path: "",
     component: EventHomeComponent,
   },
   {
