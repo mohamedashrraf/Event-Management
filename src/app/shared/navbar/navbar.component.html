@@ -19,17 +19,29 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item pe-2">
-          <a class="nav-link" routerLink="/" routerLinkActive="activate"
+          <a
+            class="nav-link"
+            routerLink="/"
+            routerLinkActive="activate"
+            [routerLinkActiveOptions]="{ exact: true }"
             >Home</a
           >
         </li>
         <li class="nav-item pe-2">
-          <a class="nav-link" routerLink="/login" routerLinkActive="activate"
+          <a
+            class="nav-link"
+            routerLink="/login"
+            routerLinkActive="activate"
+            [routerLinkActiveOptions]="{ exact: true }"
             >Login</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/signup" routerLinkActive="activate"
+          <a
+            class="nav-link"
+            routerLink="/signup"
+            routerLinkActive="activate"
+            [routerLinkActiveOptions]="{ exact: true }"
             >SignUp</a
           >
         </li>
