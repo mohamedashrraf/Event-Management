@@ -1,8 +1,11 @@
 <div class="login">
-  <div class="container w-50">
+  <div class="container w-25">
     <form #loginForm="ngForm" (ngSubmit)="handleFormSubmit(loginForm)">
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email</label>
+        
+        <label for="exampleInputEmail1" class="form-label"> <i class="fa-solid fa-envelope"></i> Email</label>
+        
+
         <input
           type="email"
           class="form-control"
@@ -23,7 +26,8 @@
         </div>
       </div>
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <label for="exampleInputPassword1" class="form-label">  <i class="fa-solid fa-lock"></i>  Password</label>
+       
         <input
           type="password"
           class="form-control"
@@ -47,14 +51,15 @@
           >
         </div>
       </div>
-
-      <button
-        type="submit"
-        class="btn btn-primary"
-        [disabled]="loginForm.invalid"
-      >
-        Submit
-      </button>
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="loginForm.invalid"
+        >
+          Submit
+        </button>
+      </div>  
     </form>
 
     <div class="text-center" style="margin-top: 200px">
