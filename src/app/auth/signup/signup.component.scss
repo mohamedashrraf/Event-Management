@@ -640,19 +640,48 @@
 //   }
 // }
 
-.register {
+.main {
+  padding-top: 66px; // To fit the navigation bar
+  position: relative;
+}
+
+.register-background {
   background-image: url("../../../assets/images/sign.jpeg");
   background-position: center right;
   background-repeat: no-repeat;
-  min-height: 80vh;
+  position: absolute;
+  min-width: 100%;
+  min-height: calc(100% - 66px);
+}
+.register {
+  backdrop-filter: blur(1px) brightness(0.96);
 }
 .form-container {
-  width: 30%;
-  margin: 2rem 0;
-  transform: translateX(90%);
+  padding: 4rem 0;
+  width: 40%;
+  transform: translateX(50%);
 }
 
 .disable {
   cursor: not-allowed;
   pointer-events: unset;
+}
+
+@media screen and (max-width: 901px) {
+  .form-container {
+    padding: 4rem 2rem 4rem;
+    width: 60%;
+    transform: translateX(0);
+  }
+}
+@media screen and (max-width: 768px) {
+  .form-container {
+    padding: 4rem;
+    width: 100%;
+    transform: translateX(0);
+  }
+
+  .register-background {
+    background-image: unset;
+  }
 }

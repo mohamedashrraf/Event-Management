@@ -1,17 +1,49 @@
-.login {
+.main {
+  padding-top: 66px; // To fit the navigation bar
+  min-height: calc(100vh - 52.8px); // To fit the footer
+  position: relative;
+}
+
+.login-background {
   background-image: url("../../../assets/images/login.jpeg");
   background-repeat: no-repeat;
   background-position: center right;
-  min-height: 80vh;
+  position: absolute;
+  width: 100%;
+  min-height: calc(100% - 66px);
+}
+
+.login {
+  backdrop-filter: blur(1px) brightness(0.96);
+  min-height: calc(100vh - (52.8px + 66px));
 }
 
 .form-container {
-  min-height: 100%;
-  width: 30%;
-  transform: translate(90%, 40%);
+  padding: 4rem 0;
+  transform: translateX(50%);
+  width: 40%;
 }
 
 .disable {
   cursor: not-allowed;
   pointer-events: unset;
+}
+
+@media screen and (max-width: 901px) {
+  .form-container {
+    padding: 4rem 2rem 4rem;
+    width: 60%;
+    transform: translateX(0);
+  }
+}
+@media screen and (max-width: 768px) {
+  .form-container {
+    padding: 4rem;
+    width: 100%;
+    transform: translateX(0);
+  }
+
+  .login-background {
+    background-image: unset;
+  }
 }

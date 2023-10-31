@@ -1,4 +1,6 @@
-footer{
-    background-color: var(--main-alt-color);
-    box-shadow: 0px 0px 40px 4px rgba(255, 2, 238, 0.338);
+footer {
+  background-color: var(--main-alt-color);
+  box-shadow: 0px 0px 40px 4px rgba(255, 2, 238, 0.338);
+  transform: translate(0, 0);
+  z-index: 99;
 }
