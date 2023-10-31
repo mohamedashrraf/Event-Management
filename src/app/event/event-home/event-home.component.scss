@@ -1,33 +1,88 @@
-
-// satrt header 
-.welcome-area{
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url(../../../assets/images/banner.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    height: 100vh;
+// satrt header
+.welcome-area {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(../../../assets/images/banner.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 100vh;
 }
-.text-content{
-    text-align: center;
-    color: var(--text-color);
+.text-content {
+  text-align: center;
+  color: var(--text-color);
 }
-.btn-feat{
-    padding: 11px 20px;
-    color: var(--text-color);
-    background-color: var(--main-color);
-    border: 0;
-    border-radius: 6px;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 20px;
-    transition: .3s;
+.btn-feat {
+  padding: 11px 20px;
+  color: var(--text-color);
+  background-color: var(--main-color);
+  border: 0;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+  transition: 0.3s;
 }
-.btn-feat:hover{
-    background-color: var(--main-alt-color) ;
+.btn-feat:hover {
+  background-color: var(--main-alt-color);
 }
-// end header 
+// end header
+// start features
+.features-small-item {
+  cursor: pointer;
+  display: block;
+  background: var(--text-color);
+  box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.1);
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  position: relative;
+  margin-bottom: 30px;
+}
+.features-small-item .icon {
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  width: 90px;
+  height: 90px;
+  line-height: 90px;
+  margin: auto;
+  position: relative;
+  margin-bottom: 30px;
+  background: var(--second-color);
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+.features-small-item .features-title {
+  font-weight: 500;
+  font-size: 18px;
+  color: #1e1e1e;
+  letter-spacing: 0.7px;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 2;
+}
+.features-small-item p {
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--gray-color);
+  letter-spacing: 0.5px;
+  line-height: 25px;
+  position: relative;
+  z-index: 2;
+}
+.features-small-item:hover .icon {
+  background-color: var(--thaird-color);
+}
+// start features
