@@ -1,11 +1,11 @@
 <div class="login">
-  <div class="container w-25">
+  <div class="form-container">
+    <h2 class="text-center mb-4">Events now</h2>
     <form #loginForm="ngForm" (ngSubmit)="handleFormSubmit(loginForm)">
       <div class="mb-3">
-        
-        <label for="exampleInputEmail1" class="form-label"> <i class="fa-solid fa-envelope"></i> Email</label>
-        
-
+        <label for="exampleInputEmail1" class="form-label">
+          <i class="fa-solid fa-envelope"></i> Email</label
+        >
         <input
           type="email"
           class="form-control"
@@ -26,8 +26,9 @@
         </div>
       </div>
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">  <i class="fa-solid fa-lock"></i>  Password</label>
-       
+        <label for="exampleInputPassword1" class="form-label">
+          <i class="fa-solid fa-lock"></i> Password</label
+        >
         <input
           type="password"
           class="form-control"
@@ -54,24 +55,27 @@
       <div class="d-grid gap-2 col-6 mx-auto">
         <button
           type="submit"
-          class="btn btn-primary"
+          class="{{
+            'btn btn-primary' + (loginForm.invalid ? ' disable' : '')
+          }}"
           [disabled]="loginForm.invalid"
         >
           Submit
         </button>
-      </div>  
+      </div>
     </form>
 
-    <div class="text-center" style="margin-top: 200px">
-      <h5>
+    <div class="text-center mt-2">
+      <p>
         Don't have accout?
         <a
+          routerLink="/signup"
           (click)="redirectToSignup()"
           routerLinkActive="text-primary"
           [routerLinkActiveOptions]="{ exact: true }"
-          >Signup</a
+          >Signup now</a
         >
-      </h5>
+      </p>
     </div>
   </div>
 </div>

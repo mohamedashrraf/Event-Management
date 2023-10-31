@@ -7,25 +7,25 @@ import { NotfoundComponent } from './shared/notfound/notfound.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: EventHomeComponent,
   },
   {
-    path: "login",
+    path: 'login',
     component: LoginComponent,
   },
   {
-    path: "signup",
+    path: 'signup',
     component: SignupComponent,
   },
   {
-    path: "**",
+    path: '**',
     component: NotfoundComponent,
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

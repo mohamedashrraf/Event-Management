@@ -1,9 +1,17 @@
-.login{
+.login {
   background-image: url("../../../assets/images/login.jpeg");
   background-repeat: no-repeat;
   background-position: center right;
+  min-height: 80vh;
 }
-form{
-  padding-top: 150px;
-  
+
+.form-container {
+  min-height: 100%;
+  width: 30%;
+  transform: translate(90%, 40%);
+}
+
+.disable {
+  cursor: not-allowed;
+  pointer-events: unset;
 }
