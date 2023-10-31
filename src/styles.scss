@@ -1,27 +1,29 @@
 @import "~@fortawesome/fontawesome-free/css/all.css";
 
-:root{
-  --main-color : #485ab8;
-  --main-alt-color : #5a73f1;
-  --green-color : #22c55e;
-  --red-color : #f44336;
-  --gray-color : #888;
-  --text-color : #FFF
+:root {
+  --main-color: #2652d6;
+  --second-color: #8261ee;
+  --thaird-color: #ff589e;
+  --main-alt-color: #3955e0;
+  --green-color: #22c55e;
+  --red-color: #f44336;
+  --gray-color: #777;
+  --text-color: #fff;
 }
 * {
   box-sizing: border-box;
   font-family: "Berkshire Swash", serif;
   font-family: "Open Sans", sans-serif;
 }
-::-webkit-scrollbar{
-  width: 15px;
+::-webkit-scrollbar {
+  width: 10px;
 }
-::-webkit-scrollbar-track{
-  background-color: var(--text-color)
+::-webkit-scrollbar-track {
+  background-color: var(--text-color);
 }
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   background-color: var(--main-color);
 }
-::-webkit-scrollbar-thumb:hover{
-  background-color: var(--main-alt-color)
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--main-alt-color);
 }
