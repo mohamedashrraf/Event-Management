@@ -1,81 +1,86 @@
-<div class="login">
-  <div class="form-container">
-    <h2 class="text-center mb-4">Events now</h2>
-    <form #loginForm="ngForm" (ngSubmit)="handleFormSubmit(loginForm)">
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">
-          <i class="fa-solid fa-envelope"></i> Email</label
-        >
-        <input
-          type="email"
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-          ngModel
-          name="email"
-          #email="ngModel"
-          required
-          minlength="3"
-        />
-        <div
-          id="emailHelp"
-          class="form-text text-danger"
-          *ngIf="email.touched && email.invalid"
-        >
-          <span *ngIf="email.errors?.['required']">E-mail is required</span>
-        </div>
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">
-          <i class="fa-solid fa-lock"></i> Password</label
-        >
-        <input
-          type="password"
-          class="form-control"
-          id="exampleInputPassword1"
-          ngModel
-          name="password"
-          #password="ngModel"
-          required
-          minlength="8"
-        />
-        <div
-          id="password"
-          class="form-text text-danger"
-          *ngIf="password.touched && password.invalid"
-        >
-          <span *ngIf="password.errors?.['required']"
-            >Password is required</span
+<!-- <div class="overflow-x-hidden"> -->
+<main class="main">
+  <div class="login-background"></div>
+  <div class="login">
+    <div class="form-container">
+      <h2 class="text-center mb-4">Events now</h2>
+      <form #loginForm="ngForm" (ngSubmit)="handleFormSubmit(loginForm)">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">
+            <i class="fa-solid fa-envelope"></i> Email</label
           >
-          <span *ngIf="password.errors?.['minlength']"
-            >Min Length is 8 characters</span
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            ngModel
+            name="email"
+            #email="ngModel"
+            required
+            minlength="3"
+          />
+          <div
+            id="emailHelp"
+            class="form-text text-danger"
+            *ngIf="email.touched && email.invalid"
           >
+            <span *ngIf="email.errors?.['required']">E-mail is required</span>
+          </div>
         </div>
-      </div>
-      <div class="d-grid gap-2 col-6 mx-auto">
-        <button
-          type="submit"
-          class="{{
-            'btn btn-primary' + (loginForm.invalid ? ' disable' : '')
-          }}"
-          [disabled]="loginForm.invalid"
-        >
-          Submit
-        </button>
-      </div>
-    </form>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">
+            <i class="fa-solid fa-lock"></i> Password</label
+          >
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            ngModel
+            name="password"
+            #password="ngModel"
+            required
+            minlength="8"
+          />
+          <div
+            id="password"
+            class="form-text text-danger"
+            *ngIf="password.touched && password.invalid"
+          >
+            <span *ngIf="password.errors?.['required']"
+              >Password is required</span
+            >
+            <span *ngIf="password.errors?.['minlength']"
+              >Min Length is 8 characters</span
+            >
+          </div>
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button
+            type="submit"
+            class="{{
+              'btn btn-primary' + (loginForm.invalid ? ' disable' : '')
+            }}"
+            [disabled]="loginForm.invalid"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
 
-    <div class="text-center mt-2">
-      <p>
-        Don't have accout?
-        <a
-          routerLink="/signup"
-          (click)="redirectToSignup()"
-          routerLinkActive="text-primary"
-          [routerLinkActiveOptions]="{ exact: true }"
-          >Signup now</a
-        >
-      </p>
+      <div class="text-center mt-4">
+        <p>
+          Don't have accout?
+          <a
+            routerLink="/signup"
+            (click)="redirectToSignup()"
+            routerLinkActive="text-primary"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Signup now</a
+          >
+        </p>
+      </div>
     </div>
   </div>
-</div>
+</main>
+<!-- </div> -->

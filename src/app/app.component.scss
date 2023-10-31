@@ -1,7 +1,5 @@
 .main {
-  min-height: 92.5vh;
-  // display: flex;
-  // justify-content: center;
-  align-items: center;
+  min-height: calc(100vh - 51.77px);
   padding-top: 66px;
+  position: relative;
 }
