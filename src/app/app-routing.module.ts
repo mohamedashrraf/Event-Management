@@ -4,6 +4,7 @@ import { EventHomeComponent } from './event/event-home/event-home.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { NotfoundComponent } from './shared/notfound/notfound.component';
+import { CalendarComponent } from './event/calendar/calendar.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignupComponent,
+  },
+  {
+    path: 'calendar',
+    component: CalendarComponent,
   },
   {
     path: '**',
