@@ -44,7 +44,7 @@ export class SignupComponent implements OnInit {
             ),
           ],
         ],
-        name: ['', [Validators.required, Validators.minLength(3)]],
+        name: ['', [Validators.required, Validators.minLength(5)]],
         username: ['', [Validators.required, Validators.pattern(/^\S*$/)]],
         password: [
           '',
@@ -64,7 +64,10 @@ export class SignupComponent implements OnInit {
             ),
           ],
         ],
-        profile: ['client'],
+        phoneNumber: [
+          '',
+          [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)],
+        ],
       },
       {
         validator: passwordMatchValidator,
@@ -72,12 +75,32 @@ export class SignupComponent implements OnInit {
     );
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.registrationForm.valid) {
       // console.log('Registration successful!');
       delete this.registrationForm.value.confirmPassword;
+      // TODO: Cancel remove username
+      delete this.registrationForm.value.username;
       console.log(this.registrationForm.value);
       // this.redirectToLogin();
+
+      try {
+        const res = await fetch('http://localhost:4000/api/v1/user/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(this.registrationForm.value),
+        });
+        console.log(res);
+        if (res.status === 201) this.redirectToLogin();
+        else {
+          const error = await res.json();
+          console.log(error);
+        }
+      } catch (err) {
+        console.log(err);
+      }
     } else {
       console.log('Form has validation errors.');
     }

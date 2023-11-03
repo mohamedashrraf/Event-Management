@@ -1,60 +1,92 @@
-<!-- <div class="overflow-x-hidden"> -->
 <main class="main">
   <div class="login-background"></div>
   <div class="login">
     <div class="form-container">
       <h2 class="text-center mb-4">Events now</h2>
-      <form #loginForm="ngForm" (ngSubmit)="handleFormSubmit(loginForm)">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">
-            <i class="fa-solid fa-envelope"></i> Email</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            ngModel
-            name="email"
-            #email="ngModel"
-            required
-            minlength="3"
-          />
+      <form #loginForm="ngForm" (ngSubmit)="handleFormSubmit(loginForm.form)">
+        <!-- Email -->
+        <div class="input-group has-validation mb-4">
+          <span class="input-group-text"
+            ><i class="fa-solid fa-envelope"></i
+          ></span>
           <div
-            id="emailHelp"
-            class="form-text text-danger"
-            *ngIf="email.touched && email.invalid"
+            class="form-floating"
+            ngClass="{{
+              email.touched ? (email.invalid ? 'is-invalid' : 'is-valid') : ''
+            }}"
           >
-            <span *ngIf="email.errors?.['required']">E-mail is required</span>
+            <input
+              type="email"
+              class="form-control"
+              ngClass="{{
+                email.touched ? (email.invalid ? 'is-invalid' : 'is-valid') : ''
+              }}"
+              id="email-input"
+              placeholder="Email"
+              name="email"
+              ngModel
+              #email="ngModel"
+              required
+              pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+            />
+            <label for="email-input">Email</label>
+          </div>
+          <div class="invalid-feedback ms-2">
+            {{
+              email.hasError("required")
+                ? "Email is required."
+                : email.hasError("pattern")
+                ? "Please enter a valid email address."
+                : ""
+            }}
           </div>
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">
-            <i class="fa-solid fa-lock"></i> Password</label
-          >
-          <input
-            type="password"
-            class="form-control"
-            id="exampleInputPassword1"
-            ngModel
-            name="password"
-            #password="ngModel"
-            required
-            minlength="8"
-          />
+
+        <!-- Password -->
+        <div class="input-group has-validation mb-4">
+          <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
           <div
-            id="password"
-            class="form-text text-danger"
-            *ngIf="password.touched && password.invalid"
+            class="form-floating"
+            ngClass="{{
+              password.touched
+                ? password.invalid
+                  ? 'is-invalid'
+                  : 'is-valid'
+                : ''
+            }}"
           >
-            <span *ngIf="password.errors?.['required']"
-              >Password is required</span
-            >
-            <span *ngIf="password.errors?.['minlength']"
-              >Min Length is 8 characters</span
-            >
+            <input
+              type="password"
+              ngClass="{{
+                password.touched
+                  ? password.invalid
+                    ? 'is-invalid'
+                    : 'is-valid'
+                  : ''
+              }}"
+              class="form-control"
+              id="password-input"
+              placeholder="Password"
+              ngModel
+              name="password"
+              #password="ngModel"
+              required
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            />
+            <label for="password-input">Password</label>
+          </div>
+          <div class="invalid-feedback ms-2">
+            {{
+              password.hasError("required")
+                ? "Password is required."
+                : password.hasError("pattern")
+                ? "8+ characters, 1 uppercase, 1 lowercase, 1 number, 1 special character."
+                : ""
+            }}
           </div>
         </div>
+
+        <!-- Submit -->
         <div class="d-grid gap-2 col-6 mx-auto">
           <button
             type="submit"
@@ -83,4 +115,3 @@
     </div>
   </div>
 </main>
-<!-- </div> -->
