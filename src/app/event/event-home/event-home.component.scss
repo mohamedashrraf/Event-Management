@@ -1,3 +1,10 @@
+// start global
+::selection {
+  background: var(--thaird-color);
+  color: var(--text-color);
+}
+// end global
+
 // satrt header
 .welcome-area {
   overflow: hidden;
@@ -32,7 +39,6 @@
 // end header
 // start features
 .features-small-item {
-  cursor: pointer;
   display: block;
   background: var(--text-color);
   box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.1);
@@ -85,4 +91,251 @@
 .features-small-item:hover .icon {
   background-color: var(--thaird-color);
 }
-// start features
+// end features
+
+//start about your event
+
+.left-text {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--gray-color);
+  line-height: 28px;
+  letter-spacing: 1px;
+}
+@media (max-width: 678px) {
+  .aboutEventText {
+    margin-top: 30px;
+    padding-top: 30px;
+    text-align: center;
+  }
+  .aboutEventText2 {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+  }
+}
+
+//end about your event
+// start mini
+.mini {
+  // min-height: 215px;
+  overflow: hidden;
+  position: relative;
+  padding-top: 90px;
+  padding-bottom: 90px;
+}
+.mini::before {
+  content: "";
+  position: absolute;
+  width: 140%;
+  height: 140%;
+  opacity: 0.95;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-image: url(../../../assets/images/banner2.png);
+  z-index: 2;
+  top: -20%;
+  left: -20%;
+}
+.mini .mini-content {
+  position: relative;
+  z-index: 2;
+}
+.mini .mini-content .info {
+  text-align: center;
+  color: #fff;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.mini .mini-content .info h1 {
+  color: #fff;
+  font-weight: 500;
+  font-size: 28px;
+  letter-spacing: 0.25px;
+  margin-bottom: 30px;
+}
+.mini .mini-content .info p {
+  letter-spacing: 1px;
+  margin-bottom: 40px;
+  color: #fff;
+  letter-spacing: 0.25px;
+  line-height: 26px;
+  font-weight: 400;
+  font-size: 15px;
+}
+.mini .mini-content .mini-box {
+  text-decoration: none;
+  display: block;
+  background: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+  position: relative;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  text-align: center;
+  cursor: pointer;
+}
+.mini .mini-content .mini-box:hover {
+  transform: translateY(-10px);
+}
+.mini .mini-content .mini-box:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background: #fff;
+  width: 100%;
+  opacity: 0.15;
+  height: 100%;
+  bottom: -10px;
+  left: 0px;
+  right: -20px;
+  margin: auto;
+  border-radius: 20px;
+}
+.mini .mini-content .mini-box i {
+  display: block;
+  font-size: 40px;
+  margin-bottom: 15px;
+  color: var(--thaird-color);
+}
+.mini .mini-content .mini-box strong {
+  display: block;
+  font-weight: 400;
+  font-size: 17px;
+  color: #1e1e1e;
+  letter-spacing: 0.25px;
+  margin-bottom: 5px;
+  margin-top: 20px;
+}
+.mini .mini-content .mini-box span {
+  display: block;
+  font-weight: 400;
+  font-size: 14px;
+  color: #777;
+  letter-spacing: 0.75px;
+}
+// end mini
+
+// start plans
+
+.center-text {
+  text-align: center;
+  font-weight: 400;
+  font-size: 16px;
+  color: #777;
+  line-height: 28px;
+  letter-spacing: 1px;
+  margin-bottom: 50px;
+}
+.center-text {
+  text-align: center;
+  font-weight: 400;
+  font-size: 16px;
+  color: #777;
+  line-height: 28px;
+  letter-spacing: 1px;
+  margin-bottom: 50px;
+}
+.pricing-item {
+  background: #ffffff;
+  box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  padding: 30px 0px 40px 0px;
+}
+.pricing-item .pricing-header {
+  text-align: center;
+  display: block;
+  position: relative;
+  padding-bottom: 10px;
+}
+.pricing-item .pricing-header .pricing-title {
+  font-weight: 500;
+  font-size: 17px;
+  letter-spacing: 0.25px;
+  color: #1e1e1e;
+  width: 180px;
+  height: 40px;
+  line-height: 40px;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+}
+.pricing-item .pricing-body {
+  margin-bottom: 40px;
+}
+.pricing-item .pricing-body .price-wrapper {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 13px;
+  background: #8261ee;
+  width: 80%;
+  margin: auto;
+  margin-bottom: 40px;
+  margin-top: 5px;
+  border-radius: 20px;
+}
+.pricing-item .pricing-body .price-wrapper .currency {
+  height: 47px;
+  font-weight: 500;
+  font-size: 32px;
+  color: #fff;
+  position: relative;
+  top: -1px;
+}
+.pricing-item .pricing-body .price-wrapper .price {
+  font-weight: 500;
+  font-size: 28px;
+  color: #fff;
+}
+.pricing-item .pricing-body .price-wrapper .period {
+  font-weight: 400;
+  font-size: 14px;
+  color: #fff;
+  display: block;
+  letter-spacing: 0.88px;
+}
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.pricing-item .pricing-body .list li.active {
+  color: #7a7a7a;
+  text-decoration: none;
+}
+.pricing-item .pricing-body .list li {
+  text-align: center;
+  margin-bottom: 12px;
+  font-weight: 400;
+  font-size: 13px;
+  color: #7a7a7a;
+  letter-spacing: 0.25px;
+  text-decoration: line-through;
+}
+.pricing-item .pricing-footer {
+  text-align: center;
+  margin-top: 50px;
+}
+a.main-button {
+  font-size: 13px;
+  border-radius: 20px;
+  padding: 12px 20px;
+  background-color: #8261ee;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 0.25px;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+// start plans
