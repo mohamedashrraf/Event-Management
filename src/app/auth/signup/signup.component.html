@@ -2,175 +2,271 @@
   <div class="register-background"></div>
   <div class="register">
     <div class="form-container">
-      <h2 class="text-center mb-4">Join us now</h2>
+      <h2 class="text-center mb-4 h1">Join us now</h2>
       <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-        <div class="form-group mb-3">
-          <label class="form-label" for="name">
-            <i class="fa-regular fa-id-card"></i> Name</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            formControlName="name"
-          />
-          <small
-            *ngIf="
-              registrationForm.controls['name'].hasError('required') &&
+        <!-- Full Name -->
+        <div class="input-group has-validation mb-4">
+          <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+          <div
+            class="form-floating"
+            ngClass="{{
               registrationForm.controls['name'].touched
-            "
-            class="text-danger"
+                ? registrationForm.controls['name'].invalid
+                  ? 'is-invalid'
+                  : 'is-valid'
+                : ''
+            }}"
           >
-            Name is required.
-          </small>
-          <small
-            *ngIf="
-              registrationForm.controls['name'].hasError('minlength') &&
-              registrationForm.controls['name'].touched
-            "
-            class="text-danger"
-          >
-            Name should be more than 3 characters.
-          </small>
-        </div>
-        <div class="form-group mb-3">
-          <label class="form-label" for="email">
-            <i class="fa-solid fa-envelope"></i> Email</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            formControlName="email"
-          />
-          <small
-            *ngIf="
-              registrationForm.controls['email'].hasError('required') &&
-              registrationForm.controls['email'].touched
-            "
-            class="text-danger"
-          >
-            Email is required.
-          </small>
-          <small
-            *ngIf="
-              registrationForm.controls['email'].hasError('email') &&
-              registrationForm.controls['email'].touched
-            "
-            class="text-danger"
-          >
-            Please enter a valid email address.
-          </small>
+            <input
+              title="name"
+              type="text"
+              class="form-control"
+              ngClass="{{
+                registrationForm.controls['name'].touched
+                  ? registrationForm.controls['name'].invalid
+                    ? 'is-invalid'
+                    : 'is-valid'
+                  : ''
+              }}"
+              id="name-input"
+              formControlName="name"
+              placeholder="Username"
+              required
+            />
+            <label for="name-input">Full name</label>
+          </div>
+          <div class="invalid-feedback ms-2">
+            {{
+              registrationForm.controls["name"].hasError("required")
+                ? "Name is required."
+                : registrationForm.controls["name"].hasError("minlength")
+                ? "Name should be more than 5 characters."
+                : ""
+            }}
+          </div>
         </div>
 
-        <div class="form-group mb-3">
-          <label class="form-label" for="username">
-            <i class="fa-solid fa-user"></i> Username</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="username"
-            formControlName="username"
-          />
-          <small
-            *ngIf="
-              registrationForm.controls['username'].hasError('required') &&
+        <!-- Username -->
+        <div class="input-group has-validation mb-4">
+          <span class="input-group-text">@</span>
+          <div
+            class="form-floating"
+            ngClass="{{
               registrationForm.controls['username'].touched
-            "
-            class="text-danger"
+                ? registrationForm.controls['username'].invalid
+                  ? 'is-invalid'
+                  : 'is-valid'
+                : ''
+            }}"
           >
-            Username is required.
-          </small>
-          <small
-            *ngIf="
-              registrationForm.controls['username'].hasError('pattern') &&
-              registrationForm.controls['username'].touched
-            "
-            class="text-danger"
-          >
-            Username should not contain spaces.
-          </small>
+            <input
+              title="username"
+              type="text"
+              class="form-control"
+              ngClass="{{
+                registrationForm.controls['username'].touched
+                  ? registrationForm.controls['username'].invalid
+                    ? 'is-invalid'
+                    : 'is-valid'
+                  : ''
+              }}"
+              id="username-input"
+              formControlName="username"
+              placeholder="Username"
+              required
+            />
+            <label for="username-input">Username</label>
+          </div>
+          <div class="invalid-feedback ms-2">
+            {{
+              registrationForm.controls["username"].hasError("required")
+                ? "Username is required."
+                : registrationForm.controls["username"].hasError("pattern")
+                ? "Username should not contain spaces."
+                : ""
+            }}
+          </div>
         </div>
 
-        <div class="form-group mb-3">
-          <label class="form-label" for="password">
-            <i class="fa-solid fa-lock"></i> Password</label
+        <!-- Email -->
+        <div class="input-group has-validation mb-4">
+          <span class="input-group-text"
+            ><i class="fa-solid fa-envelope"></i
+          ></span>
+          <div
+            class="form-floating"
+            ngClass="{{
+              registrationForm.controls['email'].touched
+                ? registrationForm.controls['email'].invalid
+                  ? 'is-invalid'
+                  : 'is-valid'
+                : ''
+            }}"
           >
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            formControlName="password"
-          />
-          <small
-            *ngIf="
-              registrationForm.controls['password'].hasError('required') &&
-              registrationForm.controls['password'].touched
-            "
-            class="text-danger"
-          >
-            Password is required.
-          </small>
-          <small
-            *ngIf="
-              registrationForm.controls['password'].hasError('pattern') &&
-              registrationForm.controls['password'].touched
-            "
-            class="text-danger"
-          >
-            8+ characters, 1 uppercase, 1 lowercase, 1 number, 1 special
-            character.
-          </small>
-          <!-- <div
-            *ngIf="
-              registrationForm.controls['password'].hasError('minlength') &&
-              registrationForm.controls['password'].touched
-            "
-            class="text-danger"
-          >
-            Password should be at least 8 characters long.
-          </div> -->
+            <input
+              title="name@example.com"
+              type="email"
+              class="form-control"
+              ngClass="{{
+                registrationForm.controls['email'].touched
+                  ? registrationForm.controls['email'].invalid
+                    ? 'is-invalid'
+                    : 'is-valid'
+                  : ''
+              }}"
+              id="email-input"
+              formControlName="email"
+              placeholder="Email"
+              required
+            />
+            <label for="email-input">Email</label>
+          </div>
+          <div class="invalid-feedback ms-2">
+            {{
+              registrationForm.controls["email"].hasError("required")
+                ? "Email is required."
+                : registrationForm.controls["email"].hasError("pattern")
+                ? "Please enter a valid email address."
+                : ""
+            }}
+          </div>
         </div>
 
-        <div class="form-group mb-3">
-          <label class="form-label" for="confirmPassword">
-            <i class="fa-solid fa-key"></i> Confirm Password</label
+        <!-- phoneNumber -->
+        <div class="input-group has-validation mb-4">
+          <span class="input-group-text"
+            ><i class="fa-solid fa-phone"></i
+          ></span>
+          <div
+            class="form-floating"
+            ngClass="{{
+              registrationForm.controls['phoneNumber'].touched
+                ? registrationForm.controls['phoneNumber'].invalid
+                  ? 'is-invalid'
+                  : 'is-valid'
+                : ''
+            }}"
           >
-          <input
-            type="password"
-            class="form-control"
-            id="confirmPassword"
-            formControlName="confirmPassword"
-          />
-          <small
-            *ngIf="
-              registrationForm.controls['passwordMismatch'] &&
+            <input
+              title="01234567890"
+              type="tel"
+              ngClass="{{
+                registrationForm.controls['phoneNumber'].touched
+                  ? registrationForm.controls['phoneNumber'].invalid
+                    ? 'is-invalid'
+                    : 'is-valid'
+                  : ''
+              }}"
+              class="form-control"
+              id="tel-input"
+              formControlName="phoneNumber"
+              placeholder="Phone number"
+              required
+            />
+            <label for="tel-input">Phone number</label>
+          </div>
+          <div class="invalid-feedback ms-2">
+            {{
+              registrationForm.controls["phoneNumber"].hasError("required")
+                ? "Phone number is required."
+                : registrationForm.controls["phoneNumber"].hasError("pattern")
+                ? "Please enter a valid phone number."
+                : ""
+            }}
+          </div>
+        </div>
+        <div class="input-group has-validation mb-4">
+          <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+          <div
+            class="form-floating"
+            ngClass="{{
+              registrationForm.controls['password'].touched
+                ? registrationForm.controls['password'].invalid
+                  ? 'is-invalid'
+                  : 'is-valid'
+                : ''
+            }}"
+          >
+            <input
+              type="password"
+              ngClass="{{
+                registrationForm.controls['password'].touched
+                  ? registrationForm.controls['password'].invalid
+                    ? 'is-invalid'
+                    : 'is-valid'
+                  : ''
+              }}"
+              class="form-control"
+              id="password-input"
+              formControlName="password"
+              placeholder="Password"
+              required
+            />
+            <label for="password-input">Password</label>
+          </div>
+          <div class="invalid-feedback ms-2">
+            {{
+              registrationForm.controls["password"].hasError("required")
+                ? "Password is required."
+                : registrationForm.controls["password"].hasError("pattern")
+                ? "8+ characters, 1 uppercase, 1 lowercase, 1 number, 1 special character."
+                : ""
+            }}
+          </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="input-group has-validation mb-4">
+          <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+          <div
+            class="form-floating"
+            ngClass="{{
               registrationForm.controls['confirmPassword'].touched
-            "
-            class="text-danger"
+                ? registrationForm.controls['confirmPassword'].invalid
+                  ? 'is-invalid'
+                  : 'is-valid'
+                : ''
+            }}"
           >
-            Passwords do not match.
-          </small>
-          <small
-            *ngIf="
-              registrationForm.controls['confirmPassword'].hasError(
-                'required'
-              ) && registrationForm.controls['confirmPassword'].touched
-            "
-            class="text-danger"
-          >
-            Confirm Password is required.
-          </small>
+            <input
+              type="password"
+              ngClass="{{
+                registrationForm.controls['confirmPassword'].touched
+                  ? registrationForm.controls['confirmPassword'].invalid
+                    ? 'is-invalid'
+                    : 'is-valid'
+                  : ''
+              }}"
+              class="form-control"
+              id="confirmPassword-input"
+              formControlName="confirmPassword"
+              placeholder="Confirm Password"
+              required
+            />
+            <label for="confirmPassword-input">Confirm Password</label>
+          </div>
+          <div class="invalid-feedback ms-2">
+            {{
+              registrationForm.controls["confirmPassword"].hasError("pattern")
+                ? "8+ characters, 1 uppercase, 1 lowercase, 1 number, 1 special character."
+                : registrationForm.errors &&
+                  registrationForm.errors["passwordMismatch"]
+                ? "Passwords do not match."
+                : registrationForm.controls["confirmPassword"].hasError(
+                    "required"
+                  )
+                ? "Confirm Password is required."
+                : ""
+            }}
+          </div>
         </div>
-        <br />
         <div class="d-grid gap-2 col-6 mx-auto">
           <button
-            type="submit"
             class="{{
               'btn btn-primary' + (registrationForm.invalid ? ' disable' : '')
             }}"
             [disabled]="!registrationForm.valid"
+            type="submit"
           >
             Signup
           </button>
@@ -189,6 +285,5 @@
         </p>
       </div>
     </div>
-    <div class="clr"></div>
   </div>
 </main>
