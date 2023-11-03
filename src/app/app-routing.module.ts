@@ -7,7 +7,6 @@ import { NotfoundComponent } from './shared/notfound/notfound.component';
 import { CalendarComponent } from './event/calendar/calendar.component';
 import { LandingComponent } from './event/landing/landing.component';
 
-
 const routes: Routes = [
   {
     path: '',
@@ -39,4 +38,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

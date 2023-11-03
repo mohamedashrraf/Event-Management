@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthServiceService } from 'src/app/auth/auth-service.service';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss']
+  styleUrls: ['./calendar.component.scss'],
 })
 export class CalendarComponent implements OnInit {
   today: Date;
@@ -15,13 +16,27 @@ export class CalendarComponent implements OnInit {
   options: string | null;
   calendarRows: number[][] = [];
 
-  constructor() {
+  constructor(private authService: AuthServiceService) {
+    this.authService.user.subscribe((user) => {
+      !user.isAuthenticated && this.authService.redirectToLogin();
+    });
+
     this.today = new Date();
     this.year = this.today.getFullYear();
     this.month = this.today.getMonth();
     this.monthTag = [
-      "January", "February", "March", "April", "May", "June", "July",
-      "August", "September", "October", "November", "December"
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ];
     this.day = this.today.getDate();
     this.selectedDay = null;
@@ -71,35 +86,34 @@ export class CalendarComponent implements OnInit {
     }
     this.drawDays();
   }
-clickDay(day: number): void {
+  clickDay(day: number): void {
     const expiredays = 30; // Set an expiration in days, you can adjust this as needed
     this.selectedDay = new Date(this.year, this.month, day);
     this.setCookie('selected_day', this.selectedDay.toISOString(), expiredays);
-}
+  }
 
-reset(): void {
+  reset(): void {
     this.selectedDay = null;
     this.options = null;
     this.drawDays();
-}
+  }
 
-setCookie(name: string, value: string, expiredays: number): void {
+  setCookie(name: string, value: string, expiredays: number): void {
     const date = new Date();
-    date.setTime(date.getTime() + (expiredays * 24 * 60 * 60 * 1000));
-    const expires = "; expires=" + date.toUTCString();
-    document.cookie = name + "=" + value + expires + "; path=/";
-}
+    date.setTime(date.getTime() + expiredays * 24 * 60 * 60 * 1000);
+    const expires = '; expires=' + date.toUTCString();
+    document.cookie = name + '=' + value + expires + '; path=/';
+  }
 
-getCookie(name: string): string | null {
-    const cookieName = name + "=";
+  getCookie(name: string): string | null {
+    const cookieName = name + '=';
     const cookies = document.cookie.split(';');
     for (let i = 0; i < cookies.length; i++) {
-        let cookie = cookies[i].trim();
-        if (cookie.indexOf(cookieName) === 0) {
-            return cookie.substring(cookieName.length, cookie.length);
-        }
+      let cookie = cookies[i].trim();
+      if (cookie.indexOf(cookieName) === 0) {
+        return cookie.substring(cookieName.length, cookie.length);
+      }
     }
     return null;
-}
-
+  }
 }
