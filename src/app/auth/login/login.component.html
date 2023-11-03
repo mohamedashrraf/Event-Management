@@ -85,7 +85,12 @@
             }}
           </div>
         </div>
-
+        <p
+          *ngIf="loginForm.form.getError('invalidLogin')"
+          class="text-danger text-center mt-1"
+        >
+          {{ loginForm.form.getError("invalidLogin") }}
+        </p>
         <!-- Submit -->
         <div class="d-grid gap-2 col-6 mx-auto">
           <button

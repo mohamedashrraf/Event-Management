@@ -8,6 +8,7 @@ import {
   FormControl,
   AbstractControl,
 } from '@angular/forms';
+import { AuthServiceService } from '../auth-service.service';
 
 // matching passwords
 function passwordMatchValidator(
@@ -30,7 +31,15 @@ function passwordMatchValidator(
 export class SignupComponent implements OnInit {
   registrationForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthServiceService
+  ) {
+    this.authService.user.subscribe((user) => {
+      user.isAuthenticated && this.authService.redirectToHome();
+    });
+  }
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group(
@@ -76,37 +85,28 @@ export class SignupComponent implements OnInit {
   }
 
   async onSubmit() {
-    if (this.registrationForm.valid) {
-      // console.log('Registration successful!');
-      delete this.registrationForm.value.confirmPassword;
-      // TODO: Cancel remove username
-      delete this.registrationForm.value.username;
-      console.log(this.registrationForm.value);
-      // this.redirectToLogin();
-
-      try {
-        const res = await fetch('http://localhost:4000/api/v1/user/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(this.registrationForm.value),
-        });
-        console.log(res);
-        if (res.status === 201) this.redirectToLogin();
-        else {
-          const error = await res.json();
-          console.log(error);
-        }
-      } catch (err) {
-        console.log(err);
+    delete this.registrationForm.value.confirmPassword;
+    // TODO: Cancel remove username
+    delete this.registrationForm.value.username;
+    try {
+      const res = await fetch('http://localhost:4000/api/v1/user/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(this.registrationForm.value),
+      });
+      if (res.status === 201) this.authService.redirectToLogin();
+      else {
+        const resErr = await res.json();
+        console.log('Unexpected response', resErr);
       }
-    } else {
-      console.log('Form has validation errors.');
+    } catch (err) {
+      console.log('Unexpected error', err);
     }
   }
 
   redirectToLogin() {
-    this.router.navigate(['login']);
+    this.authService.redirectToLogin();
   }
 }

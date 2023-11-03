@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthServiceService } from '../auth-service.service';
 
 @Component({
   selector: 'app-login',
@@ -8,15 +9,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthServiceService) {
+    this.authService.user.subscribe((user) => {
+      user.isAuthenticated && this.authService.redirectToHome();
+    });
+  }
 
   redirectToSignup() {
     this.router.navigate(['signup']);
   }
 
   async handleFormSubmit(form: FormGroup) {
-    console.log(form.value);
-
     try {
       const res = await fetch('http://localhost:4000/api/v1/user/login', {
         method: 'POST',
@@ -25,18 +28,28 @@ export class LoginComponent {
         },
         body: JSON.stringify(form.value),
       });
-      console.log(res);
       if (res.status === 200) {
-        // TODO: save user authentication in local storage and set auth state in authService
-        this.router.navigate(['home']);
+        const resData = await res.json();
+        console.log('response from login', resData);
+        this.authService.login({
+          //TODO: Change this
+          name: 'Mohamed Nasr',
+          email: 'qqq@qqq.com',
+          username: 'laplap',
+          isAuthenticated: true,
+          token: resData.token,
+        });
+        this.authService.redirectToHome();
       } else {
-        const error = await res.json();
-        if (error.message === 'email or password is wrong')
-          //TODO: show error for user
-          alert(error.message);
+        const resErr = await res.json();
+        console.log('Unexpected response', resErr);
+        if (resErr.message === 'email or password is wrong')
+          form.setErrors({
+            invalidLogin: 'Email or password is wrong',
+          });
       }
     } catch (err) {
-      console.log(err);
+      console.log('Unexpected error', err);
     }
   }
 }
