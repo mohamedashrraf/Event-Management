@@ -144,12 +144,12 @@
 }
 .mini .mini-content .info {
   text-align: center;
-  color: #fff;
+  color: var(--text-color);
   padding-top: 20px;
   padding-bottom: 20px;
 }
 .mini .mini-content .info h1 {
-  color: #fff;
+  color:  var(--text-color);
   font-weight: 500;
   font-size: 28px;
   letter-spacing: 0.25px;
@@ -158,7 +158,7 @@
 .mini .mini-content .info p {
   letter-spacing: 1px;
   margin-bottom: 40px;
-  color: #fff;
+  color:  var(--text-color);
   letter-spacing: 0.25px;
   line-height: 26px;
   font-weight: 400;
@@ -167,7 +167,7 @@
 .mini .mini-content .mini-box {
   text-decoration: none;
   display: block;
-  background: #fff;
+  background:  var(--text-color);
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.08);
@@ -187,7 +187,7 @@
   content: "";
   position: absolute;
   z-index: -1;
-  background: #fff;
+  background: var(--text-color);
   width: 100%;
   opacity: 0.15;
   height: 100%;
@@ -216,7 +216,7 @@
   display: block;
   font-weight: 400;
   font-size: 14px;
-  color: #777;
+  color: var(--gray-color);
   letter-spacing: 0.75px;
 }
 // end mini
@@ -227,7 +227,7 @@
   text-align: center;
   font-weight: 400;
   font-size: 16px;
-  color: #777;
+  color: var(--gray-color);
   line-height: 28px;
   letter-spacing: 1px;
   margin-bottom: 50px;
@@ -236,13 +236,13 @@
   text-align: center;
   font-weight: 400;
   font-size: 16px;
-  color: #777;
+  color: var(--gray-color);
   line-height: 28px;
   letter-spacing: 1px;
   margin-bottom: 50px;
 }
 .pricing-item {
-  background: #ffffff;
+  background:var(--text-color);
   box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   margin-bottom: 30px;
@@ -274,7 +274,7 @@
   text-align: center;
   padding-top: 20px;
   padding-bottom: 13px;
-  background: #8261ee;
+  background: var(--second-color);
   width: 80%;
   margin: auto;
   margin-bottom: 40px;
@@ -285,19 +285,19 @@
   height: 47px;
   font-weight: 500;
   font-size: 32px;
-  color: #fff;
+  color:var(--text-color);
   position: relative;
   top: -1px;
 }
 .pricing-item .pricing-body .price-wrapper .price {
   font-weight: 500;
   font-size: 28px;
-  color: #fff;
+  color: var(--text-color);
 }
 .pricing-item .pricing-body .price-wrapper .period {
   font-weight: 400;
   font-size: 14px;
-  color: #fff;
+  color: var(--text-color);
   display: block;
   letter-spacing: 0.88px;
 }
@@ -328,10 +328,10 @@ a.main-button {
   font-size: 13px;
   border-radius: 20px;
   padding: 12px 20px;
-  background-color: #8261ee;
+  background-color: var(--second-color);
   text-decoration: none;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--text-color);
   letter-spacing: 0.25px;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
