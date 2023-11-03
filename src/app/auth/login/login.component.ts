@@ -26,8 +26,10 @@ export class LoginComponent {
         body: JSON.stringify(form.value),
       });
       console.log(res);
-      if (res.status === 200) this.router.navigate(['home']);
-      else {
+      if (res.status === 200) {
+        // TODO: save user authentication in local storage and set auth state in authService
+        this.router.navigate(['home']);
+      } else {
         const error = await res.json();
         if (error.message === 'email or password is wrong')
           //TODO: show error for user
