@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { EventHomeComponent } from './event-home/event-home.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { LandingComponent } from './landing/landing.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -10,7 +11,8 @@ import { LandingComponent } from './landing/landing.component';
   declarations: [
     EventHomeComponent,
     CalendarComponent,
-    LandingComponent
+    LandingComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule

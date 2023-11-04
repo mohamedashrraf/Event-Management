@@ -6,6 +6,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { NotfoundComponent } from './shared/notfound/notfound.component';
 import { CalendarComponent } from './event/calendar/calendar.component';
 import { LandingComponent } from './event/landing/landing.component';
+import { ProfileComponent } from './event/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'calendar',
     component: CalendarComponent,
+  },
+  {
+    path:'profile',
+    component: ProfileComponent
   },
   {
     path: '**',
