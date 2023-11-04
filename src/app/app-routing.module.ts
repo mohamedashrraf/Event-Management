@@ -30,8 +30,8 @@ const routes: Routes = [
     component: CalendarComponent,
   },
   {
-    path:'profile',
-    component: ProfileComponent
+    path: 'profile',
+    component: ProfileComponent,
   },
   {
     path: '**',
