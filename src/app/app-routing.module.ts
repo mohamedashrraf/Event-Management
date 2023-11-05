@@ -4,7 +4,6 @@ import { EventHomeComponent } from './event/event-home/event-home.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { NotfoundComponent } from './shared/notfound/notfound.component';
-import { CalendarComponent } from './event/calendar/calendar.component';
 import { LandingComponent } from './event/landing/landing.component';
 import { ProfileComponent } from './event/profile/profile.component';
 import { EventsComponent } from './event/events/events.component';
