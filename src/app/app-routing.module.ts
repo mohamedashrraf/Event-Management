@@ -29,10 +29,6 @@ const routes: Routes = [
     component: SignupComponent,
   },
   {
-    path: 'calendar',
-    component: CalendarComponent,
-  },
-  {
     path: 'profile',
     component: ProfileComponent,children:[
       {path:"abouts",component:AboutsComponent},

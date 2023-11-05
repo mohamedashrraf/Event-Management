@@ -4,26 +4,18 @@ import { EventHomeComponent } from './event-home/event-home.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { LandingComponent } from './landing/landing.component';
 import { ProfileComponent } from './profile/profile.component';
-import { PlacesComponent } from './places/places.component';
-import { EventsComponent } from './events/events.component';
-import { AboutsComponent } from './abouts/abouts.component';
-import { AppRoutingModule } from '../app-routing.module';
 
 
 
 @NgModule({
-  declarations: [
-    EventHomeComponent,
-    CalendarComponent,
-    LandingComponent,
-    ProfileComponent,
-    PlacesComponent,
-    EventsComponent,
-    AboutsComponent
-  ],
-  imports: [
-    CommonModule,
-    AppRoutingModule
-  ]
+    declarations: [
+        EventHomeComponent,
+        LandingComponent,
+        ProfileComponent
+    ],
+    imports: [
+        CommonModule,
+        CalendarComponent
+    ]
 })
 export class EventModule { }
