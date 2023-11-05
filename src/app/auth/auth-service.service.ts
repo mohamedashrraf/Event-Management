@@ -19,7 +19,7 @@ export class AuthServiceService {
       name: '',
       email: '',
       username: '',
-      isAuthenticated: true,
+      isAuthenticated: false,
     }
   );
 
