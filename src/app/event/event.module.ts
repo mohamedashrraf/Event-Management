@@ -4,6 +4,10 @@ import { EventHomeComponent } from './event-home/event-home.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { LandingComponent } from './landing/landing.component';
 import { ProfileComponent } from './profile/profile.component';
+import { PlacesComponent } from './places/places.component';
+import { EventsComponent } from './events/events.component';
+import { AboutsComponent } from './abouts/abouts.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 
@@ -12,10 +16,14 @@ import { ProfileComponent } from './profile/profile.component';
     EventHomeComponent,
     CalendarComponent,
     LandingComponent,
-    ProfileComponent
+    ProfileComponent,
+    PlacesComponent,
+    EventsComponent,
+    AboutsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    AppRoutingModule
   ]
 })
 export class EventModule { }
