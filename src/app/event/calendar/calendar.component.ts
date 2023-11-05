@@ -18,4 +18,5 @@ export class CalendarComponent {
    constructor() {
     this.selected = this.todayDate;
   }
+
 }
