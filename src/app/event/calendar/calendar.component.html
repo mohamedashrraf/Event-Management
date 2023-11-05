@@ -1,7 +1,11 @@
 <section class="calendar">
   <div class="container">
-    <div class="date bg-success" *ngIf="selected">{{ selected }}</div>
-    <div class="date bg-success" *ngIf="!selected">{{ todayDate }}</div>
+    <div class="date bg-success text-center" *ngIf="selected">
+      {{ selected | date : "d - MMM - yyyy" }}
+    </div>
+    <div class="date bg-success text-center" *ngIf="!selected">
+      {{ selected | date : "d - MMM - yyyy" }}
+    </div>
     <mat-card class="demo-inline-calendar-card">
       <mat-calendar [(selected)]="selected"></mat-calendar>
     </mat-card>
