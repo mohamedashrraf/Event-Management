@@ -95,14 +95,18 @@
 }
 @media (max-width: 779px) {
   .profile-head {
+    margin-left: 20px;
+  }
+  .profile-head h5,h6,p{
     text-align: center;
   }
   #home-tab {
     display: none;
   }
-  .zer {
-    display: flex;
-    justify-content: center;
+  .zer{
+    display:flex;
     align-items: center;
+    justify-content: center;
+    
   }
 }
