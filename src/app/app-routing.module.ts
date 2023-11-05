@@ -7,6 +7,9 @@ import { NotfoundComponent } from './shared/notfound/notfound.component';
 import { CalendarComponent } from './event/calendar/calendar.component';
 import { LandingComponent } from './event/landing/landing.component';
 import { ProfileComponent } from './event/profile/profile.component';
+import { EventsComponent } from './event/events/events.component';
+import { PlacesComponent } from './event/places/places.component';
+import { AboutsComponent } from './event/abouts/abouts.component';
 
 const routes: Routes = [
   {
@@ -27,7 +30,11 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    component: ProfileComponent,
+    component: ProfileComponent,children:[
+      {path:"abouts",component:AboutsComponent},
+      {path:"events",component:EventsComponent},
+      {path:"places", component:PlacesComponent},
+    ]
   },
   {
     path: '**',
