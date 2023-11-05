@@ -8,14 +8,14 @@ import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
-  declarations: [
-    EventHomeComponent,
-    CalendarComponent,
-    LandingComponent,
-    ProfileComponent
-  ],
-  imports: [
-    CommonModule
-  ]
+    declarations: [
+        EventHomeComponent,
+        LandingComponent,
+        ProfileComponent
+    ],
+    imports: [
+        CommonModule,
+        CalendarComponent
+    ]
 })
 export class EventModule { }
