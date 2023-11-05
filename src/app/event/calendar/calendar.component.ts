@@ -16,7 +16,6 @@ export class CalendarComponent {
   selected: Date | null | undefined;
   todayDate: Date = new Date();
    constructor() {
-    // Initialize the selected date to today's date
     this.selected = this.todayDate;
   }
 }
