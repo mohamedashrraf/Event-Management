@@ -1,6 +1,6 @@
 .prof {
   background: -webkit-linear-gradient(left, #3931af, #00c6ff);
-  padding: 20px;
+  padding: 86px 20px 20px 20px;
 }
 .emp-profile {
   padding: 3%;
@@ -97,16 +97,17 @@
   .profile-head {
     margin-left: 20px;
   }
-  .profile-head h5,h6,p{
+  .profile-head h5,
+  h6,
+  p {
     text-align: center;
   }
   #home-tab {
     display: none;
   }
-  .zer{
-    display:flex;
+  .zer {
+    display: flex;
     align-items: center;
     justify-content: center;
-    
   }
 }
