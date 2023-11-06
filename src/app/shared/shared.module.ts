@@ -4,6 +4,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { LoadingComponent } from './loading/loading.component';
 
 
 
@@ -12,7 +13,8 @@ import { AppRoutingModule } from '../app-routing.module';
   declarations: [
     NavbarComponent,
     FooterComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { AppRoutingModule } from '../app-routing.module';
   exports: [
     NavbarComponent,
     FooterComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    LoadingComponent
   ]
 })
 export class SharedModule { }
