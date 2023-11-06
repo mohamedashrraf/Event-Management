@@ -34,3 +34,9 @@
   color: #aaa;
   font-style: italic;
 }
+
+@media (max-width: 760px) {
+  .form-control {
+      width: auto;
+  }
+}
