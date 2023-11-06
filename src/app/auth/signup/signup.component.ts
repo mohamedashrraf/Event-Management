@@ -79,10 +79,6 @@ export class SignupComponent implements OnInit {
             ),
           ],
         ],
-        phoneNumber: [
-          '',
-          [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)],
-        ],
       },
       {
         validator: passwordMatchValidator,
@@ -92,6 +88,8 @@ export class SignupComponent implements OnInit {
 
   async onSubmit() {
     delete this.registrationForm.value.confirmPassword;
+
+    console.log('this.registrationForm.value', this.registrationForm.value);
     try {
       const res = await fetch('http://localhost:4000/api/v1/user/register', {
         method: 'POST',
@@ -100,10 +98,17 @@ export class SignupComponent implements OnInit {
         },
         body: JSON.stringify(this.registrationForm.value),
       });
-      if (res.status === 201) this.authService.redirectToLogin();
-      else {
+      if (res.status === 201) {
+        const data = await res.json();
+        console.log('dataRes', data);
+        this.authService.redirectToLogin();
+      } else {
         const resErr = await res.json();
         console.log('Unexpected response', resErr);
+        if (resErr.message === 'email is unique')
+          this.registrationForm.setErrors({
+            userExists: true,
+          });
       }
     } catch (err) {
       console.log('Unexpected error', err);

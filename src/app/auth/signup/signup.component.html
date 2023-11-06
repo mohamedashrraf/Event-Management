@@ -133,7 +133,7 @@
         </div>
 
         <!-- phoneNumber -->
-        <div class="input-group has-validation mb-4">
+        <!-- <div class="input-group has-validation mb-4">
           <span class="input-group-text"
             ><i class="fa-solid fa-phone"></i
           ></span>
@@ -174,7 +174,83 @@
                 : ""
             }}
           </div>
-        </div>
+        </div> -->
+
+        <!-- Adress -->
+        <!-- <div class="input-group has-validation mb-4">
+          <span class="input-group-text"
+            ><i class="fa-solid fa-house"></i
+          ></span>
+          <div
+            class="form-floating"
+            ngClass="{{
+              registrationForm.controls['country'].touched
+                ? registrationForm.controls['country'].invalid
+                  ? 'is-invalid'
+                  : 'is-valid'
+                : ''
+            }}"
+          >
+            <input
+              title="Country"
+              type="text"
+              minlength="5"
+              ngClass="{{
+                registrationForm.controls['country'].touched
+                  ? registrationForm.controls['country'].invalid
+                    ? 'is-invalid'
+                    : 'is-valid'
+                  : ''
+              }}"
+              class="form-control"
+              id="country-input"
+              formControlName="country"
+              placeholder="Country"
+              required
+            />
+            <label for="country-input">Country</label>
+          </div>
+          <div
+            class="form-floating"
+            ngClass="{{
+              registrationForm.controls['city'].touched
+                ? registrationForm.controls['city'].invalid
+                  ? 'is-invalid'
+                  : 'is-valid'
+                : ''
+            }}"
+          >
+            <input
+              title="City"
+              type="text"
+              minlength="5"
+              ngClass="{{
+                registrationForm.controls['city'].touched
+                  ? registrationForm.controls['city'].invalid
+                    ? 'is-invalid'
+                    : 'is-valid'
+                  : ''
+              }}"
+              class="form-control"
+              id="city-input"
+              formControlName="city"
+              placeholder="City"
+              required
+            />
+            <label for="city-input">City</label>
+          </div>
+          <div class="invalid-feedback ms-2">
+            {{
+              registrationForm.controls["country"].hasError("required") ||
+              registrationForm.controls["city"].hasError("required")
+                ? "Adress is required."
+                : registrationForm.controls["country"].invalid || registrationForm.controls["city"].invalid
+                ? "Please enter a valid adress."
+                : ""
+            }}
+          </div>
+        </div> -->
+
         <div class="input-group has-validation mb-4">
           <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
           <div
@@ -287,6 +363,14 @@
             }}
           </div>
         </div>
+        <p
+          *ngIf="
+            registrationForm.errors && registrationForm.errors['userExists']
+          "
+          class="text-danger"
+        >
+          Email is alredy exists try login
+        </p>
         <div class="d-grid gap-2 col-6 mx-auto">
           <button
             type="submit"
