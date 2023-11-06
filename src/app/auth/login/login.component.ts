@@ -9,6 +9,7 @@ import { AuthServiceService } from '../auth-service.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+  showPass = false;
   constructor(private router: Router, private authService: AuthServiceService) {
     this.authService.user.subscribe((user) => {
       user.isAuthenticated && this.authService.redirectToHome();
@@ -51,5 +52,13 @@ export class LoginComponent {
     } catch (err) {
       console.log('Unexpected error', err);
     }
+  }
+
+  toggleShowPass(e: Event) {
+    this.showPass = !this.showPass;
+    const input = document.getElementById('password-input');
+    const inputType = input?.getAttribute('type');
+    if (inputType === 'password') input?.setAttribute('type', 'text');
+    else input?.setAttribute('type', 'password');
   }
 }

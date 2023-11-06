@@ -52,8 +52,8 @@
           <div
             class="form-floating"
             ngClass="{{
-              registrationForm.controls['username'].touched
-                ? registrationForm.controls['username'].invalid
+              registrationForm.controls['userName'].touched
+                ? registrationForm.controls['userName'].invalid
                   ? 'is-invalid'
                   : 'is-valid'
                 : ''
@@ -64,14 +64,14 @@
               type="text"
               class="form-control"
               ngClass="{{
-                registrationForm.controls['username'].touched
-                  ? registrationForm.controls['username'].invalid
+                registrationForm.controls['userName'].touched
+                  ? registrationForm.controls['userName'].invalid
                     ? 'is-invalid'
                     : 'is-valid'
                   : ''
               }}"
               id="username-input"
-              formControlName="username"
+              formControlName="userName"
               placeholder="Username"
               required
             />
@@ -79,10 +79,10 @@
           </div>
           <div class="invalid-feedback ms-2">
             {{
-              registrationForm.controls["username"].hasError("required")
+              registrationForm.controls["userName"].hasError("required")
                 ? "Username is required."
-                : registrationForm.controls["username"].hasError("pattern")
-                ? "Username should not contain spaces."
+                : registrationForm.controls["userName"].hasError("pattern")
+                ? "Userame should not contain spaces."
                 : ""
             }}
           </div>
@@ -181,17 +181,28 @@
             class="form-floating"
             ngClass="{{
               registrationForm.controls['password'].touched
-                ? registrationForm.controls['password'].invalid
+                ? registrationForm.controls['password'].invalid ||
+                  (registrationForm.errors &&
+                    registrationForm.errors['passwordMismatch'] &&
+                    foucusInput.password)
                   ? 'is-invalid'
                   : 'is-valid'
                 : ''
             }}"
           >
+            <span (click)="toggleShowPass($event)" class="show-password">
+              <i *ngIf="showPass" class="fa-solid fa-eye"></i>
+              <i *ngIf="!showPass" class="fa-solid fa-eye-slash"></i>
+            </span>
             <input
+              (focus)="focusInput($event)"
               type="password"
               ngClass="{{
                 registrationForm.controls['password'].touched
-                  ? registrationForm.controls['password'].invalid
+                  ? registrationForm.controls['password'].invalid ||
+                    (registrationForm.errors &&
+                      registrationForm.errors['passwordMismatch'] &&
+                      foucusInput.password)
                     ? 'is-invalid'
                     : 'is-valid'
                   : ''
@@ -206,10 +217,14 @@
           </div>
           <div class="invalid-feedback ms-2">
             {{
-              registrationForm.controls["password"].hasError("required")
-                ? "Password is required."
-                : registrationForm.controls["password"].hasError("pattern")
+              registrationForm.controls["password"].hasError("pattern")
                 ? "8+ characters, 1 uppercase, 1 lowercase, 1 number, 1 special character."
+                : registrationForm.errors &&
+                  registrationForm.errors["passwordMismatch"] &&
+                  foucusInput.password
+                ? "Passwords do not match."
+                : registrationForm.controls["password"].hasError("required")
+                ? "Password is required."
                 : ""
             }}
           </div>
@@ -222,17 +237,28 @@
             class="form-floating"
             ngClass="{{
               registrationForm.controls['confirmPassword'].touched
-                ? registrationForm.controls['confirmPassword'].invalid
+                ? registrationForm.controls['confirmPassword'].invalid ||
+                  (registrationForm.errors &&
+                    registrationForm.errors['passwordMismatch'] &&
+                    foucusInput.confirmPassword)
                   ? 'is-invalid'
                   : 'is-valid'
                 : ''
             }}"
           >
+            <span (click)="toggleShowRePass($event)" class="show-password">
+              <i *ngIf="showRePass" class="fa-solid fa-eye"></i>
+              <i *ngIf="!showRePass" class="fa-solid fa-eye-slash"></i>
+            </span>
             <input
+              (focus)="focusInput($event)"
               type="password"
               ngClass="{{
                 registrationForm.controls['confirmPassword'].touched
-                  ? registrationForm.controls['confirmPassword'].invalid
+                  ? registrationForm.controls['confirmPassword'].invalid ||
+                    (registrationForm.errors &&
+                      registrationForm.errors['passwordMismatch'] &&
+                      foucusInput.confirmPassword)
                     ? 'is-invalid'
                     : 'is-valid'
                   : ''
@@ -250,7 +276,8 @@
               registrationForm.controls["confirmPassword"].hasError("pattern")
                 ? "8+ characters, 1 uppercase, 1 lowercase, 1 number, 1 special character."
                 : registrationForm.errors &&
-                  registrationForm.errors["passwordMismatch"]
+                  registrationForm.errors["passwordMismatch"] &&
+                  foucusInput.confirmPassword
                 ? "Passwords do not match."
                 : registrationForm.controls["confirmPassword"].hasError(
                     "required"
@@ -262,11 +289,11 @@
         </div>
         <div class="d-grid gap-2 col-6 mx-auto">
           <button
+            type="submit"
             class="{{
               'btn btn-primary' + (registrationForm.invalid ? ' disable' : '')
             }}"
             [disabled]="!registrationForm.valid"
-            type="submit"
           >
             Signup
           </button>

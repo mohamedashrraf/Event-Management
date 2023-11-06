@@ -47,3 +47,13 @@
     background-image: unset;
   }
 }
+
+.show-password {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  cursor: pointer;
+  transform: translate(-150%, -50%);
+}
