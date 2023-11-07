@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-
+<!-- start body of notification -->
 <div
   class="offcanvas offcanvas-end"
   style="z-index: 1000000"
@@ -8,7 +8,13 @@
   aria-labelledby="offcanvasRightLabel"
 >
   <div class="offcanvas-header">
-    <h2 class="offcanvas-title pt-2 fw-bold" id="offcanvasRightLabel" style="border-bottom: 1.4px solid #00b3ffac;">Notification</h2>
+    <h2
+      class="offcanvas-title pt-2 fw-bold"
+      id="offcanvasRightLabel"
+      style="border-bottom: 1.4px solid #00b3ffac"
+    >
+      Notification
+    </h2>
     <button
       type="button"
       class="btn-close"
@@ -17,11 +23,14 @@
     ></button>
   </div>
   <div class="offcanvas-body">
-		<div class="test">
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates magnam esse repellat! Quod debitis sequi </p>
-		</div>
-	</div>
+    <div class="test">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates
+        magnam esse repellat! Quod debitis sequi
+      </p>
+    </div>
+  </div>
 </div>
-
+<!-- end body of notification -->
 <router-outlet></router-outlet>
 <app-footer></app-footer>

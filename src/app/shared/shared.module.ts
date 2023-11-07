@@ -5,11 +5,15 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { LoadingComponent } from './loading/loading.component';
+import { SocketService } from './socket.service';
 
 
 
 
 @NgModule({
+  providers:[
+    SocketService
+  ],
   declarations: [
     NavbarComponent,
     FooterComponent,
