@@ -62,7 +62,7 @@
             </div>
           </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item hoho">
           <a
             class="nav-link"
             routerLink="/home"
@@ -73,16 +73,28 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link"
+            class="nav-link popo"
             routerLink="/profile"
             routerLinkActive="activate"
             [routerLinkActiveOptions]="{ exact: true }"
             >Profile</a
           >
         </li>
-
         <li class="nav-item">
-          <button class="btn btn-danger" (click)="logout()" title="Logout">
+          <button
+            class="btn"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight"
+            aria-controls="offcanvasRight"
+          >
+            <i class="fa-regular fa-bell fa-xl notifi position-relative"
+              ><span>1</span></i
+            >
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-danger d-inline-block" (click)="logout()" title="Logout">
             <i class="fa-solid fa-right-from-bracket"></i>
           </button>
         </li>

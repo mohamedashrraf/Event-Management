@@ -37,7 +37,22 @@
   font-style: italic;
 }
 
-@media (max-width: 760px) {
+// start notifi
+.notifi span{
+  position: absolute;
+  font-size: 12px;
+  top: -20px;
+  left: 11px;
+  background-color: red;
+  padding: 7px;
+  border-radius: 5px;
+  color: #fff;
+}
+// end notifi
+@media (max-width:787px) {
+  .hoho,.popo{
+    width: 78px;
+  }
   .form-control {
       width: auto;
   }
