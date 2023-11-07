@@ -29,11 +29,12 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    component: ProfileComponent,children:[
-      {path:"abouts",component:AboutsComponent},
-      {path:"events",component:EventsComponent},
-      {path:"places", component:PlacesComponent},
-    ]
+    component: ProfileComponent,
+    children: [
+      { path: 'abouts', component: AboutsComponent },
+      { path: 'events', component: EventsComponent },
+      { path: 'places', component: PlacesComponent },
+    ],
   },
   {
     path: '**',

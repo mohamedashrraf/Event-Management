@@ -17,7 +17,7 @@ import { AppRoutingModule } from '../app-routing.module';
     ProfileComponent,
     PlacesComponent,
     EventsComponent,
-    AboutsComponent
+    AboutsComponent,
   ],
   imports: [
     CommonModule,
