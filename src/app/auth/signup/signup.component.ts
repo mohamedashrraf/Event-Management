@@ -5,7 +5,6 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
-  FormControl,
   AbstractControl,
 } from '@angular/forms';
 import { AuthServiceService } from '../auth-service.service';
@@ -16,8 +15,9 @@ function passwordMatchValidator(
 ): { [key: string]: boolean } | null {
   const password = control.get('password');
   const confirmPassword = control.get('confirmPassword');
-  if (!password?.value || !confirmPassword?.value) return null;
-  if (password.value !== confirmPassword.value) {
+  if (password?.value?.length < 8 || confirmPassword?.value?.length < 8)
+    return null;
+  if (password?.value !== confirmPassword?.value) {
     return { passwordMismatch: true };
   }
   return null;
@@ -30,6 +30,12 @@ function passwordMatchValidator(
 })
 export class SignupComponent implements OnInit {
   registrationForm!: FormGroup;
+  foucusInput = {
+    password: false,
+    confirmPassword: false,
+  };
+  showPass = false;
+  showRePass = false;
 
   constructor(
     private fb: FormBuilder,
@@ -54,7 +60,7 @@ export class SignupComponent implements OnInit {
           ],
         ],
         name: ['', [Validators.required, Validators.minLength(5)]],
-        username: ['', [Validators.required, Validators.pattern(/^\S*$/)]],
+        userName: ['', [Validators.required, Validators.pattern(/^\S*$/)]],
         password: [
           '',
           [
@@ -73,10 +79,6 @@ export class SignupComponent implements OnInit {
             ),
           ],
         ],
-        phoneNumber: [
-          '',
-          [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)],
-        ],
       },
       {
         validator: passwordMatchValidator,
@@ -86,8 +88,8 @@ export class SignupComponent implements OnInit {
 
   async onSubmit() {
     delete this.registrationForm.value.confirmPassword;
-    // TODO: Cancel remove username
-    delete this.registrationForm.value.username;
+
+    console.log('this.registrationForm.value', this.registrationForm.value);
     try {
       const res = await fetch('http://localhost:4000/api/v1/user/register', {
         method: 'POST',
@@ -96,14 +98,48 @@ export class SignupComponent implements OnInit {
         },
         body: JSON.stringify(this.registrationForm.value),
       });
-      if (res.status === 201) this.authService.redirectToLogin();
-      else {
+      if (res.status === 201) {
+        const data = await res.json();
+        console.log('dataRes', data);
+        this.authService.redirectToLogin();
+      } else {
         const resErr = await res.json();
         console.log('Unexpected response', resErr);
+        if (resErr.message === 'email is unique')
+          this.registrationForm.setErrors({
+            userExists: true,
+          });
       }
     } catch (err) {
       console.log('Unexpected error', err);
     }
+  }
+
+  focusInput(e: Event) {
+    const targetEl = e.target as HTMLElement;
+    if (targetEl.id === 'password-input') {
+      this.foucusInput.password = true;
+      this.foucusInput.confirmPassword = false;
+    }
+    if (targetEl.id === 'confirmPassword-input') {
+      this.foucusInput.confirmPassword = true;
+      this.foucusInput.password = false;
+    }
+  }
+
+  toggleShowPass(e: Event) {
+    this.showPass = !this.showPass;
+    const input = document.getElementById('password-input');
+    const inputType = input?.getAttribute('type');
+    if (inputType === 'password') input?.setAttribute('type', 'text');
+    else input?.setAttribute('type', 'password');
+  }
+  toggleShowRePass(e: Event) {
+    this.showRePass = !this.showRePass;
+    const input = document.getElementById('confirmPassword-input');
+    const inputType = input?.getAttribute('type');
+    if (inputType === 'password') input?.setAttribute('type', 'text');
+    else input?.setAttribute('type', 'password');
   }
 
   redirectToLogin() {
