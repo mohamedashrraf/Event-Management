@@ -80,7 +80,7 @@
             >Profile</a
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item  notifi position-relative">
           <button
             class="btn"
             type="button"
@@ -88,13 +88,19 @@
             data-bs-target="#offcanvasRight"
             aria-controls="offcanvasRight"
           >
-            <i class="fa-regular fa-bell fa-xl notifi position-relative"
-              ><span>1</span></i
+            <i class="fa-regular fa-bell fa-xl"
+              >
+             </i
             >
+            <span>{{numberNot}}</span>
           </button>
         </li>
         <li class="nav-item">
-          <button class="btn btn-danger d-inline-block" (click)="logout()" title="Logout">
+          <button
+            class="btn btn-danger d-inline-block"
+            (click)="logout()"
+            title="Logout"
+          >
             <i class="fa-solid fa-right-from-bracket"></i>
           </button>
         </li>
