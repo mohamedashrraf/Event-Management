@@ -9,6 +9,8 @@ import { EventsComponent } from './events/events.component';
 import { AboutsComponent } from './abouts/abouts.component';
 import { AppRoutingModule } from '../app-routing.module';
 
+import { EventDetailsComponent } from './event-details/event-details.component';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { AppRoutingModule } from '../app-routing.module';
     ProfileComponent,
     PlacesComponent,
     EventsComponent,
-    AboutsComponent
+    AboutsComponent,
+    EventDetailsComponent
   ],
   imports: [
     CommonModule,

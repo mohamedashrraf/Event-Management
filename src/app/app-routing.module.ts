@@ -9,6 +9,7 @@ import { ProfileComponent } from './event/profile/profile.component';
 import { EventsComponent } from './event/events/events.component';
 import { PlacesComponent } from './event/places/places.component';
 import { AboutsComponent } from './event/abouts/abouts.component';
+import { EventDetailsComponent } from './event/event-details/event-details.component';
 
 const routes: Routes = [
   {
@@ -29,12 +30,14 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    component: ProfileComponent,children:[
-      {path:"abouts",component:AboutsComponent},
-      {path:"events",component:EventsComponent},
-      {path:"places", component:PlacesComponent},
-    ]
+    component: ProfileComponent,
+    children: [
+      { path: 'abouts', component: AboutsComponent },
+      { path: 'events', component: EventsComponent },
+      { path: 'places', component: PlacesComponent },
+    ],
   },
+  { path: 'event/:id', component: EventDetailsComponent },
   {
     path: '**',
     component: NotfoundComponent,
