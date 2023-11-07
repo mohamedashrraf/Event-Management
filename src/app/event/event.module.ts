@@ -11,6 +11,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
 import { EventDetailsComponent } from './event-details/event-details.component';
+import { SubscriptionComponent } from './subscription/subscription.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { EventDetailsComponent } from './event-details/event-details.component';
     EventsComponent,
     AboutsComponent,
     EventDetailsComponent,
+    SubscriptionComponent,
   ],
   imports: [CommonModule, AppRoutingModule, CalendarComponent, SharedModule],
 })
