@@ -8,23 +8,20 @@ import { PlacesComponent } from './places/places.component';
 import { EventsComponent } from './events/events.component';
 import { AboutsComponent } from './abouts/abouts.component';
 import { AppRoutingModule } from '../app-routing.module';
-import { SharedModule } from "../shared/shared.module";
+import { SharedModule } from '../shared/shared.module';
 
+import { EventDetailsComponent } from './event-details/event-details.component';
 
 @NgModule({
-    declarations: [
-        EventHomeComponent,
-        LandingComponent,
-        ProfileComponent,
-        PlacesComponent,
-        EventsComponent,
-        AboutsComponent
-    ],
-    imports: [
-        CommonModule,
-        AppRoutingModule,
-        CalendarComponent,
-        SharedModule
-    ]
+  declarations: [
+    EventHomeComponent,
+    LandingComponent,
+    ProfileComponent,
+    PlacesComponent,
+    EventsComponent,
+    AboutsComponent,
+    EventDetailsComponent,
+  ],
+  imports: [CommonModule, AppRoutingModule, CalendarComponent, SharedModule],
 })
-export class EventModule { }
+export class EventModule {}
