@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'text'
+  name: 'text_trim'
 })
 export class TextPipe implements PipeTransform {
 
