@@ -28,7 +28,8 @@ import { SocketService } from './socket.service';
     NavbarComponent,
     FooterComponent,
     NotfoundComponent,
-    LoadingComponent
+    LoadingComponent,
+    
   ]
 })
 export class SharedModule { }
