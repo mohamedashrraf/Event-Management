@@ -10,6 +10,8 @@ import { EventModule } from './event/event.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InterceptorService } from './shared/services/interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     SharedModule,
     EventModule,
     BrowserAnimationsModule,
-    
+    HttpClientModule,
 
   ],
   providers: [
