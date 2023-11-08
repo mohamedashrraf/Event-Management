@@ -1,0 +1,9 @@
+    <div class="card w-75 mb-3 mt-3">
+      <img src="../../../assets/images/noob-saibot.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h4 class="card-title">{{place.address}}</h4>
+        <p class="card-text">{{place.description|text_trim:morText}}</p>
+        <button (click)="showMore()" *ngIf="place.description.length>=50">{{showMoreText}}</button>
+      </div>
+    </div>
+ 

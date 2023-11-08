@@ -9,6 +9,7 @@ import { AuthServiceService } from 'src/app/auth/auth-service.service';
 export class PlacesComponent {
   places: any[] = [];
   userInfo: any;
+  morText:boolean =false
   constructor(private _athService: AuthServiceService) {
     this._athService.user.subscribe((user) => {
       this.userInfo = user;

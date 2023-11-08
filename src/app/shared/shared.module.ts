@@ -7,6 +7,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { LoadingComponent } from './loading/loading.component';
 import { SocketService } from './socket.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TextPipe } from './pipes/text.pipe';
 
 
 
@@ -19,7 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NavbarComponent,
     FooterComponent,
     NotfoundComponent,
-    LoadingComponent
+    LoadingComponent,
+    TextPipe
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NotfoundComponent,
     LoadingComponent,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TextPipe
   ]
 })
 export class SharedModule { }
