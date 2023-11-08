@@ -23,7 +23,7 @@
     ></button>
   </div>
   
-    <div class="offcanvas-body" *ngFor="let event of arrayOfNotifi; trackBy:userTrackBy">
+    <div class="offcanvas-body" *ngFor="let event of arrayOfNotifi;index as i; trackBy:userTrackBy" (click)="removEvent(i)" >
       <div class="test">
         <h2>{{event.title}}</h2>
         <p>

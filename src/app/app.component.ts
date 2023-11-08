@@ -15,10 +15,16 @@ export class AppComponent {
   ngOnInit() {
     this.socket.arrayOfNotifi.subscribe((arr)=>{
       this.arrayOfNotifi = arr
+    
     })
     
   }
   userTrackBy(i:number,event:any){
     return event._id
+  }
+  public removEvent(i:number){
+    console.log(i)
+    this.arrayOfNotifi.splice(i,1)
+    this.socket.numNot.next(this.arrayOfNotifi.length)
   }
 }
