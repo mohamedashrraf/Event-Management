@@ -8,11 +8,13 @@
   background: #fff;
 }
 .profile-img {
-  text-align: center;
+  justify-content: space-evenly;
+
 }
 .profile-img img {
-  width: 70%;
+  width: 15%;
   height: 100%;
+  border-radius: 6px;
 }
 .profile-img .file {
   position: relative;
@@ -30,10 +32,11 @@
   right: 0;
   top: 0;
 }
-.profile-head h5 {
+.profile-head h1 {
   color: #333;
+  font-weight: bold;
 }
-.profile-head h6 {
+.profile-head h2 {
   color: #0062cc;
 }
 .profile-edit-btn {
@@ -109,5 +112,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .profile-img {
+    justify-content: space-evenly;
+  }
+  .profile-img img {
+    width: 20%;
+    height: 100%;
+  }
+  .text-content {
+    margin-top: 10px !important
   }
 }

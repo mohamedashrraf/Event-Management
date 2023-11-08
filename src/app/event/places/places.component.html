@@ -1,10 +1,92 @@
+<p *ngIf="!places.length">Not Found</p>
+<!-- Button trigger modal -->
+<button
+  type="button"
+  class="btn-gra"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+>
+  Create
+  <i class="fa-solid fa-circle-plus"></i>
+</button>
+<!-- start placeLink  -->
 <div class="container">
   <div class="row">
-    <div class="place">
-      <div class="col-md-12">
-        <h4>No places add yet !</h4>
-				<p>Add some places</p>
+    <div *ngFor="let place of places" class="col-md-4 cardition">
+    <div class="card w-75 mb-3 mt-3">
+      <img src="../../../assets/images/noob-saibot.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h4 class="card-title">{{place.address}}</h4>
+        <p class="card-text">{{place.description}}</p>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- end placeLink  -->
+<!-- Modal -->
+<div
+  class="modal fade mt-5 pt-5"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create Host</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form (submit)="createPlace(placeForm)" #placeForm="ngForm">
+          <!-- <div class="mb-3">
+            <input
+              type="file"
+              ngModel
+              name="poster"
+              #poster="ngModel"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+            />
+          </div> -->
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Address</label>
+            <input
+              type="text"
+              ngModel
+              name="address"
+              #address="ngModel"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label"
+              >Description</label
+            >
+            <textarea
+              ngModel
+              name="description"
+              #description="ngModel"
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+            ></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Create</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
+
