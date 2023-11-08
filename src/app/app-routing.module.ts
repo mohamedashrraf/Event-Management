@@ -10,6 +10,7 @@ import { EventsComponent } from './event/events/events.component';
 import { PlacesComponent } from './event/places/places.component';
 import { AboutsComponent } from './event/abouts/abouts.component';
 import { EventDetailsComponent } from './event/event-details/event-details.component';
+import { SubscriptionComponent } from './event/subscription/subscription.component';
 
 const routes: Routes = [
   {
@@ -37,7 +38,14 @@ const routes: Routes = [
       { path: 'places', component: PlacesComponent },
     ],
   },
-  { path: 'event/:id', component: EventDetailsComponent },
+  {
+    path: 'event/:id',
+    component: EventDetailsComponent
+  },
+  {
+    path: 'subscription',
+    component: SubscriptionComponent,
+  },
   {
     path: '**',
     component: NotfoundComponent,
