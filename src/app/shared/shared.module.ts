@@ -35,7 +35,8 @@ import { TextPipe } from './pipes/text.pipe';
     NotfoundComponent,
     LoadingComponent,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TextPipe
   ]
 })
 export class SharedModule { }

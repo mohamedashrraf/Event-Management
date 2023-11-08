@@ -5,8 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TextPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(value: string, ...args: boolean[]): string {
+    if(args[0]&&value.length>=50){
+        return  value.slice(0,50)+"...."
+    }
+    return value;
   }
 
 }

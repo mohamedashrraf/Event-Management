@@ -8,14 +8,14 @@ import { User } from 'src/app/shared/interfaces/user';
   templateUrl: './abouts.component.html',
   styleUrls: ['./abouts.component.scss']
 })
-export class AboutsComponent implements  OnInit {
-  user!:User
-  constructor(private router: Router){
+export class AboutsComponent implements OnInit {
+  user!: User
+  constructor(private router: Router) {
     const whoiam = localStorage.getItem("whoiam")
-    if(!whoiam)
-    this.router.navigate(["/login"]);
+    if (!whoiam)
+      this.router.navigate(["/login"]);
     else
-   this.user = JSON.parse(whoiam) ;
+      this.user = JSON.parse(whoiam);
   }
   ngOnInit(): void {
   }

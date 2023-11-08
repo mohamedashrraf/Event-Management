@@ -12,6 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
+import { PlaceCardComponent } from './place-card/place-card.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SubscriptionComponent } from './subscription/subscription.component';
     AboutsComponent,
     EventDetailsComponent,
     SubscriptionComponent,
+    PlaceCardComponent,
   ],
   imports: [CommonModule, AppRoutingModule, CalendarComponent, SharedModule],
 })
