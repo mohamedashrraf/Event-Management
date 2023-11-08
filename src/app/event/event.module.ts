@@ -13,6 +13,7 @@ import { SharedModule } from '../shared/shared.module';
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { PlaceCardComponent } from './place-card/place-card.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,6 @@ import { PlaceCardComponent } from './place-card/place-card.component';
     SubscriptionComponent,
     PlaceCardComponent,
   ],
-  imports: [CommonModule, AppRoutingModule, CalendarComponent, SharedModule],
+  imports: [CommonModule, AppRoutingModule, CalendarComponent, SharedModule,HttpClientModule],
 })
 export class EventModule {}

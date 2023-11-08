@@ -38,18 +38,23 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form (submit)="createPlace(placeForm)" #placeForm="ngForm">
-          <!-- <div class="mb-3">
+        <form (ngSubmit)="createPlace(placeForm)" #placeForm="ngForm">
+          <div class="mb-3">
             <input
               type="file"
               ngModel
-              name="poster"
+              name="placPhoto"
               #poster="ngModel"
               class="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
+              required
+              (change)="getFiles($event)"
             />
-          </div> -->
+            <div *ngIf="poster.touched && poster.invalid" class=" text-danger">
+              <div *ngIf="poster.errors?.['required']">poster required</div>
+          </div>
+          </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Address</label>
             <input
@@ -60,7 +65,33 @@
               class="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
+              required
+              min="5"
+              maxlength="200"
             />
+            <div *ngIf="address.touched && address.invalid" class=" text-danger">
+              <div *ngIf="address.errors?.['minlength']">address min 5 cher</div>
+              <div *ngIf="address.errors?.['required']">address required</div>
+          </div>
+          </div>
+          <div class="mb-3">
+            <label for="googleMapUrl" class="form-label">Goole Map Url</label>
+            <input
+              type="text"
+              ngModel
+              required
+              name="googleMapUrl"
+              #googleMapUrl="ngModel"
+              class="form-control"
+              id="googleMapUrl"
+              aria-describedby="google-Map-Url"
+              minlength="5"
+              maxlength="2000"
+            />
+            <div *ngIf="googleMapUrl.touched && googleMapUrl.invalid" class=" text-danger">
+              <div *ngIf="googleMapUrl.errors?.['minlength']">google Map Url min 5 cher</div>
+              <div *ngIf="googleMapUrl.errors?.['required']">google Map Url required</div>
+          </div>
           </div>
           <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label"
@@ -73,7 +104,13 @@
               class="form-control"
               id="exampleFormControlTextarea1"
               rows="3"
+              required
+              minlength="5"
             ></textarea>
+            <div *ngIf="description.touched && description.invalid" class=" text-danger">
+              <div *ngIf="description.errors?.['required']">description required</div>
+              <div *ngIf="description.errors?.['minlength']">description min length 5</div>
+          </div>
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Create</button>
