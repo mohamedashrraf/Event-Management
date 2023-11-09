@@ -3,6 +3,7 @@
     <!-- <h1 class="h1">DEVELOPERS CONFERENCE</h1> -->
     <div class="d-flex gap-3 mb-4">
       <div class="hosted-img rounded-5 overflow-hidden">
+        <!-- {{ foundEvent?.data.posterPath }} -->
         <img
           class="w-100"
           src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -10,9 +11,9 @@
       </div>
       <div>
         <p class="mb-1 h6">Hosted by:</p>
-        <a class="h5 text-decoration-none text-dark" href="/users/id"
-          >Mohamed Nasr</a
-        >
+        <!-- <a class="h5 text-decoration-none text-dark">{{
+          foundEvent?.data.title
+        }}</a> -->
       </div>
     </div>
   </div>
@@ -82,6 +83,7 @@
     </div>
   </section> -->
   <!--                         Inspiration                                        -->
+
   <!-- Hero Area Start -->
   <div id="hero-area" class="hero-area-bg">
     <div class="overlay"></div>
@@ -89,23 +91,13 @@
       <div class="row justify-content-center">
         <div class="col-lg-9 col-sm-12">
           <div class="contents text-center">
-            <div class="icon">
+            <!-- <div class="icon">
               <i class="lni-mic"></i>
-            </div>
+            </div> -->
             <p class="banner-info">
-              15, Dec 2023 - Hilton Cairo Heliopolis, Cairo, Egypt
+              {{ foundEvent?.dateTime | date : "d - MMM - yyyy" }}
             </p>
-            <h2 class="head-title">Developers Conference</h2>
-            <p class="banner-desc">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Sapiente, nobis nesciunt atque perferendis, ipsa doloremque
-              deserunt cum qui.
-            </p>
-            <div class="banner-btn">
-              <a href="{{ url + '#pricing' }}" class="btn btn-common"
-                >Get Ticket</a
-              >
-            </div>
+            <h2 class="head-title">{{ foundEvent?.title }}</h2>
           </div>
         </div>
       </div>
@@ -119,11 +111,12 @@
       <div class="row">
         <div class="col-lg-6 col-md-12 col-xs-12">
           <div class="img-thumb">
-            <img
+            <!-- <img
               class="img-fluid"
               src="https://images.squarespace-cdn.com/content/5898e29c725e25e7132d5a5a/1487546591045-NJLLE20UXLVGZ9XHL47Y/600x400-Image-Placeholder.jpg?content-type=image%2Fjpeg"
               alt=""
-            />
+            /> -->
+            {{ foundPhoto }}
           </div>
         </div>
         <div class="col-lg-6 col-md-12 col-xs-12">
@@ -131,13 +124,7 @@
             <div>
               <div class="about-text">
                 <h2>About The Event</h2>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                  eiusmod ncididunt ametfh consectetur dolore magna aliqua. Ut
-                  enim ad minim veniam dolor sitame magnaelit ate consectetur
-                  adipisicing. Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit sed do eiusmod.
-                </p>
+                {{ foundEvent?.title }}
               </div>
               <ul class="stylish-list mb-3">
                 <li>
@@ -194,7 +181,10 @@
               </span>
             </li>
             <li>
-              <span><b>Date & Time</b> 10am - 7pm, 15th Dec</span>
+              <span
+                ><b>Date & Time</b>
+                {{ foundEvent?.dateTime | date : "d - MMM - yyyy" }}</span
+              >
             </li>
           </ul>
         </div>
@@ -446,140 +436,4 @@
     </div>
   </section>
   <!-- Event Slides Section End -->
-
-  <!-- Ticket Pricing Area Start -->
-  <section id="pricing" class="section-padding">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <div class="section-title-header text-center">
-            <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">
-              Ticket Pricing
-            </h2>
-            <p class="wow fadeInDown" data-wow-delay="0.2s">
-              Lorem ipsum dolor sit amet, in quodsi vulputate pro. Ius illum
-              vocent mediocritatem an <br />
-              cule dicta iriure at phaedrum.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 col-md-6 col-xa-12 mb-3">
-          <div class="price-block-wrapper wow fadeInLeft" data-wow-delay="0.2s">
-            <div class="colmun-title">
-              <h5>Basic Pass</h5>
-            </div>
-            <div class="price">
-              <h2>$29</h2>
-              <span>Per Day</span>
-            </div>
-            <div class="pricing-list">
-              <ul>
-                <li>
-                  <i class="lni-check-mark-circle"></i
-                  ><span class="text">Entrance</span>
-                </li>
-                <li>
-                  <i class="lni-check-mark-circle"></i
-                  ><span class="text">Coffee Break</span>
-                </li>
-                <li>
-                  <i class="lni-check-mark-circle"></i
-                  ><span class="text">Lunch on all days</span>
-                </li>
-                <li>
-                  <i class="lni-close"></i
-                  ><span class="text">Access to all areas</span>
-                </li>
-                <li>
-                  <i class="lni-close"></i><span class="text">Certificate</span>
-                </li>
-              </ul>
-            </div>
-            <a href="#" class="btn btn-common">Buy Ticket</a>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-xa-12 mb-3">
-          <div
-            class="price-block-wrapper active wow fadeInUp"
-            data-wow-delay="0.3s"
-          >
-            <div class="colmun-title">
-              <h5>Standard Pass</h5>
-            </div>
-            <div class="price">
-              <h2>$40</h2>
-              <span>Per Day</span>
-            </div>
-            <div class="pricing-list">
-              <ul>
-                <li>
-                  <i class="lni-check-mark-circle"></i
-                  ><span class="text">Entrance</span>
-                </li>
-                <li>
-                  <i class="lni-check-mark-circle"></i
-                  ><span class="text">Coffee Break</span>
-                </li>
-                <li>
-                  <i class="lni-check-mark-circle"></i
-                  ><span class="text">Lunch on all days</span>
-                </li>
-                <li>
-                  <i class="lni-close"></i
-                  ><span class="text">Access to all areas</span>
-                </li>
-                <li>
-                  <i class="lni-check-mark-circle"></i
-                  ><span class="text">Certificate</span>
-                </li>
-              </ul>
-            </div>
-            <a href="#" class="btn btn-common">Buy Ticket</a>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-xa-12 mb-3">
-          <div
-            class="price-block-wrapper wow fadeInRight"
-            data-wow-delay="0.4s"
-          >
-            <div class="colmun-title">
-              <h5>Premium Pass</h5>
-            </div>
-            <div class="price">
-              <h2>$68</h2>
-              <span>Per Day</span>
-            </div>
-            <div class="pricing-list">
-              <ul>
-                <li>
-                  <i class="lni-check-mark-circle"></i
-                  ><span class="text">Entrance</span>
-                </li>
-                <li>
-                  <i class="lni-check-mark-circle"></i
-                  ><span class="text">Coffee Break</span>
-                </li>
-                <li>
-                  <i class="lni-close"></i
-                  ><span class="text">Lunch on all days</span>
-                </li>
-                <li>
-                  <i class="lni-check-mark-circle"></i
-                  ><span class="text">Access to all areas</span>
-                </li>
-                <li>
-                  <i class="lni-check-mark-circle"></i
-                  ><span class="text">Certificate</span>
-                </li>
-              </ul>
-            </div>
-            <a href="#" class="btn btn-common">Buy Ticket</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- Ticket Pricing Area End -->
 </div>
