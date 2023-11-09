@@ -8,6 +8,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { EventModule } from './event/event.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InterceptorService } from './shared/services/interceptor.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { ShatingModule } from './shating/shating.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,8 +25,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SharedModule,
     EventModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    ShatingModule,
   ],
-  providers: [],
+
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

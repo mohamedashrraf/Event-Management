@@ -11,6 +11,8 @@ import { AboutsComponent } from './event/abouts/abouts.component';
 import { EventDetailsComponent } from './event/event-details/event-details.component';
 import { HostsComponent } from './event/hosts/hosts.component';
 import { HostDetailsComponent } from './event/host-details/host-details.component';
+import { SubscriptionComponent } from './event/subscription/subscription.component';
+import { ShatingComponent } from './shating/shating/shating.component';
 
 const routes: Routes = [
   {
@@ -43,6 +45,14 @@ const routes: Routes = [
     component: HostDetailsComponent,
   },
   { path: 'event/:id', component: EventDetailsComponent },
+  {
+    path: 'subscription',
+    component: SubscriptionComponent,
+  },
+  {
+    path: 'shating/:id',
+    component: ShatingComponent,
+  },
   {
     path: '**',
     component: NotfoundComponent,

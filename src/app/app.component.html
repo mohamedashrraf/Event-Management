@@ -22,14 +22,18 @@
       aria-label="Close"
     ></button>
   </div>
-  <div class="offcanvas-body">
-    <div class="test">
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates
-        magnam esse repellat! Quod debitis sequi
-      </p>
+  
+    <div class="offcanvas-body" *ngFor="let event of arrayOfNotifi;index as i; trackBy:userTrackBy" (click)="removEvent(i)" >
+      <div class="test">
+        <h2>{{event.title}}</h2>
+        <p>
+          <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates
+          magnam esse repellat! Quod debitis sequi -->
+          {{event.description}}
+        </p>
+      </div>
     </div>
-  </div>
+  
 </div>
 <!-- end body of notification -->
 <router-outlet></router-outlet>

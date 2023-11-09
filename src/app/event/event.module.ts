@@ -16,6 +16,8 @@ import { HostsComponent } from './hosts/hosts.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UiModule } from '../ui/ui.module';
 import { HostDetailsComponent } from './host-details/host-details.component';
+import { PlaceCardComponent } from './place-card/place-card.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { HostDetailsComponent } from './host-details/host-details.component';
     SubscriptionComponent,
     HostsComponent,
     HostDetailsComponent,
+    PlaceCardComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +39,12 @@ import { HostDetailsComponent } from './host-details/host-details.component';
     CalendarComponent,
     SharedModule,
     UiModule,
+    PlaceCardComponent,
+    CommonModule,
+    AppRoutingModule,
+    CalendarComponent,
+    SharedModule,
+    HttpClientModule,
   ],
 })
 export class EventModule {}
