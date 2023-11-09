@@ -7,7 +7,9 @@ import { GetTokenDataService } from 'src/app/shared/services/get-token-data.serv
   styleUrls: ['./shating-layout.component.scss']
 })
 export class ShatingLayoutComponent {
+  subscribeWith!:string[]
   constructor(private getTokenData:GetTokenDataService){
-    console.log(getTokenData.tokenData)
+    console.log(getTokenData.tokenData.subscribeWith)
+   this.subscribeWith = getTokenData.tokenData.subscribeWith
   }
 }

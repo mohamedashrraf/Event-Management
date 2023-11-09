@@ -6,6 +6,7 @@ import { ShatingMessageComponent } from './shating-message/shating-message.compo
 import { BrowserModule } from '@angular/platform-browser';
 import { SharedModule } from '../shared/shared.module';
 import { ShatingLayoutComponent } from './shating-layout/shating-layout.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 
@@ -20,7 +21,8 @@ import { ShatingLayoutComponent } from './shating-layout/shating-layout.componen
     BrowserModule,
     ReactiveFormsModule,
     FormsModule ,
-    SharedModule
+    SharedModule,
+    AppRoutingModule
     
   ],
 

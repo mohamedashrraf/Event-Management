@@ -16,10 +16,10 @@
   
   <ul id="messages" #messages>
 
-    <app-shating-message *ngFor=" let mes of messagesList" [message]="mes"></app-shating-message>
+    <app-shating-message *ngFor=" let mes of messagesListStore[eventId]" [message]="mes"></app-shating-message>
   </ul>
   {{eventId}}
-  {{messagesList[0]}}
+  
  
     
 

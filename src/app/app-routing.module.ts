@@ -54,8 +54,9 @@ const routes: Routes = [
     path: 'shating',
       component: ShatingLayoutComponent,
     children:[
-      {path: 'shating/:id',
-      component: ShatingComponent,}
+      {path: ':id',
+      component: ShatingComponent,
+    }
 
     ]
   },
