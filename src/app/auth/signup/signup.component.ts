@@ -105,7 +105,7 @@ export class SignupComponent implements OnInit {
       } else {
         const resErr = await res.json();
         console.log('Unexpected response', resErr);
-        if (resErr.message === 'email is unique')
+        if (resErr.message === 'unique err')
           this.registrationForm.setErrors({
             userExists: true,
           });
