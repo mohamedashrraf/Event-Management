@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthServiceService } from 'src/app/auth/auth-service.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { SocketService } from '../socket.service';
 
 @Component({
@@ -9,11 +9,8 @@ import { SocketService } from '../socket.service';
 })
 export class NavbarComponent {
   isAuthenticated = false;
-  numberNot:number = 0
-  constructor(
-    private authService: AuthServiceService,
-    private socket: SocketService
-  ) {
+  numberNot: number = 0;
+  constructor(private authService: AuthService, private socket: SocketService) {
     this.authService.user.subscribe((user) => {
       this.isAuthenticated = user.isAuthenticated;
     });
@@ -25,11 +22,11 @@ export class NavbarComponent {
   ngOnInit() {
     this.socket.on('new_event', (event: any) => {
       console.log(event);
-      this.socket.numNot.next(this.numberNot+1)
-      this.socket.numNot.subscribe((num)=>{
-        this.numberNot = num
-        console.log(this.numberNot)
-      })
+      this.socket.numNot.next(this.numberNot + 1);
+      this.socket.numNot.subscribe((num) => {
+        this.numberNot = num;
+        console.log(this.numberNot);
+      });
     });
   }
 }

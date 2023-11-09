@@ -6,10 +6,11 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { NotfoundComponent } from './shared/notfound/notfound.component';
 import { LandingComponent } from './event/landing/landing.component';
 import { ProfileComponent } from './event/profile/profile.component';
-import { EventsComponent } from './event/events/events.component';
 import { PlacesComponent } from './event/places/places.component';
 import { AboutsComponent } from './event/abouts/abouts.component';
 import { EventDetailsComponent } from './event/event-details/event-details.component';
+import { HostsComponent } from './event/hosts/hosts.component';
+import { HostDetailsComponent } from './event/host-details/host-details.component';
 
 const routes: Routes = [
   {
@@ -32,10 +33,14 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent,
     children: [
-      { path: 'abouts', component: AboutsComponent },
-      { path: 'events', component: EventsComponent },
+      { path: '', component: AboutsComponent },
+      { path: 'hosts', component: HostsComponent },
       { path: 'places', component: PlacesComponent },
     ],
+  },
+  {
+    path: 'profile/host/:id',
+    component: HostDetailsComponent,
   },
   { path: 'event/:id', component: EventDetailsComponent },
   {

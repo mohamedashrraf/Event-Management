@@ -6,29 +6,24 @@ import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { LoadingComponent } from './loading/loading.component';
 import { SocketService } from './socket.service';
-
-
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  providers:[
-    SocketService
-  ],
+  providers: [SocketService],
   declarations: [
     NavbarComponent,
     FooterComponent,
     NotfoundComponent,
-    LoadingComponent
+    LoadingComponent,
   ],
-  imports: [
-    CommonModule,
-    AppRoutingModule
-  ],
+  imports: [CommonModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   exports: [
     NavbarComponent,
     FooterComponent,
     NotfoundComponent,
-    LoadingComponent
-  ]
+    LoadingComponent,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

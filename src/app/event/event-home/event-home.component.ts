@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthServiceService } from 'src/app/auth/auth-service.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-event-home',
@@ -7,7 +7,7 @@ import { AuthServiceService } from 'src/app/auth/auth-service.service';
   styleUrls: ['./event-home.component.scss'],
 })
 export class EventHomeComponent {
-  constructor(private authService: AuthServiceService) {
+  constructor(private authService: AuthService) {
     this.authService.user.subscribe((user) => {
       !user.isAuthenticated && this.authService.redirectToLogin();
     });

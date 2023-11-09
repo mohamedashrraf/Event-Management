@@ -12,6 +12,10 @@ import { SharedModule } from '../shared/shared.module';
 
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
+import { HostsComponent } from './hosts/hosts.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UiModule } from '../ui/ui.module';
+import { HostDetailsComponent } from './host-details/host-details.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,15 @@ import { SubscriptionComponent } from './subscription/subscription.component';
     AboutsComponent,
     EventDetailsComponent,
     SubscriptionComponent,
+    HostsComponent,
+    HostDetailsComponent,
   ],
-  imports: [CommonModule, AppRoutingModule, CalendarComponent, SharedModule],
+  imports: [
+    CommonModule,
+    AppRoutingModule,
+    CalendarComponent,
+    SharedModule,
+    UiModule,
+  ],
 })
 export class EventModule {}

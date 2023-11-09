@@ -4,32 +4,30 @@
       <div class="row">
         <div class="col-md-4">
           <div class="profile-img">
-            <img src="../../../assets/images/noob.jpg" />
-            <div class="file btn btn-lg btn-primary">
+            <img src="../../../assets/images/noob1.jpg" />
+            <button class="file btn btn-primary" (click)="changePhoto($event)">
               Change Photo
               <input type="file" name="file" />
-            </div>
+            </button>
           </div>
         </div>
         <div class="col-md-6">
           <div class="profile-head">
-            <h5>Noob Saibot</h5>
-            <h6>Web Developer</h6>
+            <p class="h2">{{ userInfo.name }}</p>
+            <!-- <h6>Web Developer</h6> -->
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item">
                 <a
                   class="nav-link"
                   routerLinkActive="active"
-                  routerLink="abouts"
+                  routerLink="/profile"
+                  [routerLinkActiveOptions]="{ exact: true }"
                   >About</a
                 >
               </li>
               <li class="nav-item">
-                <a
-                  class="nav-link"
-                  routerLinkActive="active"
-                  routerLink="events"
-                  >Events</a
+                <a class="nav-link" routerLinkActive="active" routerLink="hosts"
+                  >Hosts</a
                 >
               </li>
               <li class="nav-item">

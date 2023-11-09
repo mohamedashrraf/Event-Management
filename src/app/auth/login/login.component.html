@@ -55,9 +55,11 @@
                 : ''
             }}"
           >
-                      <span (click)="toggleShowPass($event)" class="show-password">
-              <i *ngIf="showPass" class="fa-solid fa-eye"></i>
-              <i *ngIf="!showPass" class="fa-solid fa-eye-slash"></i>
+            <span (click)="toggleShowPass($event)" class="show-password">
+              <span *ngIf="showPass"><i class="fa-solid fa-eye"></i></span>
+              <span *ngIf="!showPass"
+                ><i class="fa-solid fa-eye-slash"></i
+              ></span>
             </span>
             <input
               type="password"
