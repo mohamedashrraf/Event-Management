@@ -267,8 +267,10 @@
             }}"
           >
             <span (click)="toggleShowPass($event)" class="show-password">
-              <i *ngIf="showPass" class="fa-solid fa-eye"></i>
-              <i *ngIf="!showPass" class="fa-solid fa-eye-slash"></i>
+              <span *ngIf="showPass"><i class="fa-solid fa-eye"></i></span>
+              <span *ngIf="!showPass"
+                ><i class="fa-solid fa-eye-slash"></i
+              ></span>
             </span>
             <input
               (focus)="focusInput($event)"
@@ -323,8 +325,10 @@
             }}"
           >
             <span (click)="toggleShowRePass($event)" class="show-password">
-              <i *ngIf="showRePass" class="fa-solid fa-eye"></i>
-              <i *ngIf="!showRePass" class="fa-solid fa-eye-slash"></i>
+              <span *ngIf="showRePass"><i class="fa-solid fa-eye"></i></span>
+              <span *ngIf="!showRePass"
+                ><i class="fa-solid fa-eye-slash"></i
+              ></span>
             </span>
             <input
               (focus)="focusInput($event)"
@@ -369,7 +373,7 @@
           "
           class="text-danger"
         >
-          Email is alredy exists try login
+          Email or username is alredy exists try login
         </p>
         <div class="d-grid gap-2 col-6 mx-auto">
           <button

@@ -9,26 +9,26 @@ import { SocketService } from './socket.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextPipe } from './pipes/text.pipe';
 
-
-
-
 @NgModule({
-  providers:[
-    SocketService
-  ],
+  providers: [SocketService],
   declarations: [
     NavbarComponent,
     FooterComponent,
     NotfoundComponent,
     LoadingComponent,
-    TextPipe
+    TextPipe,
   ],
   imports: [
     CommonModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
+
   exports: [
     NavbarComponent,
     FooterComponent,
@@ -36,7 +36,7 @@ import { TextPipe } from './pipes/text.pipe';
     LoadingComponent,
     FormsModule,
     ReactiveFormsModule,
-    TextPipe
-  ]
+    TextPipe,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

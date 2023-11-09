@@ -7,7 +7,7 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
-import { AuthServiceService } from '../auth-service.service';
+import { AuthService } from '../auth.service';
 
 // matching passwords
 function passwordMatchValidator(
@@ -40,7 +40,7 @@ export class SignupComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthServiceService
+    private authService: AuthService
   ) {
     this.authService.user.subscribe((user) => {
       user.isAuthenticated && this.authService.redirectToHome();
@@ -105,7 +105,7 @@ export class SignupComponent implements OnInit {
       } else {
         const resErr = await res.json();
         console.log('Unexpected response', resErr);
-        if (resErr.message === 'email is unique')
+        if (resErr.message === 'unique err')
           this.registrationForm.setErrors({
             userExists: true,
           });
@@ -136,6 +136,7 @@ export class SignupComponent implements OnInit {
   }
   toggleShowRePass(e: Event) {
     this.showRePass = !this.showRePass;
+
     const input = document.getElementById('confirmPassword-input');
     const inputType = input?.getAttribute('type');
     if (inputType === 'password') input?.setAttribute('type', 'text');
