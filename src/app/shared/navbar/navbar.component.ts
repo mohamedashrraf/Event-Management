@@ -12,30 +12,30 @@ export class NavbarComponent {
   numberNot!: number;
   arrayOfNotifi!: any[];
   constructor(private authService: AuthService, private socket: SocketService) {
-    // this.socket.on('new_event', (event: any) => {
-    //   console.log(event);
-    //   this.socket.numNot.next(this.numberNot + 1);
-    //   this.arrayOfNotifi.push(event);
-    //   console.log(this.arrayOfNotifi);
-    //   this.socket.arrayOfNotifi.next(this.arrayOfNotifi);
-    // });
-    // this.authService.user.subscribe((user) => {
-    //   this.isAuthenticated = user.isAuthenticated;
-    // });
-    // this.socket.on('connect_error', (err: any) => {
-    //   console.log(`connect_error due to ${err}`);
-    // });
+    this.socket.on('new_event', (event: any) => {
+      console.log(event);
+      this.socket.numNot.next(this.numberNot + 1);
+      this.arrayOfNotifi.push(event);
+      console.log(this.arrayOfNotifi);
+      this.socket.arrayOfNotifi.next(this.arrayOfNotifi);
+    });
+    this.authService.user.subscribe((user) => {
+      this.isAuthenticated = user.isAuthenticated;
+    });
+    this.socket.on('connect_error', (err: any) => {
+      console.log(`connect_error due to ${err}`);
+    });
   }
 
   logout() {
     this.authService.logout();
   }
-  // ngOnInit() {
-  //   this.socket.numNot.subscribe((num) => {
-  //     this.numberNot = num;
-  //   });
-  //   this.socket.arrayOfNotifi.subscribe((arr) => {
-  //     this.arrayOfNotifi = arr;
-  //   });
-  // }
+  ngOnInit() {
+    this.socket.numNot.subscribe((num) => {
+      this.numberNot = num;
+    });
+    this.socket.arrayOfNotifi.subscribe((arr) => {
+      this.arrayOfNotifi = arr;
+    });
+  }
 }
