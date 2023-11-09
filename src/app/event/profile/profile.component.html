@@ -5,9 +5,9 @@
         <div class="col-md-3 me-5">
           <div class="profile-img d-flex flex-column">
             <img [src]="imgSrc" class="w-100" />
-            <button class="file btn btn-primary" (click)="changePhoto($event)">
+            <button class="file btn btn-primary"  (click)="changePhoto($event)">
               Change Photo
-              <input type="file" name="file" />
+              <input type="file" name="file"  (change)="sendNewPhoto($event)"/>
             </button>
           </div>
         </div>
