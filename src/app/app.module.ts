@@ -13,11 +13,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { ShatingModule } from './shating/shating.module';
 
-
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,15 +26,12 @@ import { ShatingModule } from './shating/shating.module';
     EventModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ShatingModule
+    ShatingModule,
+  ],
 
-  ],
   providers: [
-    {provide:HTTP_INTERCEPTORS,
-      useClass:InterceptorService,
-      multi:true
-    }
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

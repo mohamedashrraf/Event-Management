@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import UserInfo from '../event/profile/interfaces/userInfo';
 
 interface User {
   name: string;
@@ -13,23 +14,23 @@ interface User {
 @Injectable({
   providedIn: 'root',
 })
-export class AuthServiceService {
-  private whoiam = new BehaviorSubject<User>(
+export class AuthService {
+  private whoiam = new BehaviorSubject<UserInfo>(
     JSON.parse(localStorage.getItem('whoiam')!) || {
       name: '',
       email: '',
-      username: '',
       isAuthenticated: false,
+      userName: '',
     }
   );
 
   constructor(private router: Router) {}
 
-  get user(): BehaviorSubject<User> {
+  get user(): BehaviorSubject<UserInfo> {
     return this.whoiam;
   }
 
-  login(user: User) {
+  login(user: UserInfo) {
     this.whoiam.next(user);
     localStorage.setItem('whoiam', JSON.stringify(user));
   }
@@ -38,8 +39,9 @@ export class AuthServiceService {
     this.whoiam.next({
       name: '',
       email: '',
-      username: '',
+      userName: '',
       isAuthenticated: false,
+      isVerify: false,
     });
     localStorage.removeItem('whoiam');
   }
