@@ -1,9 +1,22 @@
-    <div class="card w-75 mb-3 mt-3">
-      <img src="http://localhost:4000/api/v1/place/photo/{{place._id}}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h4 class="card-title">{{place.address}}</h4>
-        <p class="card-text">{{place.description|text_trim:morText}}</p>
-        <button (click)="showMore()" *ngIf="place.description.length>=50">{{showMoreText}}</button>
-      </div>
-    </div>
- 
+<div class="card w-75 mb-3 mt-3">
+  <img
+    src="http://localhost:4000/api/v1/place/photo/{{ place._id }}"
+    class="card-img-top"
+    alt="place photo"
+  />
+  <div class="card-body">
+    <h2 class="card-title">{{ place.address }}</h2>
+    <p class="card-text text-secondary m-0">
+      {{ place.description | text_trim : morText }}
+      <button
+        class="btn shown"
+        (click)="showMore()"
+        *ngIf="place.description.length >= 50"
+      >
+        {{ showMoreText }}
+      </button>
+    </p>
+    <p class="t m-0 mb-4">{{ place.createdAt | date }}</p>
+    <a class="btn location w-100" href="{{ place.googleMapUrl }}">Go there</a>
+  </div>
+</div>

@@ -54,6 +54,26 @@
 // start card 
 .card img{
   width: 248px;
-
 }
 // end card 
+.notFound{
+  text-align: center;
+  color:var(--gray-color);
+  font-size: 40px;
+  padding: 10px;
+}
+.notnot p:nth-child(2){
+  text-align: center;
+  color:var(--gray-color);
+  margin-top: 40px;
+  font-size: 20px;
+}
+@media (max-width: 787px) {
+  .notFound{
+    font-size: 25px;
+  }
+  .notnot p:nth-child(2){
+    font-size: 20px;
+    margin: 0;
+  }
+}
