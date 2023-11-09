@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-3 me-5">
           <div class="profile-img d-flex flex-column">
-            <img src="../../../assets/images/noob.jpg" class="w-100" />
+            <img [src]="imgSrc" class="w-100" />
             <button class="file btn btn-primary" (click)="changePhoto($event)">
               Change Photo
               <input type="file" name="file" />
