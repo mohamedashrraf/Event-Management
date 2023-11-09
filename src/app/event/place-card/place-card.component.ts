@@ -7,11 +7,11 @@ import { Component, Input } from '@angular/core';
 })
 export class PlaceCardComponent {
 @Input()place:any
-morText: boolean=false;
+morText: boolean=true;
 showMoreText:string ="show more"
 showMore(){
   this.morText=!this.morText
-  this.morText?this.showMoreText="show less":this.showMoreText="show more"
+  this.morText?this.showMoreText="show more":this.showMoreText="show less"
 
 }
 }
