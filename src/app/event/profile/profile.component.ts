@@ -9,8 +9,10 @@ import UserInfo from './interfaces/userInfo';
 })
 export class ProfileComponent {
   userInfo!: UserInfo;
+  loading: boolean = true;
   constructor(private authService: AuthService) {
     this.authService.user.subscribe((user) => {
+      this.loading = false;
       !user.isAuthenticated && this.authService.redirectToLogin();
       this.userInfo = user;
     });
