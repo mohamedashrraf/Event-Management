@@ -42,6 +42,7 @@ export class AuthService {
       userName: '',
       isAuthenticated: false,
       isVerify: false,
+      phoneNumber: ""
     });
     localStorage.removeItem('whoiam');
   }
