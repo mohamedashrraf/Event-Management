@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InterceptorService } from './shared/services/interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { ShatingModule } from './shating/shating.module';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
     EventModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ShatingModule
 
   ],
   providers: [
