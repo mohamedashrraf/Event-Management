@@ -1,7 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, Input, ViewChild, ViewChildren } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthServiceService } from 'src/app/auth/auth-service.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { ResBody } from 'src/app/shared/interfaces/res-body';
 
 @Component({
@@ -12,20 +18,20 @@ import { ResBody } from 'src/app/shared/interfaces/res-body';
 export class PlacesComponent {
   @ViewChild('close') cloas!: ElementRef;
   places: any[] = [];
-  isLoding:boolean=true
+  isLoding: boolean = true;
   userInfo: any;
-  morText: boolean = false
+  morText: boolean = false;
   file: any;
-  constructor(private _athService: AuthServiceService, private httpClint: HttpClient) {
-    
+  constructor(private _athService: AuthService, private httpClint: HttpClient) {
     this._athService.user.subscribe((user) => {
+      !user.isAuthenticated && this._athService.redirectToLogin();
       this.userInfo = user;
       console.log(user);
     });
   }
 
   async getPlaces() {
-    this.isLoding=true
+    this.isLoding = true;
     const res = await fetch(
       `http://localhost:4000/api/v1/place/all_user_place`,
       {
@@ -35,7 +41,7 @@ export class PlacesComponent {
         },
       }
     );
-    this.isLoding=false
+    this.isLoding = false;
     console.log('token', this.userInfo.token);
     console.log(res);
     const data = await res.json();
@@ -45,25 +51,22 @@ export class PlacesComponent {
   ngOnInit() {
     this.getPlaces();
   }
-  ngAfterViewInit(){
-    console.log(this.cloas.nativeElement)
-
+  ngAfterViewInit() {
+    console.log(this.cloas.nativeElement);
   }
   async createPlace(placeForm: NgForm) {
-    placeForm.control.markAllAsTouched()
+    placeForm.control.markAllAsTouched();
     // placeForm.control.valid
-    const formData = new FormData()
+    const formData = new FormData();
     Object.keys(placeForm.controls).forEach((key) => {
       const control = placeForm.controls[key];
-      if (control.value && key != "placPhoto") {
+      if (control.value && key != 'placPhoto') {
         formData.append(key, control.value);
       }
-    })
+    });
     if (this.file) {
-
-      formData.append("placPhoto", this.file)
+      formData.append('placPhoto', this.file);
     }
-
 
     //  const res = await fetch(`http://localhost:4000/api/v1/place`, {
     //    method: 'POST',
@@ -75,22 +78,23 @@ export class PlacesComponent {
     //     },
     //     body: JSON.stringify(formData),
     //   });
-    this.httpClint.post<ResBody>("http://localhost:4000/api/v1/place", formData, {
-      headers: {
-        Authorization: this.userInfo.token,
-      }
-    }).subscribe(async (res) => {
+    this.httpClint
+      .post<ResBody>('http://localhost:4000/api/v1/place', formData, {
+        headers: {
+          Authorization: this.userInfo.token,
+        },
+      })
+      .subscribe(async (res) => {
+        const data = res;
+        const isLimet = res.message == 'you cant add more then 5 place';
 
-      const data = res;
-      const isLimet = res.message== 'you cant add more then 5 place'
-
-      await this.getPlaces();
-      console.log('data from create host', res);
-      console.log('data from create host data', data);
-      console.log(this.places);
-      console.log('forming', placeForm.value);
-      this.cloas.nativeElement.click()
-    })
+        await this.getPlaces();
+        console.log('data from create host', res);
+        console.log('data from create host data', data);
+        console.log(this.places);
+        console.log('forming', placeForm.value);
+        this.cloas.nativeElement.click();
+      });
   }
   getFiles(event: any) {
     this.file = event.target.files[0];

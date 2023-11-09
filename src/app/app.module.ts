@@ -11,12 +11,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InterceptorService } from './shared/services/interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ShatingModule } from './shating/shating.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -28,14 +26,12 @@ import { HttpClientModule } from '@angular/common/http';
     EventModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ShatingModule,
+  ],
 
-  ],
   providers: [
-    {provide:HTTP_INTERCEPTORS,
-      useClass:InterceptorService,
-      multi:true
-    }
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

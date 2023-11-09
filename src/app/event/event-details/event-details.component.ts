@@ -9,16 +9,20 @@ import { EventHttpService } from '../services/event-http.service';
 })
 export class EventDetailsComponent {
   url = location.pathname;
-  activeId: string = "";
+  activeId: string = '';
   foundEvent: any;
   foundPhoto: any;
 
-  constructor(private activeRoute: ActivatedRoute, private router: Router, private eventHttp: EventHttpService) {
+  constructor(
+    private activeRoute: ActivatedRoute,
+    private router: Router,
+    private eventHttp: EventHttpService
+  ) {
     console.log(this.url);
   }
 
   ngOnInit() {
-    this.activeId = this.activeRoute.snapshot.params["id"];
+    this.activeId = this.activeRoute.snapshot.params['id'];
 
     this.eventHttp.getEventDetails(this.activeId).subscribe(
       (res) => {
@@ -28,19 +32,19 @@ export class EventDetailsComponent {
       (error) => {
         console.log(error);
         if (error.status === 404) {
-          this.router.navigate(["/notfound"]);
+          this.router.navigate(['/notfound']);
         }
       }
     );
 
     this.eventHttp.getEventPhoto(this.activeId).subscribe(
-          (res) => {
+      (res) => {
         this.foundPhoto = res;
         console.log(this.foundPhoto);
       },
       (error) => {
         console.log(error);
       }
-    )
+    );
   }
 }

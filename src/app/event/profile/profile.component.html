@@ -2,39 +2,32 @@
   <div class="container emp-profile">
     <form method="post">
       <div class="row">
-        <!-- <div class="col-md-4">
-          <div class="profile-img">
-            <img src="../../../assets/images/noob.jpg" />
-            <div class="file btn btn-lg btn-primary">
+        <div class="col-md-3 me-5">
+          <div class="profile-img d-flex flex-column">
+            <img src="../../../assets/images/noob.jpg" class="w-100" />
+            <button class="file btn btn-primary" (click)="changePhoto($event)">
               Change Photo
               <input type="file" name="file" />
-            </div>
+            </button>
           </div>
-        </div> -->
-        <div class="col-md-12">
-          <div class="profile-head ">
-            <div class="profile-img d-flex">
-              <div class="text-content mt-5">
-                <h1 class="mb-0">Noob Saibot</h1>
-                <h2>Web Developer</h2>
-              </div>
-            <img src="../../../assets/images/noob.jpg" />
-            </div>
+        </div>
+        <div class="col-md-6">
+          <div class="profile-head">
+            <p class="h2">{{ userInfo.name }}</p>
+            <!-- <h6>Web Developer</h6> -->
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item">
                 <a
                   class="nav-link"
                   routerLinkActive="active"
-                  routerLink="abouts"
+                  routerLink="/profile"
+                  [routerLinkActiveOptions]="{ exact: true }"
                   >About</a
                 >
               </li>
               <li class="nav-item">
-                <a
-                  class="nav-link"
-                  routerLinkActive="active"
-                  routerLink="events"
-                  >Events</a
+                <a class="nav-link" routerLinkActive="active" routerLink="hosts"
+                  >Hosts</a
                 >
               </li>
               <li class="nav-item">

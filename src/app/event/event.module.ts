@@ -12,6 +12,10 @@ import { SharedModule } from '../shared/shared.module';
 
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
+import { HostsComponent } from './hosts/hosts.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UiModule } from '../ui/ui.module';
+import { HostDetailsComponent } from './host-details/host-details.component';
 import { PlaceCardComponent } from './place-card/place-card.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -25,8 +29,22 @@ import { HttpClientModule } from '@angular/common/http';
     AboutsComponent,
     EventDetailsComponent,
     SubscriptionComponent,
+    HostsComponent,
+    // CalendarComponent,
+    HostDetailsComponent,
     PlaceCardComponent,
   ],
-  imports: [CommonModule, AppRoutingModule, CalendarComponent, SharedModule,HttpClientModule],
+  imports: [
+    CommonModule,
+    AppRoutingModule,
+    CalendarComponent,
+    SharedModule,
+    UiModule,
+    // PlaceCardComponent,
+    CommonModule,
+    AppRoutingModule,
+    SharedModule,
+    HttpClientModule,
+  ],
 })
 export class EventModule {}

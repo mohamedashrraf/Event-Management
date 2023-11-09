@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthServiceService } from '../auth-service.service';
+import { AuthService } from '../auth.service';
+import UserInfo from 'src/app/event/profile/interfaces/userInfo';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { AuthServiceService } from '../auth-service.service';
 })
 export class LoginComponent {
   showPass = false;
-  constructor(private router: Router, private authService: AuthServiceService) {
+  constructor(private router: Router, private authService: AuthService) {
     this.authService.user.subscribe((user) => {
       user.isAuthenticated && this.authService.redirectToHome();
     });
@@ -32,13 +33,16 @@ export class LoginComponent {
       if (res.status === 200) {
         const resData = await res.json();
         console.log('response from login', resData);
+        const userInfo: UserInfo = resData.data._doc;
+        console.log(userInfo, 'userInfo');
         this.authService.login({
-          //TODO: Change this
-          name: 'Mohamed Nasr',
-          email: 'qqq@qqq.com',
-          username: 'laplap',
+          name: userInfo.name,
+          email: userInfo.email,
+          userName: userInfo.userName,
           isAuthenticated: true,
           token: resData.token,
+          isVerify: userInfo.isVerify,
+          subscripeWith: userInfo.subscripeWith,
         });
         this.authService.redirectToHome();
       } else {
@@ -56,6 +60,10 @@ export class LoginComponent {
 
   toggleShowPass(e: Event) {
     this.showPass = !this.showPass;
+
+    console.log(e.target);
+
+    console.log(this.showPass);
     const input = document.getElementById('password-input');
     const inputType = input?.getAttribute('type');
     if (inputType === 'password') input?.setAttribute('type', 'text');
