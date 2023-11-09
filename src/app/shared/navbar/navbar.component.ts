@@ -25,6 +25,9 @@ export class NavbarComponent {
     this.authService.user.subscribe((user) => {
       this.isAuthenticated = user.isAuthenticated;
     });
+    this.socket.on("connect_error", (err:any) => {
+      console.log(`connect_error due to ${err}`);
+    });
   }
   
   logout() {
