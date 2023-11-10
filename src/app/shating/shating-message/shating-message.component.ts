@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class ShatingMessageComponent {
 @Input("message")message!:string
+
 }

@@ -1,4 +1,5 @@
 export default interface UserInfo {
+  phoneNumber?: string;
   name: string;
   email: string;
   userName: string;
