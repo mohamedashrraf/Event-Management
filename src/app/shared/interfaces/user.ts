@@ -3,7 +3,16 @@ export interface User {
     isAuthenticated: boolean;
     name: string;
     token: string;
-    username: string;
-    subscribeWith:string[]
+    userName: string;
+    subscribeWith: SubscribeWith[];
+    _id: string
 
+}
+export interface SubscribeWith { title: string, _id: string };
+export interface MessageCreated {
+    createdAt: string;
+    message: string;
+    name: string;
+    updatedAt: string;
+    _id: string;
 }

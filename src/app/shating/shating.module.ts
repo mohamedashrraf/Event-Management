@@ -24,7 +24,11 @@ import { AppRoutingModule } from '../app-routing.module';
     SharedModule,
     AppRoutingModule
     
-  ],
+  ],exports:[
+    ShatingComponent,
+    ShatingMessageComponent,
+    ShatingLayoutComponent
+  ]
 
 })
 export class ShatingModule { }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { SubscribeWith } from 'src/app/shared/interfaces/user';
 import { GetTokenDataService } from 'src/app/shared/services/get-token-data.service';
+import { SocketService } from 'src/app/shared/socket.service';
 
 @Component({
   selector: 'app-shating-layout',
@@ -7,9 +9,13 @@ import { GetTokenDataService } from 'src/app/shared/services/get-token-data.serv
   styleUrls: ['./shating-layout.component.scss']
 })
 export class ShatingLayoutComponent {
-  subscribeWith!:string[]
-  constructor(private getTokenData:GetTokenDataService){
-    console.log(getTokenData.tokenData.subscribeWith)
-   this.subscribeWith = getTokenData.tokenData.subscribeWith
+  subscribeWith!:SubscribeWith[]
+  constructor(private getTokenData:GetTokenDataService,private socket:SocketService){
+    console.log(getTokenData.tokenData)
+    const _id =getTokenData.tokenData._id
+    this.socket.emit("get_events_rooms",_id)
+    this.socket.on("events_rooms",(subscribeWith: SubscribeWith[])=>{
+      this.subscribeWith = subscribeWith
+    })
   }
 }
