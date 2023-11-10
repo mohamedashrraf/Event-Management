@@ -161,11 +161,11 @@
   Hosting has not been created yet
 </p>
 <div *ngIf="hosts.length && !loadingGet">
-  <p class="h3 text-primary text-center mb-0 mt-5 mb-2">Hosting List</p>
+  <p class="h3 text-primary text-center mb-0 mt-5 mb-4">Hosting List</p>
   <div class="page-content page-container" id="page-content">
     <div class="padding">
       <div class="row">
-        <div class="list list-row block">
+        <div class="list list-row block d-flex flex-column gap-3">
           <a
             class="list-item"
             [routerLink]="host._id"

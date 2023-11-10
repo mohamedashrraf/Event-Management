@@ -68,7 +68,10 @@ export class HostsComponent {
         form.reset();
 
         // Get Latest Hosts
-      } else console.log('create Host res not ok', res);
+      } else {
+        console.log('create Host res not ok', res);
+        console.log('create Host res not ok', await res.json());
+      }
     } catch (err) {
       console.log('error from create Host', err);
     }
