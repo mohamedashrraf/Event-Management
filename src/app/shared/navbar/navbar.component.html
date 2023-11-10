@@ -96,7 +96,7 @@
             aria-controls="offcanvasRight"
           >
             <i class="fa-regular fa-bell fa-xl"> </i>
-            <span>{{ numberNot }}</span>
+            <span [ngClass]="{'d-none':!numberNot}" >{{ numberNot }}</span>
           </button>
         </li>
         <li class="nav-item">

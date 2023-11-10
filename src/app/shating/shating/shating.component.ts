@@ -13,20 +13,19 @@ import { SocketService } from 'src/app/shared/socket.service';
 export class ShatingComponent implements OnDestroy, OnInit {
   eventId!: string;
   messagesListStore!: MessageCreated[]
-  editMod:boolean=false
-  messageEdit !:MessageCreated
-  formSender!:FormGroup;
-formEditer!:FormGroup;
+  editMod: boolean = false
+  messageEdit !: MessageCreated
+  formSender!: FormGroup;
+  formEditer!: FormGroup;
 
-constructor(private activeRoute: ActivatedRoute, private socket: SocketService, private getTokenData: GetTokenDataService ,private fb: FormBuilder) {
-  this.formSender= this.fb.group({
-    shat_text:["",Validators.required]
-  })
-  this.formEditer= this.fb.group({
-    shat_text_edit:["",Validators.required]
-  })
-  
-  this.activeRoute.params.subscribe((pram) => {
+  constructor(private activeRoute: ActivatedRoute, private socket: SocketService, private getTokenData: GetTokenDataService, private fb: FormBuilder) {
+    this.formSender = this.fb.group({
+      shat_text: ["", Validators.required]
+    })
+    this.formEditer = this.fb.group({
+      shat_text_edit: ["", Validators.required]
+    })
+    this.activeRoute.params.subscribe((pram) => {
       this.socket.emit("leave_room", this.eventId)
       this.eventId = pram['id']
       this.messagesListStore = []
@@ -35,8 +34,7 @@ constructor(private activeRoute: ActivatedRoute, private socket: SocketService, 
         if (!messagesListStore) {
           this.messagesListStore = []
         } else {
-          this.messagesListStore = [...messagesListStore]
-
+          this.messagesListStore = [...messagesListStore].reverse()
         }
       }
       this.socket.emit("join_room", this.eventId, errorHandler)
@@ -56,10 +54,10 @@ constructor(private activeRoute: ActivatedRoute, private socket: SocketService, 
       }
 
     })
-    this.socket.editMod.subscribe((editMod)=>{
+    this.socket.editMod.subscribe((editMod) => {
       this.editMod = editMod
     })
-    this.socket.messageToEdit.subscribe((message)=>{
+    this.socket.messageToEdit.subscribe((message) => {
       this.messageEdit = message
     })
   }
@@ -78,7 +76,6 @@ constructor(private activeRoute: ActivatedRoute, private socket: SocketService, 
       }
       this.socket.emit("send_message", this.eventId, message, selfMessage)
       this.formSender.reset()
-
     }
   }
   editMessage() {
@@ -89,11 +86,10 @@ constructor(private activeRoute: ActivatedRoute, private socket: SocketService, 
       console.log(message)
       const userName = this.getTokenData.tokenData.userName
       console.log(userName)
-      this.socket.emit("edit_message", this.eventId, this.messageEdit._id,message)
+      this.socket.emit("edit_message", this.eventId, this.messageEdit._id, message)
       this.formEditer.reset()
       this.socket.editMod.next(false);
-      this.socket.messageToEdit.next({...this.messageEdit,message})
-
+      this.socket.messageToEdit.next({ ...this.messageEdit, message })
     }
   }
   ngOnDestroy(): void {
