@@ -9,10 +9,11 @@
         </div>
         
         <div class="list-group list-group-flush border-bottom scrollarea"  >
-            <a  *ngFor="let event of subscribeWith; " [routerLink]="['/shating/',event._id]" routerLinkActive="active"  [routerLinkActiveOptions]="{ exact: true }"
-                class="list-group-item list-group-item  py-3 lh-tight" aria-current="true">
-                <div class="col-10 mb-1 small">{{event.title}}</div>
-            </a>
+            <a *ngFor="let event of subscribeWith; " [routerLink]="['/shating/',event._id]" routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }" class="list-group-item list-group-item  py-3 lh-tight"
+    aria-current="true">
+    <app-room-link [notificationNewMessage]="notificationNewMessage" [event]="event" ></app-room-link>
+</a>
         </div>
     </div>
     <router-outlet></router-outlet>

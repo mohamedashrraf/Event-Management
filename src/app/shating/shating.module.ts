@@ -7,6 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { SharedModule } from '../shared/shared.module';
 import { ShatingLayoutComponent } from './shating-layout/shating-layout.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { RoomLinkComponent } from './room-link/room-link.component';
 
 
 
@@ -14,7 +15,8 @@ import { AppRoutingModule } from '../app-routing.module';
   declarations: [
     ShatingComponent,
     ShatingMessageComponent,
-    ShatingLayoutComponent
+    ShatingLayoutComponent,
+    RoomLinkComponent
   ],
   imports: [
     CommonModule,
