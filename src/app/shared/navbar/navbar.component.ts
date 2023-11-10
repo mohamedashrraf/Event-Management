@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { SocketService } from '../socket.service';
+import { NotificationNewMessage } from '../interfaces/user';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +12,7 @@ export class NavbarComponent {
   isAuthenticated = false;
   numberNot!: number;
   arrayOfNotifi!: any[];
+  notificationNewMessage!: NotificationNewMessage[];
   constructor(private authService: AuthService, private socket: SocketService) {
     this.socket.on('new_event', (event: any) => {
       console.log(event);
@@ -25,6 +27,20 @@ export class NavbarComponent {
     this.socket.on('connect_error', (err: any) => {
       console.log(`connect_error due to ${err}`);
     });
+    this.socket.on("notification_new_message", (eventId: string) => {
+      const index = this.notificationNewMessage.findIndex((notification) => {
+        notification._id == eventId
+      })
+      if(index){
+        ++this.notificationNewMessage[index].NotifiNum
+      }else{
+        this.notificationNewMessage.push({_id:eventId,NotifiNum:1})
+      }
+
+    })
+    this.socket.notificationNewMessage.subscribe((notificationNewMessage) => {
+      this.notificationNewMessage = notificationNewMessage
+    })
   }
 
   logout() {
