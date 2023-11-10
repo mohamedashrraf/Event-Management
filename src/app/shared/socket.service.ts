@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { BehaviorSubject } from 'rxjs';
-import { MessageCreated } from './interfaces/user';
+import { MessageCreated, NotificationNewMessage } from './interfaces/user';
 @Injectable({
   providedIn: 'root',
 })
@@ -10,6 +10,7 @@ export class SocketService extends Socket {
   arrayOfNotifi = new BehaviorSubject<any[]>([])
   editMod = new BehaviorSubject<boolean>(false);
   messageToEdit = new BehaviorSubject<MessageCreated>({_id:"",createdAt:"",message:"",name:"",updatedAt:""});
+  notificationNewMessage = new BehaviorSubject<NotificationNewMessage[]>([]);
   constructor() {
     super({ url: 'http://localhost:4000', options: {
        reconnection:false,

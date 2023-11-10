@@ -16,3 +16,7 @@ export interface MessageCreated {
     updatedAt: string;
     _id: string;
 }
+export interface NotificationNewMessage {
+    _id: string;
+    NotifiNum:number;
+}

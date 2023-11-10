@@ -66,9 +66,6 @@ constructor(private activeRoute: ActivatedRoute, private socket: SocketService, 
   ngOnInit(): void {
     console.log("init ShatingComponent")
   }
-  ngOnDestroy(): void {
-    this.socket.emit("leave_room", this.eventId)
-  }
   sendMessage() {
     if (this.formSender.valid) {
       const message = this.formSender.value.shat_text
@@ -98,5 +95,8 @@ constructor(private activeRoute: ActivatedRoute, private socket: SocketService, 
       this.socket.messageToEdit.next({...this.messageEdit,message})
 
     }
+  }
+  ngOnDestroy(): void {
+    this.socket.emit("leave_room", this.eventId)
   }
 }
