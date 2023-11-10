@@ -10,9 +10,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProfileComponent {
   userInfo!: UserInfo;
+  loading: boolean = true;
   imgSrc:string="http://localhost:4000/api/v1/user/ProPicPath/"
   constructor(private authService: AuthService,private httpClint:HttpClient) {
     this.authService.user.subscribe((user) => {
+      this.loading = false;
       !user.isAuthenticated && this.authService.redirectToLogin();
       this.userInfo = user;
     });

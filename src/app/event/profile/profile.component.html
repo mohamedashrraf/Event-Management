@@ -1,4 +1,7 @@
-<div class="prof">
+<div *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+<div class="prof" *ngIf="!loading">
   <div class="container emp-profile">
     <form method="post">
       <div class="row">
