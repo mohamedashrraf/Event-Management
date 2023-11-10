@@ -1,4 +1,7 @@
-<div class="main">
+<div *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+<div class="main" *ngIf="!loading">
   <div class="bg-body-secondary p-3 rounded-1">
     <!-- <h1 class="h1">DEVELOPERS CONFERENCE</h1> -->
     <div class="d-flex gap-3 mb-4">
@@ -17,72 +20,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Details -->
-  <!-- <section class="d-flex bg-body-tertiary p-3">
-    <div>
-      <img
-        class="w-75"
-        src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=1412&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-      />
-      <p class="h2 mb-2 mt-4">Details</p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia est
-        sint quas laudantium sit, expedita harum eum voluptates impedit
-        voluptatem exercitationem delectus illo, fugit distinctio in, accusamus
-        beatae sapiente? Minus.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit accusamus
-        veniam quisquam doloremque ratione voluptates in, vitae ipsum et eveniet
-        qui perspiciatis ea, voluptas laudantium assumenda nemo? Minus, ex
-        vitae.
-      </p>
-
-      <div class="mt-6">
-        <div class="d-flex flex-wrap gap-2">
-          <a
-            class="py-2 px-1 bg-info-subtle text-dark text-decoration-none rounded-2"
-            href="#"
-            >Online Marketing</a
-          ><a
-            class="py-2 px-1 bg-info-subtle text-dark text-decoration-none rounded-2"
-            href="#"
-            >Mergers &amp; Acquisitions</a
-          ><a
-            class="py-2 px-1 bg-info-subtle text-dark text-decoration-none rounded-2"
-            href="#"
-            >Professional Networking</a
-          ><a
-            id="topics-link-3"
-            class="py-2 px-1 bg-info-subtle text-dark text-decoration-none rounded-2"
-            href="#"
-            >Entrepreneurship</a
-          ><a
-            id="topics-link-4"
-            class="py-2 px-1 bg-info-subtle text-dark text-decoration-none rounded-2"
-            href="#"
-            >CEO to CEO Coaching &amp; Mentoring for Mutual Growth</a
-          >
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="d-flex gap-2">
-        <span><i class="fa-regular fa-clock"></i></span>
-        <p>
-          Tuesday, November 14, 2023 at 6:00 PM to Tuesday, November 14, 2023 at
-          8:00 PM EET
-        </p>
-      </div>
-      <div class="d-flex gap-2">
-        <span><i class="fa-solid fa-location-pin"></i></span>
-        <p>6 Al Mzyn, El-Gamaleya, El Gamaliya, Cairo Governorate 4331001</p>
-      </div>
-    </div>
-  </section> -->
-  <!--                         Inspiration                                        -->
 
   <!-- Hero Area Start -->
   <div id="hero-area" class="hero-area-bg">
@@ -116,7 +53,7 @@
               src="https://images.squarespace-cdn.com/content/5898e29c725e25e7132d5a5a/1487546591045-NJLLE20UXLVGZ9XHL47Y/600x400-Image-Placeholder.jpg?content-type=image%2Fjpeg"
               alt=""
             /> -->
-            {{ foundPhoto }}
+            <img class="img-fluid" [src]="foundPhoto" alt="" />
           </div>
         </div>
         <div class="col-lg-6 col-md-12 col-xs-12">

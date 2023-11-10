@@ -13,6 +13,7 @@ import { HostsComponent } from './event/hosts/hosts.component';
 import { HostDetailsComponent } from './event/host-details/host-details.component';
 import { SubscriptionComponent } from './event/subscription/subscription.component';
 import { ShatingComponent } from './shating/shating/shating.component';
+import { ShatingLayoutComponent } from './shating/shating-layout/shating-layout.component';
 
 const routes: Routes = [
   {
@@ -50,8 +51,14 @@ const routes: Routes = [
     component: SubscriptionComponent,
   },
   {
-    path: 'shating/:id',
-    component: ShatingComponent,
+    path: 'shating',
+      component: ShatingLayoutComponent,
+    children:[
+      {path: ':id',
+      component: ShatingComponent,
+    }
+
+    ]
   },
   {
     path: '**',

@@ -5,20 +5,24 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShatingMessageComponent } from './shating-message/shating-message.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { SharedModule } from '../shared/shared.module';
+import { ShatingLayoutComponent } from './shating-layout/shating-layout.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 
 @NgModule({
   declarations: [
     ShatingComponent,
-    ShatingMessageComponent
+    ShatingMessageComponent,
+    ShatingLayoutComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
     ReactiveFormsModule,
     FormsModule ,
-    SharedModule
+    SharedModule,
+    AppRoutingModule
     
   ],
 
