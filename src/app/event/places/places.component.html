@@ -1,13 +1,12 @@
-<section class="min-vh-100">
+<section class="min-vh-100 ps-3 pt-1">
   <div class="spinner-border" role="status" *ngIf="isLoding">
     <span class="visually-hidden">Loading...</span>
   </div>
   <div *ngIf="!isLoding" >
-    <p *ngIf="!places.length">Not Found</p>
   <!-- Button trigger modal -->
   <button
-    type="button"
-    class="btn-gra"
+    type="button "
+    class="btn-gra "
     data-bs-toggle="modal"
     data-bs-target="#exampleModal"
     [ngStyle]="{'display':places.length>=5?'none':'block'}"
@@ -15,10 +14,11 @@
     Create
     <i class="fa-solid fa-circle-plus"></i>
   </button>
+  <p class=" pipi text-center fs-6 text-secondary p-5" *ngIf="!places.length">No places added yet</p>
   <!-- start placeLink  -->
   <div class="container">
     <div class="row">
-      <div *ngFor="let place of places" class="col-md-4 cardition">
+      <div *ngFor="let place of places" class="col-md-6 cardition">
         <app-place-card [place]="place"></app-place-card>
       </div>
     </div>
