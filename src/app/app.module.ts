@@ -27,6 +27,7 @@ import { ShatingModule } from './shating/shating.module';
     BrowserAnimationsModule,
     HttpClientModule,
     ShatingModule,
+  
   ],
 
   providers: [
