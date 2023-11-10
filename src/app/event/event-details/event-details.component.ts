@@ -22,6 +22,9 @@ export class EventDetailsComponent {
     console.log(this.url);
     this.activeId = this.activeRoute.snapshot.params['id'];
 
+    this.foundPhoto = `http://localhost:4000/api/v1/event/photo/${this.activeId}`;
+    console.log(this.foundPhoto);
+
   }
 
   ngOnInit() {
@@ -49,5 +52,7 @@ export class EventDetailsComponent {
     //     console.log(error);
     //   }
     // );
+
+
   }
 }
