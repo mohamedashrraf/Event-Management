@@ -21,37 +21,10 @@ export class ShatingLayoutComponent implements OnInit {
     this.socket.on("events_rooms", (subscribeWith: SubscribeWith[]) => {
       this.subscribeWith = subscribeWith
     })
-    this.socket.notificationNewMessage.subscribe((notificationNewMessage) => {
-      this.notificationNewMessage = notificationNewMessage
-    })
+   
   }
   ngOnInit(): void {
-    this.activeRoute.url.subscribe(() => {
-
-      if (this.activeRoute.firstChild) {
-
-        this.activeRoute.firstChild.params.subscribe((pram) => {
-
-          this.eventId = pram['id']
-          if(this.eventId){
-
-            const index = this.notificationNewMessage.findIndex((message) => {
-              return message._id == this.eventId
-            })
-            if(index>=0){
-  
-              this.notificationNewMessage[index].NotifiNum=0
-            }else{
-              this.notificationNewMessage.push({_id:this.eventId,NotifiNum:0})
-            }
-            console.log(this.eventId)
-          }
-        })
-
-      } else {
-        console.log("no Cild")
-      }
-    })
+    
 
   }
 
