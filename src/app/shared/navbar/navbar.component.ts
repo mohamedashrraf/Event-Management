@@ -14,6 +14,9 @@ export class NavbarComponent {
   arrayOfNotifi!: any[];
   notificationNewMessage!: NotificationNewMessage[];
   constructor(private authService: AuthService, private socket: SocketService) {
+    this.socket.notificationNewMessage.subscribe((notificationNewMessage) => {
+      this.notificationNewMessage = notificationNewMessage
+    })
     this.socket.on('new_event', (event: any) => {
       console.log(event);
       this.socket.numNot.next(this.numberNot + 1);
@@ -28,18 +31,21 @@ export class NavbarComponent {
       console.log(`connect_error due to ${err}`);
     });
     this.socket.on("notification_new_message", (eventId: string) => {
+      console.log("notification_new_message")
+      console.log(eventId)
+      console.log(this.notificationNewMessage)
       const index = this.notificationNewMessage.findIndex((notification) => {
-        notification._id == eventId
+       return notification._id == eventId
       })
-      if(index){
+      console.log(index)
+      if(index>=0){
+        console.log("notification_found")
         ++this.notificationNewMessage[index].NotifiNum
       }else{
+        console.log("notification_notfound")
         this.notificationNewMessage.push({_id:eventId,NotifiNum:1})
       }
 
-    })
-    this.socket.notificationNewMessage.subscribe((notificationNewMessage) => {
-      this.notificationNewMessage = notificationNewMessage
     })
   }
 

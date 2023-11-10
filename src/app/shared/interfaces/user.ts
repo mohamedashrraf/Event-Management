@@ -18,5 +18,5 @@ export interface MessageCreated {
 }
 export interface NotificationNewMessage {
     _id: string;
-    NotifiNum:number;
+    NotifiNum:number
 }
