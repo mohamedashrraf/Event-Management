@@ -71,21 +71,14 @@
             >Home</a
           >
         </li>
-        <li class="nav-item">
-          <a
-            class="nav-link popo"
-            routerLink="/profile"
-            routerLinkActive="activate"
-            >Profile</a
-          >
-        </li>
+
         <li class="nav-item">
           <a
             class="nav-link popo"
             routerLink="/shating"
             routerLinkActive="activate"
-            >Messages</a
-          >
+            ><i class="fa-regular fa-message fa-xl"></i
+          ></a>
         </li>
         <li class="nav-item notifi position-relative">
           <button
@@ -98,6 +91,22 @@
             <i class="fa-regular fa-bell fa-xl"> </i>
             <span [ngClass]="{ 'd-none': !numberNot }">{{ numberNot }}</span>
           </button>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link popo"
+            routerLink="/profile"
+            routerLinkActive="activate"
+            ><i class="fa-regular fa-user fa-xl"></i
+          ></a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link popo"
+            routerLink="/subscribe"
+            routerLinkActive="activate"
+            >Pro</a
+          >
         </li>
         <li class="nav-item">
           <button
