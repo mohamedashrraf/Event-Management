@@ -10,7 +10,7 @@ import { EventHttpService } from '../services/event-http.service';
 export class EventDetailsComponent {
   url = location.pathname;
   activeId: string = '';
-  foundEvent: any;
+  foundEvent!: any;
   foundPhoto!: string;
   loading: boolean = true;
 

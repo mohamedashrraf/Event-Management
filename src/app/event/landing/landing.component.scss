@@ -244,8 +244,11 @@
 }
 
 // end mini
-
 // start plans
+
+.free-plan {
+  height: 200px;
+}
 
 .center-text {
   text-align: center;
@@ -274,6 +277,7 @@
   margin-bottom: 30px;
   margin-top: 20px;
   padding: 30px 0px 40px 0px;
+  height: 494px;
 }
 
 .pricing-item .pricing-header {
@@ -304,7 +308,6 @@
   text-align: center;
   padding-top: 20px;
   padding-bottom: 13px;
-  background: var(--second-color);
   width: 80%;
   margin: auto;
   margin-bottom: 40px;
@@ -323,7 +326,7 @@
 
 .pricing-item .pricing-body .price-wrapper .price {
   font-weight: 500;
-  font-size: 28px;
+  font-size: 37px;
   color: var(--text-color);
 }
 
@@ -351,7 +354,7 @@ li {
   text-align: center;
   margin-bottom: 12px;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 18px;
   color: #7a7a7a;
   letter-spacing: 0.25px;
   text-decoration: line-through;
@@ -362,11 +365,11 @@ li {
   margin-top: 50px;
 }
 
-a.main-button {
+button.main-button {
   font-size: 13px;
   border-radius: 20px;
   padding: 12px 20px;
-  background-color: var(--second-color);
+  background-color: #2652d6;
   text-decoration: none;
   text-transform: uppercase;
   color: var(--text-color);
@@ -377,4 +380,8 @@ a.main-button {
   transition: all 0.3s ease 0s;
 }
 
-// start plans
+@media (max-width: 800px) {
+  .free-plan {
+    margin-bottom: 400px;
+  }
+}
