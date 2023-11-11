@@ -1,3 +1,4 @@
+import EventInfo from './event-info';
 import UserInfo from './user-info';
 
 export default interface HostDetails {
@@ -6,6 +7,6 @@ export default interface HostDetails {
   description: string;
   name: string;
   _id: string;
-  events: [];
+  events: EventInfo[];
   owner: UserInfo;
 }
