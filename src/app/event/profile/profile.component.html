@@ -10,7 +10,11 @@
             <div class="hed-cont d-flex">
               <div class="headOfPro col-lg-4 col-md-12">
                 <div class="profile-img d-flex flex-column">
-                  <img [src]="imgSrc" />
+                  <img
+                    [src]="
+                      imgSrc ? imgSrc : '../../../assets/images/avatar.jpg'
+                    "
+                  />
                   <button class="file" (click)="changePhoto($event)">
                     Change Photo
                     <input
@@ -20,6 +24,7 @@
                     />
                   </button>
                 </div>
+
                 <h2>{{ userInfo.name }}</h2>
               </div>
               <div class="col-lg-6 hihihi">
@@ -36,7 +41,6 @@
                 </div>
               </div>
             </div>
-            <!-- <h6>Web Developer</h6> -->
             <ul
               class="nav nav-tabs d-flex justify-content-center"
               id="myTab"
