@@ -9,7 +9,7 @@ export class SocketService extends Socket {
   numNot =  new BehaviorSubject<number>(0) 
   arrayOfNotifi = new BehaviorSubject<any[]>([])
   editMod = new BehaviorSubject<boolean>(false);
-  messageToEdit = new BehaviorSubject<MessageCreated>({_id:"",createdAt:"",message:"",name:"",updatedAt:""});
+  messageToEdit = new BehaviorSubject<MessageCreated>({_id:"",message:"",name:""});
   notificationNewMessage = new BehaviorSubject<NotificationNewMessage[]>([]);
   constructor() {
     super({ url: 'http://localhost:4000', options: {

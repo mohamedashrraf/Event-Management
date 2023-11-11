@@ -10,10 +10,10 @@ export interface User {
 }
 export interface SubscribeWith { title: string, _id: string };
 export interface MessageCreated {
-    createdAt: string;
+    createdAt?: Date;
     message: string;
     name: string;
-    updatedAt: string;
+    updatedAt?: Date;
     _id: string;
 }
 export interface NotificationNewMessage {

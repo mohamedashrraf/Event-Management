@@ -75,15 +75,15 @@
             </div>
             <ul class="list">
               <li class="active">5 Host</li>
-              <li class="active">Unlimited Places</li>
-              <li class="active">Unlimted Events</li>
-              <li class="active">15-minute Support</li>
+              <li class="active">5 Places</li>
+              <li class="active">5 Events</li>
+              <li class="active">Technical Support</li>
               <li class="active">Unlimited Emails</li>
               <li class="active">24/7 Security</li>
             </ul>
           </div>
-          <div class="pricing-footer">
-            <a href="#" class="main-button">Subscribe Now</a>
+          <div  class="pricing-footer"  >
+            <button (click)="VIPPaypal()" style="cursor: pointer;"class="btn main-button" [ngClass]="{'disabled':isGitLink}" >Subscribe Now</button>
           </div>
         </div>
       </div>
