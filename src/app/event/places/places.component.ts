@@ -85,6 +85,7 @@ export class PlacesComponent {
         },
       })
       .subscribe(async (res) => {
+        console.log(res);
         const data = res;
         const isLimet = res.message == 'you cant add more then 5 place';
 

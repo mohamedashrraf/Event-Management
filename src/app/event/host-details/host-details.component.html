@@ -238,9 +238,9 @@
                       accept="image/*"
                       type="file"
                       id="formFile"
-                      formControlName="posterPath"
                       placeholder="Poster Event"
                       required
+                      (change)="readUrl($event)"
                     />
                   </div>
 
@@ -486,15 +486,20 @@
               >
                 <a
                   class="list-item col-8"
-                  [routerLink]="event._id"
+                  [routerLink]="'/event/' + event._id"
                   data-id="19"
                   *ngFor="let event of events"
                 >
                   <div>
                     <p data-abc="true">
-                      <span class="w-48 avatar gd-warning">{{
-                        event.name?.at(0)?.toUpperCase()
-                      }}</span>
+                      <span class="w-48 avatar gd-warning">
+                        <img
+                          [src]="
+                            'http://localhost:4000/api/v1/event/photo/' +
+                            event._id
+                          "
+                        />
+                      </span>
                     </p>
                   </div>
                   <div class="flex">
@@ -503,7 +508,7 @@
                       class="item-author text-color"
                       data-abc="true"
                     >
-                      {{ event.name }}
+                      {{ event.title }}
                     </p>
                     <div class="item-except text-muted text-sm h-1x">
                       {{ event.description || "Some description" }}
