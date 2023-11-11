@@ -1,10 +1,10 @@
 <div class="d-flex" >
 
     <div class="alert   message p-0 my-1 w-25 " role="alert" [ngClass]="{'alert-primary':isMe,'alert-secondary':!isMe,'ms-auto':!isMe,'me-auto':isMe}">
-        <h4 class="p-0 my-0 fs-6  ">{{isMe ?"Me":message.name}}  </h4>
+        <h4 class="p-0 my-0 fs-6  ">{{isMe ?"Me":message.name}}  <span [ngClass]="{'d-none':!isModified}">modified</span></h4>{{updatedAt|date:"short"}}
         <div class="d-flex justify-content-between p-0 my-0 ">
             <p class="p-0 my-0 " >{{message.message}}</p>
-            <a type="button" class="link-opacity-10 w-25 fs-6  " (click)="activEdeiMod()" >edit</a>
+            <a type="button" class="link-opacity-10 w-25 fs-6   " *ngIf="isMe" (click)="activEdeiMod()" >edit</a>
         </div>
       </div>
 </div>

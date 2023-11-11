@@ -12,9 +12,15 @@ import { SocketService } from 'src/app/shared/socket.service';
 export class ShatingMessageComponent implements OnInit {
 @Input("message")message!:MessageCreated
 isMe?:boolean
+isModified?: boolean;
+updatedAt!:Date
  constructor(private socket:SocketService ,private tokenData:GetTokenDataService){
   this.socket.messageToEdit.subscribe((message)=>{
     if(message._id==this.message?._id){
+      if( this.message.message != message.message){
+
+        this.isModified=true
+      }
       this.message.message = message.message
     }
   })
@@ -23,15 +29,19 @@ isMe?:boolean
   ngOnInit(): void {
     
     this.isMe = this.tokenData.tokenData.userName == this.message.name
+    this.isModified = this.message.createdAt!=this.message.updatedAt
+    this.updatedAt = this.message.updatedAt!
+    this.updatedAt.toLocaleString('en-US', { timeZone: 'Africa/Cairo' })
+    console.log(this.isModified)
   }
 activEdeiMod(){
   this.socket.editMod.next(true)
   this.socket.messageToEdit.next({
     _id: this.message._id,
-    createdAt: '',
+   
     message: this.message.message,
     name: '',
-    updatedAt: ''
+ 
   })
  }
 }

@@ -7,21 +7,21 @@ import { Observable } from 'rxjs';
 })
 export class EventHttpService {
 
-   constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-   getEventList(): Observable<any> {
+  getEventList(): Observable<any> {
     return this.http.get('http://localhost:4000/api/v1')
   }
 
   getEventDetails(id: string): Observable<any> {
-  return this.http.get(`http://localhost:4000/api/v1/event/${id}`);
+    return this.http.get(`http://localhost:4000/api/v1/event/${id}`);
   }
 
   getEventPhoto(id: string): Observable<any> {
-  return this.http.get(`http://localhost:4000/api/v1/event/photo/${id}`);
+    return this.http.get(`http://localhost:4000/api/v1/event/photo/${id}`);
+  }
+  getPaypal(id: string) {
+    return this.http.get<any>(`http://localhost:4000/api/v1/user/vip_plane/${id}`)
   }
 
-  vipPlan(id: string): Observable<any>{
-    return this.http.get(`http://localhost:4000/user/vip_plane/${id}`);
-  }
 }

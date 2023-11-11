@@ -10,6 +10,17 @@ import { EventHttpService } from '../services/event-http.service';
   styleUrls: ['./subscription.component.scss']
 })
 export class SubscriptionComponent {
+  isGitLink:boolean=false
+  constructor(private eventHttp:EventHttpService,private tokenData:GetTokenDataService){}
+VIPPaypal() {
+  this.isGitLink = true
+this.eventHttp.getPaypal(this.tokenData.tokenData._id).subscribe((res)=>{
+  console.log(res.data.link)
+  const link = res.data.link
+  location.href = link
+  // this.isGitLink = false
+});
+}
 
   activeId:any
   vip: any;
