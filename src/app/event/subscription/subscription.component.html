@@ -46,9 +46,9 @@
               <li class="active">1 Host</li>
               <li class="active">1 Place</li>
               <li class="active">3 Events</li>
-              <li>15-minute support</li>
-              <li>Unlimited Emails</li>
-              <li>24/7 Security</li>
+              <li class="active">Technical Support</li>
+              <li class="active">Unlimited Emails</li>
+              <li class="active">Security</li>
             </ul>
           </div>
         </div>
@@ -79,11 +79,18 @@
               <li class="active">5 Events</li>
               <li class="active">Technical Support</li>
               <li class="active">Unlimited Emails</li>
-              <li class="active">24/7 Security</li>
+              <li class="active">Security</li>
             </ul>
           </div>
-          <div  class="pricing-footer"  >
-            <button (click)="VIPPaypal()" style="cursor: pointer;"class="btn main-button" [ngClass]="{'disabled':isGitLink}" >Subscribe Now</button>
+          <div class="pricing-footer">
+            <button
+              (click)="VIPPaypal()"
+              style="cursor: pointer"
+              class="btn main-button"
+              [ngClass]="{ disabled: isGitLink }"
+            >
+              Subscribe Now
+            </button>
           </div>
         </div>
       </div>

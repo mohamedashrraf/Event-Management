@@ -47,7 +47,7 @@ const routes: Routes = [
   },
   { path: 'event/:id', component: EventDetailsComponent },
   {
-    path: 'subscription',
+    path: 'subscribe',
     component: SubscriptionComponent,
   },
   {
