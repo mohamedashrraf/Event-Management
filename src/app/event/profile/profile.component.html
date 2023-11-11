@@ -6,12 +6,12 @@
     <form method="post">
       <div class="row">
         <div class="col-md-12">
-          <div class="profile-head emp-profile">
+          <div class="profile-head emp-profile rounded-3 overflow-hidden">
             <div class="hed-cont d-flex">
-              <div class="headOfPro col-lg-4 col-md-12 ">
+              <div class="headOfPro col-lg-4 col-md-12">
                 <div class="profile-img d-flex flex-column">
                   <img [src]="imgSrc" />
-                  <button class="file " (click)="changePhoto($event)">
+                  <button class="file" (click)="changePhoto($event)">
                     Change Photo
                     <input
                       type="file"
@@ -26,8 +26,12 @@
                 <div class="first-intro">
                   <div class="intro-fill">
                     <span class="tf-user-welcome welcome-1">Hi There</span>
-                    <span class="tf-user-welcome welcome-2">Welcome to profile</span>
-                    <span class="tf-user-welcome welcome-3">Believe yourself</span>
+                    <span class="tf-user-welcome welcome-2"
+                      >Welcome to profile</span
+                    >
+                    <span class="tf-user-welcome welcome-3"
+                      >Believe yourself</span
+                    >
                   </div>
                 </div>
               </div>

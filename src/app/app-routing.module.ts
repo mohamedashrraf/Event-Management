@@ -42,7 +42,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'profile/host/:id',
+    path: 'profile/hosts/:hostId',
     component: HostDetailsComponent,
   },
   { path: 'event/:id', component: EventDetailsComponent },
@@ -52,13 +52,8 @@ const routes: Routes = [
   },
   {
     path: 'shating',
-      component: ShatingLayoutComponent,
-    children:[
-      {path: ':id',
-      component: ShatingComponent,
-    }
-
-    ]
+    component: ShatingLayoutComponent,
+    children: [{ path: ':id', component: ShatingComponent }],
   },
   {
     path: '**',
