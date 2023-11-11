@@ -51,6 +51,9 @@
   </ul>
 
   <!-- Content  -->
+  <div class="text-center w-100" *ngIf="loadingGet">
+    <app-spinner />
+  </div>
   <div
     *ngIf="hostDetails"
     class="tab-content flex-grow-1 text-center pt-5"
@@ -332,12 +335,30 @@
                     </div>
                   </div>
 
+                  <!-- Place List -->
+                  <!-- <div class="form-floating">
+                    <select
+                      class="form-select"
+                      id="floatingSelect"
+                      aria-label="Floating label select example"
+                    >
+                      <option selected>Select Place</option>
+                      <option
+                        value="1"
+                        [ngIf]="listOfPlaces"
+                        *ngFor="let place of listOfPlaces"
+                      >
+                        One
+                      </option>
+                    </select>
+                    <label for="floatingSelect">Select Place</label>
+                  </div> -->
                   <!-- Place -->
                   <div class="input-group has-validation mb-4">
                     <span class="input-group-text"
                       ><i class="fa-solid fa-location-dot"></i
                     ></span>
-                    <div
+                    <!-- <div
                       class="form-floating"
                       ngClass="{{
                         eventForm.controls['place'].touched
@@ -364,6 +385,35 @@
                         required
                       />
                       <label for="ticket-input">Place</label>
+                    </div> -->
+
+                    <div class="form-floating" *ngIf="listOfPlaces.length">
+                      <select
+                        required
+                        formControlName="place"
+                        class="form-select"
+                        id="floatingSelect"
+                        aria-label="Floating label select example"
+                      >
+                        <option selected>Select Place</option>
+                        <option
+                          *ngFor="let place of listOfPlaces"
+                          [value]="place._id"
+                        >
+                          <div class="d-flex">
+                            <!-- src="http://localhost:4000/api/v1/place/photo/{{
+                              place._id
+                            }}" -->
+                            <!-- [style]="
+                              'background-image: url(http://localhost:4000/api/v1/place/photo {{place._id}})'
+                            " -->
+                            <div class="place-image"></div>
+
+                            <p>{{ place.address }}</p>
+                          </div>
+                        </option>
+                      </select>
+                      <label for="floatingSelect">Select Place</label>
                     </div>
                     <div class="invalid-feedback ms-2">
                       {{
@@ -375,62 +425,6 @@
                       }}
                     </div>
                   </div>
-                  <!-- <input
-                    id="host-input"
-                    formControlName="host"
-                    name="host"
-                    type="hidden"
-                    [value]="hostDetails._id"
-                  /> -->
-
-                  <!-- Plane -->
-                  <!-- <div class="input-group has-validation mb-4">
-                    <span class="input-group-text"
-                      ><i class="fa-solid fa-user"></i
-                    ></span>
-                    <div
-                      class="form-floating"
-                      ngClass="{{
-                        eventForm.controls['plane'].touched
-                          ? eventForm.controls['plane'].invalid
-                            ? 'is-invalid'
-                            : 'is-valid'
-                          : ''
-                      }}"
-                    >
-                      <select
-                        class="form-select"
-                        id="select-plane"
-                        aria-label="Floating label select example"
-                        ngClass="{{
-                          eventForm.controls['plane'].touched
-                            ? eventForm.controls['plane'].invalid
-                              ? 'is-invalid'
-                              : 'is-valid'
-                            : ''
-                        }}"
-                        formControlName="plane"
-                        placeholder="event Plane"
-                        required
-                      >
-                        <option disabled value="not-selected">
-                          Select Your Plane
-                        </option>
-                        <option value="free">Free</option>
-                        <option value="advanced">Advanced</option>
-                      </select>
-                      <label for="select-plane">event Plane</label>
-                    </div>
-                    <div class="invalid-feedback ms-2">
-                      {{
-                        eventForm.controls["plane"].value == "not-selected"
-                          ? "Name is required."
-                          : eventForm.controls["plane"].hasError("pattern")
-                          ? "Name should be more than 5 characters."
-                          : ""
-                      }}
-                    </div>
-                  </div> -->
                   <p
                     *ngIf="
                       eventForm.errors && eventForm.errors['notValidRequest']
@@ -454,7 +448,6 @@
                 </form>
               </div>
               <!-- Form End -->
-              <app-spinner *ngIf="loadingPost"></app-spinner>
             </div>
           </div>
         </div>
@@ -488,7 +481,7 @@
                   class="list-item col-8"
                   [routerLink]="'/event/' + event._id"
                   data-id="19"
-                  *ngFor="let event of events"
+                  *ngFor="let event of hostDetails.events"
                 >
                   <div>
                     <p data-abc="true">
