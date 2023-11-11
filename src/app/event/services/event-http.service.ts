@@ -23,4 +23,5 @@ export class EventHttpService {
   getPaypal(id: string) {
     return this.http.get<any>(`http://localhost:4000/api/v1/user/vip_plane/${id}`)
   }
+
 }
