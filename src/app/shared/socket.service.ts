@@ -12,7 +12,7 @@ export class SocketService extends Socket {
   messageToEdit = new BehaviorSubject<MessageCreated>({_id:"",message:"",name:""});
   notificationNewMessage = new BehaviorSubject<NotificationNewMessage[]>([]);
   constructor() {
-    super({ url: 'http://localhost:4000', options: {
+    super({ url: 'https://events-app-api-faar.onrender.com/', options: {
        reconnection:false,
       extraHeaders: {
         Authorization: JSON.parse(localStorage.getItem("whoiam")!)?.token
