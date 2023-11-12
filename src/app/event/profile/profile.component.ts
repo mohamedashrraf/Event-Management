@@ -11,7 +11,8 @@ import { HttpClient } from '@angular/common/http';
 export class ProfileComponent {
   userInfo!: UserInfo;
   loading: boolean = true;
-  imgSrc: string = 'http://localhost:4000/api/v1/user/ProPicPath/';
+  imgSrc: string =
+    'https://events-app-api-faar.onrender.com/api/v1/user/ProPicPath/';
   constructor(private authService: AuthService, private httpClint: HttpClient) {
     this.authService.user.subscribe((user) => {
       this.loading = false;
@@ -36,7 +37,7 @@ export class ProfileComponent {
     const formData = new FormData();
     formData.append('proPic', file);
     this.httpClint
-      .patch('http://localhost:4000/api/v1/user/', formData)
+      .patch('https://events-app-api-faar.onrender.com/api/v1/user/', formData)
       .subscribe((res) => {
         console.log(res);
         const reader = new FileReader();

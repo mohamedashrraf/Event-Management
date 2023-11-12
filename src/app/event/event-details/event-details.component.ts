@@ -44,20 +44,29 @@ export class EventDetailsComponent {
 
   async getEventInfo() {
     this.loading = true;
-    this.foundPhoto = `http://localhost:4000/api/v1/event/photo/${this.activeId.value}`;
+    this.foundPhoto = `https://events-app-api-faar.onrender.com/api/v1/event/photo/${this.activeId.value}`;
     console.log(this.foundPhoto);
     this.eventHttp.getEventDetails(this.activeId.value).subscribe(
       (res) => {
         this.foundEvent = res.data;
-        this.loading = false; // Set loading to false on success
+        this.loading = false;
         console.log(this.foundEvent);
 
-        this.foundEvent.subscribers.forEach((user: UserInfo) => {
-          console.log('user on subscripers', user);
-          if (user._id === this.userInfo._id) {
-            this.userAttende = true;
-          } else this.userAttende = false;
-        });
+        // this.foundEvent.subscribers.forEach((user: UserInfo) => {
+        //   console.log('user on subscripers', user);
+        //   if (user._id === this.userInfo._id) {
+        //     this.userAttende = true;
+        //   } else this.userAttende = false;
+        // });
+        const userAttended = this.foundEvent.subscribers.find(
+          (user: UserInfo) => user._id === this.userInfo._id
+        );
+        if (userAttended) {
+          this.userAttende = true;
+        } else this.userAttende = false;
+        console.log(userAttended);
+        console.log('this.foundEvent.subscribers', this.foundEvent.subscribers);
+        console.log('this.userInfo', this.userInfo);
       },
       (error) => {
         console.log(error);
@@ -69,11 +78,14 @@ export class EventDetailsComponent {
 
   async getRelatedEvents() {
     try {
-      const res = await fetch(`http://localhost:4000/api/v1/event/all`, {
-        headers: {
-          Authorization: this.userInfo.token!,
-        },
-      });
+      const res = await fetch(
+        `https://events-app-api-faar.onrender.com/api/v1/event/all`,
+        {
+          headers: {
+            Authorization: this.userInfo.token!,
+          },
+        }
+      );
       if (res.ok) {
         const data: { message: string; data: EventInfo[] } = await res.json();
         const randomNum = Math.round(Math.random() * 10) + 1;
@@ -90,7 +102,7 @@ export class EventDetailsComponent {
     try {
       if (!this.userAttende) {
         const res = await fetch(
-          `http://localhost:4000/api/v1/event/subscribe/${this.activeId.value}`,
+          `https://events-app-api-faar.onrender.com/api/v1/event/subscribe/${this.activeId.value}`,
 
           {
             method: 'PATCH',
@@ -107,7 +119,7 @@ export class EventDetailsComponent {
         }
       } else {
         const res = await fetch(
-          `http://localhost:4000/api/v1/event/unsubscribe/${this.activeId.value}`,
+          `https://events-app-api-faar.onrender.com/api/v1/event/unsubscribe/${this.activeId.value}`,
 
           {
             method: 'PATCH',

@@ -401,12 +401,7 @@
                           [value]="place._id"
                         >
                           <div class="d-flex">
-                            <!-- src="http://localhost:4000/api/v1/place/photo/{{
-                              place._id
-                            }}" -->
-                            <!-- [style]="
-                              'background-image: url(http://localhost:4000/api/v1/place/photo {{place._id}})'
-                            " -->
+                            <!-- TODO: place card -->
                             <div class="place-image"></div>
 
                             <p>{{ place.address }}</p>
@@ -445,6 +440,13 @@
                       Create
                     </button>
                   </div>
+                  <p
+                    class="text-center text-danger mt-5 h5"
+                    *ngIf="eventForm.errors?.['limited']"
+                  >
+                    {{ eventForm.errors?.['limited'] }}
+                    <a [routerLink]="'/subscribe'">Subscribe Now</a>
+                  </p>
                 </form>
               </div>
               <!-- Form End -->
@@ -488,7 +490,7 @@
                       <span class="w-48 avatar gd-warning">
                         <img
                           [src]="
-                            'http://localhost:4000/api/v1/event/photo/' +
+                            'https://events-app-api-faar.onrender.com/api/v1/event/photo/' +
                             event._id
                           "
                         />

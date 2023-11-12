@@ -10,21 +10,21 @@ export class EventHttpService {
   constructor(private http: HttpClient) { }
 
   getEventList(): Observable<any> {
-    return this.http.get('http://localhost:4000/api/v1')
+    return this.http.get('https://events-app-api-faar.onrender.com/api/v1')
   }
 
   getEventDetails(id: string): Observable<any> {
-    return this.http.get(`http://localhost:4000/api/v1/event/${id}`);
+    return this.http.get(`https://events-app-api-faar.onrender.com/api/v1/event/${id}`);
   }
 
   getEventPhoto(id: string): Observable<any> {
-  return this.http.get(`http://localhost:4000/api/v1/event/photo/${id}`);
+  return this.http.get(`https://events-app-api-faar.onrender.com/api/v1/event/photo/${id}`);
 }
  getEvents(): Observable<any> {
-  return this.http.get(`http://localhost:4000/api/v1/event/all`);
+  return this.http.get(`https://events-app-api-faar.onrender.com/api/v1/event/all`);
 }
  getPaypal(id: string) {
-    return this.http.get<any>(`http://localhost:4000/api/v1/user/vip_plane/${id}`)
+    return this.http.get<any>(`https://events-app-api-faar.onrender.com/api/v1/user/vip_plane/${id}`)
   }
 
 }

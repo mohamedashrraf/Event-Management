@@ -78,7 +78,7 @@ export class HostDetailsComponent {
     this.loadingGet = true;
     try {
       const res = await fetch(
-        `http://localhost:4000/api/v1/host/hosts/${hostId}`,
+        `https://events-app-api-faar.onrender.com/api/v1/host/hosts/${hostId}`,
         {
           method: 'GET',
           headers: {
@@ -111,7 +111,7 @@ export class HostDetailsComponent {
     try {
       this.httpClint
         .post<{ message: string; data: EventInfo }>(
-          'http://localhost:4000/api/v1/event',
+          'https://events-app-api-faar.onrender.com/api/v1/event',
           formData,
           {
             headers: {
@@ -122,19 +122,25 @@ export class HostDetailsComponent {
         .subscribe(
           (data) => {
             console.log('data from create event', data);
-            this.hostDetails.events.push(data.data);
 
-            console.log(this.hostDetails.events);
-            this.loadingPost = false;
-            const clickEvent = new MouseEvent('click');
-            document
-              .getElementById('close-event-form')
-              ?.dispatchEvent(clickEvent);
-            this.eventForm.reset();
-            this.eventForm.addControl(
-              'host',
-              new FormControl(this.hostDetails._id)
-            );
+            if (data.message === 'event created') {
+              this.hostDetails.events.push(data.data);
+              console.log(this.hostDetails.events);
+              this.loadingPost = false;
+              const clickEvent = new MouseEvent('click');
+              document
+                .getElementById('close-event-form')
+                ?.dispatchEvent(clickEvent);
+              this.eventForm.reset();
+              this.eventForm.addControl(
+                'host',
+                new FormControl(this.hostDetails._id)
+              );
+            } else if (data.message === 'change your plan to add more event') {
+              this.eventForm.setErrors({
+                limited: data.message,
+              });
+            }
           },
           (err) => {
             console.log(err);
@@ -154,12 +160,15 @@ export class HostDetailsComponent {
 
   // 5) Get all places
   async getPlaces() {
-    const res = await fetch('http://localhost:4000/api/v1/place/all', {
-      method: 'GET',
-      headers: {
-        Authorization: this.userInfo.token!,
-      },
-    });
+    const res = await fetch(
+      'https://events-app-api-faar.onrender.com/api/v1/place/all',
+      {
+        method: 'GET',
+        headers: {
+          Authorization: this.userInfo.token!,
+        },
+      }
+    );
 
     if (res.ok) {
       // console.log('get all places ok', await res.json());

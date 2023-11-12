@@ -1,8 +1,7 @@
-<!-- <div class="container">
+<div *ngIf="loading">
   <app-loading></app-loading>
-</div> -->
-
-<section class="home">
+</div>
+<section class="home" *ngIf="!loading">
   <div class="container">
     <div class="row">
       <!-- <div class="col-md-4 col-5 col-sm-12 col-xs-12 mb-5">
@@ -10,14 +9,18 @@
       </div> -->
       <div *ngIf="events">
         <div class="row row-cols-1 row-cols-md-3 g-4">
-          <div
+          <a
             *ngFor="let event of events"
-            (click)="handleClick()"
+            (click)="handleClick(event._id)"
             class="col car"
+            routerLink="/event/{{ event._id }}"
           >
             <div class="card h-100">
               <img
-                [src]="URL + '/api/v1/event/photo/' + event._id"
+                [src]="
+                  'https://events-app-api-faar.onrender.com/api/v1/event/photo/' +
+                  event._id
+                "
                 class="card-img-top"
                 alt="..."
               />
@@ -37,7 +40,7 @@
                 >
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </div>

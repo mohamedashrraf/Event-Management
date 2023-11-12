@@ -24,10 +24,12 @@
   <div
     id="hero-area"
     class="hero-area-bg"
-    style="
-      background-image:
-        url(http://localhost:4000/api/v1/event/photo/{{ foundEvent._id }})
-    "
+    [style]="{
+      backgroundImage:
+        'url(https://events-app-api-faar.onrender.com/api/v1/event/photo/' +
+        foundEvent._id +
+        ')'
+    }"
   >
     <div class="overlay"></div>
     <div class="container position-relative z-3">
@@ -306,7 +308,9 @@
           <div class="event-item">
             <img
               class="img-fluid w-100"
-              src="http://localhost:4000/api/v1/event/photo/{{ event._id }}"
+              src="https://events-app-api-faar.onrender.com/v1/event/photo/{{
+                event._id
+              }}"
               alt=""
             />
             <div class="overlay-text">
