@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { SocketService } from '../socket.service';
 import { NotificationNewMessage } from '../interfaces/user';
@@ -8,9 +8,9 @@ import { NotificationNewMessage } from '../interfaces/user';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnDestroy {
   isAuthenticated = false;
-  numberNot!: number;
+  numberNot: number=0;
   arrayOfNotifi!: any[];
   notificationNewMessage!: NotificationNewMessage[];
   constructor(private authService: AuthService, private socket: SocketService) {
@@ -48,7 +48,7 @@ export class NavbarComponent {
 
     })
   }
-
+  
   logout() {
     this.authService.logout();
   }
@@ -59,5 +59,8 @@ export class NavbarComponent {
     this.socket.arrayOfNotifi.subscribe((arr) => {
       this.arrayOfNotifi = arr;
     });
+  }
+  ngOnDestroy(): void {
+    this.socket.emit("disconnect");
   }
 }

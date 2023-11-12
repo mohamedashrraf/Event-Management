@@ -20,6 +20,7 @@ export class ShatingLayoutComponent implements OnInit {
 
     this.socket.on("events_rooms", (subscribeWith: SubscribeWith[]) => {
       this.subscribeWith = subscribeWith
+      console.log(subscribeWith)
     })
    
   }
