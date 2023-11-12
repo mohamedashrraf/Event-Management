@@ -26,6 +26,7 @@
       </div>
       <div class="modal-body">
         <!-- Form Start -->
+        <app-spinner *ngIf="loadingPost"></app-spinner>
         <div class="form-container" *ngIf="!loadingPost">
           <form [formGroup]="hostForm" (ngSubmit)="createHost(hostForm)">
             <!-- Host Name -->
@@ -114,53 +115,6 @@
                 }}
               </div>
             </div>
-
-            <!-- Plan -->
-            <!-- <div class="input-group has-validation mb-4">
-              <span class="input-group-text"
-                ><i class="fa-solid fa-dollar-sign"></i
-              ></span>
-              <div
-                class="form-floating"
-                ngClass="{{
-                  hostForm.controls['plane'].touched
-                    ? hostForm.controls['plane'].invalid
-                      ? 'is-invalid'
-                      : 'is-valid'
-                    : ''
-                }}"
-              >
-                <select
-                  class="form-select"
-                  id="select-plane"
-                  aria-label="Floating label select example"
-                  ngClass="{{
-                    hostForm.controls['plane'].touched
-                      ? hostForm.controls['plane'].invalid
-                        ? 'is-invalid'
-                        : 'is-valid'
-                      : ''
-                  }}"
-                  formControlName="plane"
-                  placeholder="Host Plane"
-                  required
-                >
-                  <option disabled value="not-selected">
-                    Select Your Plane
-                  </option>
-                  <option value="free">Free</option>
-                  <option value="advanced">Advanced</option>
-                </select>
-                <label for="select-plane">Host Plane</label>
-              </div>
-              <div class="invalid-feedback ms-2">
-                {{
-                  hostForm.controls["plane"].value == "not-selected"
-                    ? "Plane is required."
-                    : ""
-                }}
-              </div>
-            </div> -->
             <p
               *ngIf="hostForm.errors && hostForm.errors['notValidRequest']"
               class="text-danger"
@@ -178,10 +132,18 @@
                 Create
               </button>
             </div>
+            <p
+              class="text-center text-danger mt-4 h6"
+              *ngIf="hostForm.errors?.['createdFailed']"
+            >
+              {{ hostForm.errors?.['createdFailed'] }}
+              <a [routerLink]="'/subscribe'" (click)="removeModal()"
+                >Subscribe Now</a
+              >
+            </p>
           </form>
         </div>
         <!-- Form End -->
-        <app-spinner *ngIf="loadingPost"></app-spinner>
       </div>
     </div>
   </div>

@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class ProfileComponent {
   userInfo!: UserInfo;
   loading: boolean = true;
+  profileImgChaged = false;
   imgSrc: string =
     'https://events-app-api-faar.onrender.com/api/v1/user/ProPicPath/';
   constructor(private authService: AuthService, private httpClint: HttpClient) {
@@ -18,11 +19,10 @@ export class ProfileComponent {
       this.loading = false;
       !user.isAuthenticated && this.authService.redirectToLogin();
       this.userInfo = user;
+      if (user.proPicPath) this.profileImgChaged = true;
     });
     const whoiam = localStorage.getItem('whoiam');
     const token = JSON.parse(whoiam!).token;
-
-    console.log(jwtDecode(token!));
     const tokenData = jwtDecode(token!) as any;
     this.imgSrc += tokenData._id;
   }

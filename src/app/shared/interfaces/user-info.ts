@@ -8,4 +8,5 @@ export default interface UserInfo {
   token?: string;
   isAuthenticated: boolean;
   _id?: string;
+  proPicPath?: string;
 }

@@ -1,10 +1,9 @@
-
 .d-table {
-    display: table;
+  display: table;
 }
 .d-tablecell {
-    display: table-cell;
-    vertical-align: middle;
+  display: table-cell;
+  vertical-align: middle;
 }
 .prof {
   background: -webkit-linear-gradient(left, #3931af, #00c6ff);
@@ -13,29 +12,29 @@
 .emp-profile {
   background: #fff;
 }
-.hed-cont{
-  background: linear-gradient(20deg, #214289 , #D61A62);
+.hed-cont {
+  background: linear-gradient(20deg, #214289, #d61a62);
   padding: 10px;
   height: 400px;
 }
-.headOfPro{
+.headOfPro {
   padding: 3%;
   border-radius: 0.5rem;
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   overflow: hidden;
 }
 .profile-img button {
-  background-color:#212529b8;
+  background-color: #212529b8;
   color: var(--text-color);
   border: 0;
   padding: 10px;
-  transition: .3s;
+  transition: 0.3s;
 }
 .profile-img button:hover {
-  background-color:#15181cb8;
+  background-color: #15181cb8;
 }
-.profile-img  {
+.profile-img {
   width: 56%;
   border-radius: 6px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -53,7 +52,7 @@
   font-weight: bold;
 }
 .profile-head h2 {
-    color: var(--text-color);
+  color: var(--text-color);
   margin-bottom: 0;
   padding-bottom: 0;
   padding-top: 10px;
@@ -116,22 +115,22 @@
     justify-content: center;
   }
   .profile-img button {
-    background-color:#212529b8;
+    background-color: #212529b8;
     color: var(--text-color);
     font-size: 10px;
   }
-  .hihihi{
+  .hihihi {
     display: none;
   }
-  .profile-img  {
+  .profile-img {
     width: 30%;
   }
-  .headOfPro{
+  .headOfPro {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .hed-cont{
+  .hed-cont {
     height: 100%;
   }
   .profile-head h2 {
@@ -146,9 +145,8 @@
   cursor: pointer;
 }
 
-
-// start animatinon 
-.first-intro{
+// start animatinon
+.first-intro {
   overflow: hidden;
 }
 .intro-fill {
@@ -175,13 +173,13 @@
     left: 0px;
     margin: auto;
   }
-  
+
   .welcome-1 {
     font-size: 32px;
     width: inherit;
     text-align: center;
     opacity: 0;
-    color: rgb(255,255,255);
+    color: rgb(255, 255, 255);
     animation: tans 6s linear infinite;
     animation-delay: 0s;
   }
@@ -190,20 +188,20 @@
     width: inherit;
     text-align: center;
     opacity: 0;
-    color: rgb(255,255,255);
+    color: rgb(255, 255, 255);
     animation: tans 6s linear infinite;
-    animation-delay: 2s ;
+    animation-delay: 2s;
   }
   .welcome-3 {
     font-size: 32px;
     width: inherit;
     text-align: center;
     opacity: 0;
-    color: rgb(255,255,255);
+    color: rgb(255, 255, 255);
     animation: tanss 6s linear infinite;
     animation-delay: 4s;
   }
-  
+
   @keyframes tans {
     from {
       opacity: 0;
@@ -211,11 +209,11 @@
     }
     40% {
       opacity: 1;
-      transform: translateY(0px)  scale(1.4);
+      transform: translateY(0px) scale(1.4);
     }
     70% {
       opacity: 0;
-      transform: translateY(0px)  scale(1);
+      transform: translateY(0px) scale(1);
     }
   }
   @keyframes tanss {
@@ -225,15 +223,15 @@
     }
     40% {
       opacity: 1;
-      transform: translateY(0px)  scale(1.4);
+      transform: translateY(0px) scale(1.4);
     }
     50% {
       opacity: 1;
-      transform: translateY(0px)  scale(1.4);
+      transform: translateY(0px) scale(1.4);
     }
     75% {
       opacity: 0;
-      transform: translateY(0px)  scale(1);
+      transform: translateY(0px) scale(1);
     }
   }
 }

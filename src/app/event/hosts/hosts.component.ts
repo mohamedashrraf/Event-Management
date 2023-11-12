@@ -39,10 +39,6 @@ export class HostsComponent {
   }
 
   async createHost(form: FormGroup) {
-    // delete form.value.plane;
-    console.log('Form Group', form);
-
-    // return;
     try {
       this.loadingPost = true;
       const res = await fetch(
@@ -53,24 +49,21 @@ export class HostsComponent {
             'Content-Type': 'application/json',
             Authorization: this.userInfo.token!,
           },
-          body: JSON.stringify(form.value),
+          body: JSON.stringify(this.hostForm.value),
         }
       );
-      console.log('responce from create Host', res);
-      if (res.ok) {
-        const data: { message: string; data: HostDataRes } = await res.json();
-        console.log('data from create Host', data);
-        // await this.getHosts();
+      const data: { message: string; data: HostDataRes } = await res.json();
+      this.loadingPost = false;
+      if (data.message === 'host created') {
         this.hosts.push(data.data);
-        const clickEvent = new MouseEvent('click');
-        document.getElementById('close-host-form')?.dispatchEvent(clickEvent);
-        this.loadingPost = false;
+        this.removeModal();
         form.reset();
-
-        // Get Latest Hosts
-      } else {
-        console.log('create Host res not ok', res);
-        console.log('create Host res not ok', await res.json());
+      } else if (data.message === 'chang your plan to add more host') {
+        setTimeout(() => {
+          this.hostForm.setErrors({
+            createdFailed: 'Upgrade your plan to create more hosting',
+          });
+        });
       }
     } catch (err) {
       console.log('error from create Host', err);
@@ -106,5 +99,10 @@ export class HostsComponent {
       console.log('host/all_user_host error', error);
     }
     this.loadingGet = false;
+  }
+
+  removeModal() {
+    const clickEvent = new MouseEvent('click');
+    document.getElementById('close-host-form')?.dispatchEvent(clickEvent);
   }
 }
