@@ -1,9 +1,9 @@
-
-    <div class="col-10 mb-1 small position-relative">{{event.title}}
-
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" [ngClass]="{'d-none':!notification?.NotifiNum}" >
-            {{notification?.NotifiNum}}
-            
-          </span>
-    </div>
-    
+<div class="mb-1 small position-relative ">
+  {{ event.title }}
+  <span
+    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+    [ngClass]="{ 'd-none': !notification?.NotifiNum }"
+  >
+    {{ notification?.NotifiNum }}
+  </span>
+</div>

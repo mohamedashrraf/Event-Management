@@ -6,7 +6,7 @@ export interface User {
     userName: string;
     subscribeWith: SubscribeWith[];
     _id: string;
-    isVip?: boolean;
+    isVIP?: boolean;
 
 }
 export interface SubscribeWith { title: string, _id: string };

@@ -1,8 +1,15 @@
-main {
+.conatiner {
   padding-top: 66px;
 }
 
-.messages {
-  min-height: 82vh;
-  width: 58vw;
+.sider {
+  box-shadow: 3px 0px 10px #666;
+  padding: 20px;
+  height: 100%;
+  z-index: 1;
+}
+
+.sider a {
+  padding: 8px 0px 0px 14px;
+  margin-bottom: 10px;
 }

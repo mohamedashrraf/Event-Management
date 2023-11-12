@@ -1,13 +1,47 @@
-<section class=" position-relative  " >
-   <div class=" bottom-0 overflow-auto messages  w-100" #messages>
-     <app-shating-message *ngFor=" let mes of messagesListStore" [message]="mes"></app-shating-message>
-   </div>
-   <form class="form" (ngSubmit)="sendMessage()" #messageForm="ngForm" [ngClass]="{'d-none':editMod}" [formGroup]="formSender" >
-       <input class="input" autocomplete="off" aria-describedby="shating-text"    maxlength="2000" formControlName="shat_text"/><button>Send</button>          
-     </form>
-   <form class="form" (ngSubmit)="editMessage()" #messageFormEdit="ngForm" [ngClass]="{'d-none':!editMod}" [formGroup]="formEditer" >
-     <div>{{messageEdit.message}}</div>
-       <input class="input" autocomplete="off" aria-describedby="shating-text"   formControlName="shat_text_edit" maxlength="2000"/><button>Edit</button>          
-     </form>
- 
-</section>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <section class="position-relative">
+        <div class="messages w-100" #messages>
+          <app-shating-message
+            *ngFor="let mes of messagesListStore"
+            [message]="mes"
+          ></app-shating-message>
+        </div>
+        <form
+          class="form mt-5"
+          (ngSubmit)="sendMessage()"
+          #messageForm="ngForm"
+          [ngClass]="{ 'd-none': editMod }"
+          [formGroup]="formSender"
+        >
+          <input
+            class="input"
+            autocomplete="off"
+            aria-describedby="shating-text"
+            maxlength="2000"
+            formControlName="shat_text"
+            placeholder="Write here"
+          /><button>Send</button>
+        </form>
+        <form
+          class="form"
+          (ngSubmit)="editMessage()"
+          #messageFormEdit="ngForm"
+          [ngClass]="{ 'd-none': !editMod }"
+          [formGroup]="formEditer"
+        >
+          <input
+          placeholder="Write here"
+            class="input"
+            autocomplete="off"
+            aria-describedby="shating-text"
+            formControlName="shat_text_edit"
+            maxlength="2000"
+          /><button>Edit</button>
+        </form>
+        <div class="text-dark" [ngClass]="{ 'd-none': !editMod }">{{ messageEdit.message }}</div>
+      </section>
+    </div>
+  </div>
+</div>
