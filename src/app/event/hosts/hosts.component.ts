@@ -28,10 +28,6 @@ export class HostsComponent {
     });
     this.hostForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      // plane: new FormControl('not-selected', [
-      //   Validators.required,
-      //   Validators.pattern(/(free|advanced)/),
-      // ]),
       description: new FormControl('', [
         Validators.required,
         Validators.minLength(10),
@@ -49,14 +45,17 @@ export class HostsComponent {
     // return;
     try {
       this.loadingPost = true;
-      const res = await fetch('http://localhost:4000/api/v1/host', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: this.userInfo.token!,
-        },
-        body: JSON.stringify(form.value),
-      });
+      const res = await fetch(
+        'https://events-app-api-faar.onrender.com/api/v1/host',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: this.userInfo.token!,
+          },
+          body: JSON.stringify(form.value),
+        }
+      );
       console.log('responce from create Host', res);
       if (res.ok) {
         const data: { message: string; data: HostDataRes } = await res.json();
@@ -82,7 +81,7 @@ export class HostsComponent {
     try {
       this.loadingGet = true;
       const res = await fetch(
-        'http://localhost:4000/api/v1/host/all_user_host',
+        'https://events-app-api-faar.onrender.com/api/v1/host/all_user_host',
         {
           method: 'GET',
           headers: {
@@ -90,7 +89,7 @@ export class HostsComponent {
           },
         }
       );
-      console.log('getHosts res', res);
+      // console.log('getHosts res', await res.json());
       if (res.ok) {
         const data: {
           data: HostDataRes[];
@@ -102,7 +101,7 @@ export class HostsComponent {
         this.hosts.push(...data.data);
 
         console.log(this.hosts, 'my hosts');
-      } else console.log('get Hosts res not ok', res);
+      } else console.log('get Hosts res not ok', await res.json());
     } catch (error) {
       console.log('host/all_user_host error', error);
     }
