@@ -43,6 +43,7 @@ export class LoginComponent {
           token: resData.token,
           isVerify: userInfo.isVerify,
           subscripeWith: userInfo.subscripeWith,
+          _id: userInfo._id,
         });
         this.authService.redirectToHome();
       } else {

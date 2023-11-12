@@ -21,7 +21,14 @@
   </div> -->
 
   <!-- Hero Area Start -->
-  <div id="hero-area" class="hero-area-bg">
+  <div
+    id="hero-area"
+    class="hero-area-bg"
+    style="
+      background-image:
+        url(http://localhost:4000/api/v1/event/photo/{{ foundEvent._id }})
+    "
+  >
     <div class="overlay"></div>
     <div class="container position-relative z-3">
       <div class="row justify-content-center">
@@ -34,7 +41,13 @@
               {{ foundEvent.dateTime | date : "d - MMM - yyyy" }}
             </p>
             <h2 class="head-title">{{ foundEvent.title }}</h2>
-            <button class="btn btn-outline-info">Attend</button>
+            <h4 class="mb-2" *ngIf="userAttende">You're going! 🎊</h4>
+            <button
+              (click)="attendee()"
+              class="btn {{ userAttende ? 'btn-danger' : 'btn-primary' }}"
+            >
+              {{ userAttende ? "Not going!" : "Attend" }}
+            </button>
           </div>
         </div>
       </div>
@@ -90,18 +103,18 @@
   <section id="information-bar">
     <div class="container">
       <div class="row inforation-wrapper">
-        <div class="col-lg-3 col-md-6 col-xs-12">
+        <div class="col-lg-4 col-md-6 col-xs-12">
           <ul>
             <li>
               <!-- <i class="lni-map-marker"></i> -->
               <span class="icon"><i class="fa-solid fa-location-pin"></i></span>
             </li>
             <li>
-              <span><b>Location</b> Hilton Heliopolis, Cairo, Egypt</span>
+              <span><b>Location</b> {{ foundEvent.place.address }}</span>
             </li>
           </ul>
         </div>
-        <div class="col-lg-3 col-md-6 col-xs-12">
+        <div class="col-lg-4 col-md-6 col-xs-12">
           <ul>
             <li>
               <i class="lni-calendar"></i>
@@ -117,7 +130,7 @@
             </li>
           </ul>
         </div>
-        <div class="col-lg-3 col-md-6 col-xs-12">
+        <!-- <div class="col-lg-4 col-md-6 col-xs-12">
           <ul>
             <li>
               <span class="icon">
@@ -149,8 +162,8 @@
               >
             </li>
           </ul>
-        </div>
-        <div class="col-lg-3 col-md-6 col-xs-12">
+        </div> -->
+        <div class="col-lg-4 col-md-6 col-xs-12">
           <ul>
             <li>
               <!-- <i class="lni-user"></i> -->
@@ -159,7 +172,7 @@
               </span>
             </li>
             <li>
-              <span><b>Seats</b> 100 People</span>
+              <span><b>Seats</b> {{ foundEvent.ticketCount }} People</span>
             </li>
           </ul>
         </div>
@@ -274,7 +287,7 @@
   <!-- intro Section End -->
 
   <!-- Event Slides Section Start -->
-  <section id="event-up" class="section-padding">
+  <section id="event-up" class="section-padding" *ngIf="allEvents">
     <div class="container">
       <div class="row">
         <div class="col-12">
@@ -286,22 +299,25 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-3 col-md-6 col-xs-12">
+        <div
+          class="col-lg-3 col-md-6 col-xs-12"
+          *ngFor="let event of allEvents"
+        >
           <div class="event-item">
             <img
-              class="img-fluid"
-              src="https://images.squarespace-cdn.com/content/5898e29c725e25e7132d5a5a/1487546591045-NJLLE20UXLVGZ9XHL47Y/600x400-Image-Placeholder.jpg?content-type=image%2Fjpeg"
+              class="img-fluid w-100"
+              src="http://localhost:4000/api/v1/event/photo/{{ event._id }}"
               alt=""
             />
             <div class="overlay-text">
               <div class="content">
-                <h3>Business Event</h3>
-                <a href="#">View details</a>
+                <h3>{{ event.title }}</h3>
+                <a routerLink="/event/{{ event._id }}">View details</a>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-xs-12">
+        <!-- <div class="col-lg-3 col-md-6 col-xs-12">
           <div class="event-item">
             <img
               class="img-fluid"
@@ -345,7 +361,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="row mt-5">
         <div class="col-12 text-center">
