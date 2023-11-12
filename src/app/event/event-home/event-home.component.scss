@@ -2,5 +2,12 @@
   padding: 130px 0px;
 }
 
+.car{
+  cursor: pointer;
+  transition: box-shadow 1s scale 1s;
+}
 
-
+.car:hover{
+  box-shadow: 0px 0px 20px #8261ee;
+  transform:scaleY(1.2);
+}

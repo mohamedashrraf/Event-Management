@@ -19,7 +19,7 @@ export class AuthService {
     JSON.parse(localStorage.getItem('whoiam')!) || {
       name: '',
       email: '',
-      isAuthenticated: false,
+      isAuthenticated: true,
       userName: '',
     }
   );
