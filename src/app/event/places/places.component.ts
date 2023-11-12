@@ -65,7 +65,6 @@ export class PlacesComponent {
 
   async createPlace(placeForm: NgForm) {
 
-
     placeForm.control.markAllAsTouched();
     // placeForm.control.valid
     const formData = new FormData();
