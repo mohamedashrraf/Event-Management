@@ -7,4 +7,5 @@ export default interface UserInfo {
   isVerify: boolean;
   token?: string;
   isAuthenticated: boolean;
+  _id?: string;
 }

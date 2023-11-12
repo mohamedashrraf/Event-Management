@@ -33,7 +33,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-size: 36px;
+  // font-size: 36px;
   font-weight: 700;
   font-family: "Roboto", sans-serif;
 }
@@ -925,6 +925,8 @@ a.back-to-top:focus {
 
 #event-up .event-item {
   position: relative;
+
+  height: 174px;
 }
 
 #event-up .event-item .overlay-text {
@@ -2211,9 +2213,11 @@ h1 {
 3. Hero Area
 ========================================================================== */
 .hero-area-bg {
-  background: url(https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=1412&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
-    no-repeat;
+  // background: url(https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=1412&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+  //   no-repeat;
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 #hero-area {

@@ -1,4 +1,5 @@
 import EventInfo from './event-info';
+import PlaceInfo from './place-info';
 import UserInfo from './user-info';
 
 export default interface HostDetails {
@@ -9,4 +10,5 @@ export default interface HostDetails {
   _id: string;
   events: EventInfo[];
   owner: UserInfo;
+  place: PlaceInfo;
 }
