@@ -1,8 +1,7 @@
-<!-- <div class="container">
+<div *ngIf="loading">
   <app-loading></app-loading>
-</div> -->
-
-<section class="home">
+</div>
+<section class="home" *ngIf="!loading">
   <div class="container">
     <div class="row">
       <!-- <div class="col-md-4 col-5 col-sm-12 col-xs-12 mb-5">

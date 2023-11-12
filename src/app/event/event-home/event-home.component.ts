@@ -12,13 +12,15 @@ import { Router } from '@angular/router';
 
 
 export class EventHomeComponent  implements OnInit{
-   @Input() events: any;
-   description : string ="";
-   posterPath:any;
-   updatedAt :any ;
-   title :any ;
-   CreatedAt:any ;
-   URL: any;
+  @Input() events: any;
+  description : string ="";
+  posterPath:any;
+  updatedAt :any ;
+  title :any ;
+  CreatedAt:any ;
+  URL: any;
+  loading: boolean = true;
+
 
   constructor(private authService: AuthService , private eventHttpService:EventHttpService ,private router: Router)  {
     this.authService.user.subscribe((user) => {
@@ -31,8 +33,10 @@ export class EventHomeComponent  implements OnInit{
     this.router.navigate(['event',id]);
   }
   ngOnInit(): void {
+    this.loading = true;
     this.eventHttpService.getEvents().subscribe((res)=>
-     {
+    {
+        this.loading = false;
         this.events = res.data
         console.log(this.events)
         console.log(res);

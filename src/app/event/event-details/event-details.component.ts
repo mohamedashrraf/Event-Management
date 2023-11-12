@@ -49,7 +49,7 @@ export class EventDetailsComponent {
     this.eventHttp.getEventDetails(this.activeId.value).subscribe(
       (res) => {
         this.foundEvent = res.data;
-        this.loading = false; // Set loading to false on success
+        this.loading = false;
         console.log(this.foundEvent);
 
         this.foundEvent.subscribers.forEach((user: UserInfo) => {
