@@ -9,10 +9,14 @@
           <div class="profile-head emp-profile rounded-3 overflow-hidden">
             <div class="hed-cont d-flex">
               <div class="headOfPro col-lg-4 col-md-12">
-                <div class="profile-img d-flex flex-column">
+                <div
+                  class="profile-img d-flex flex-column rounded-1 overflow-hidden"
+                >
                   <img
                     [src]="
-                      imgSrc ? imgSrc : '../../../assets/images/avatar.jpg'
+                      profileImgChaged
+                        ? imgSrc
+                        : '../../../assets/images/avatar.jpg'
                     "
                   />
                   <button class="file" (click)="changePhoto($event)">
@@ -25,7 +29,7 @@
                   </button>
                 </div>
 
-                <h2>{{ userInfo.name }}</h2>
+                <h2 class="mt-2">{{ userInfo.name }}</h2>
               </div>
               <div class="col-lg-6 hihihi">
                 <div class="first-intro">

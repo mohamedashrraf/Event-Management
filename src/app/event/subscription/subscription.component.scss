@@ -1,6 +1,8 @@
 // start plans
-
-.free-plan{
+.main {
+  padding: 66px;
+}
+.free-plan {
   height: 200px;
 }
 
@@ -137,5 +139,5 @@ button.main-button {
 @media (max-width: 540px) {
   .free-plan {
     margin-bottom: 400px;
-    }
+  }
 }

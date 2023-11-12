@@ -56,14 +56,6 @@ export class HostDetailsComponent {
     this.getPlaces();
   }
 
-  async ngOnInit() {
-    setTimeout(() => {
-      const dateInput = document.getElementById('dateTime-input');
-
-      dateInput?.setAttribute('min', new Date().toISOString().slice(0, 16));
-    }, 1000);
-  }
-
   readUrl(event: any) {
     if (event.target.files && event.target.files[0]) {
       this.eventForm.setControl(
@@ -122,11 +114,10 @@ export class HostDetailsComponent {
         .subscribe(
           (data) => {
             console.log('data from create event', data);
-
+            this.loadingPost = false;
             if (data.message === 'event created') {
               this.hostDetails.events.push(data.data);
               console.log(this.hostDetails.events);
-              this.loadingPost = false;
               const clickEvent = new MouseEvent('click');
               document
                 .getElementById('close-event-form')
@@ -137,13 +128,14 @@ export class HostDetailsComponent {
                 new FormControl(this.hostDetails._id)
               );
             } else if (data.message === 'change your plan to add more event') {
-              this.eventForm.setErrors({
-                limited: data.message,
+              setTimeout(() => {
+                this.eventForm.setErrors({
+                  limited: data.message,
+                });
               });
             }
           },
           (err) => {
-            console.log(err);
             console.log('res is not ok from create event', err);
             this.loadingPost = false;
           }
@@ -178,5 +170,11 @@ export class HostDetailsComponent {
     } else {
       console.log('get all places not ok', await res.json());
     }
+  }
+
+  handleMin() {
+    const dateInput = document.getElementById('dateTime-input');
+
+    dateInput?.setAttribute('min', new Date().toISOString().slice(0, 16));
   }
 }

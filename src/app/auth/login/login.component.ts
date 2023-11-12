@@ -47,6 +47,7 @@ export class LoginComponent {
           isVerify: userInfo.isVerify,
           subscripeWith: userInfo.subscripeWith,
           _id: userInfo._id,
+          proPicPath: userInfo.proPicPath,
         });
         this.authService.redirectToHome();
       } else {
@@ -55,6 +56,10 @@ export class LoginComponent {
         if (resErr.message === 'email or password is wrong')
           form.setErrors({
             invalidLogin: 'Email or password is wrong',
+          });
+        else if (resErr.message === 'varify your email')
+          form.setErrors({
+            invalidLogin: 'Please verify your email',
           });
       }
     } catch (err) {
