@@ -18,6 +18,7 @@ export class EventHomeComponent  implements OnInit{
    updatedAt :any ;
    title :any ;
    CreatedAt:any ;
+   URL: any;
 
   constructor(private authService: AuthService , private eventHttpService:EventHttpService ,private router: Router)  {
     this.authService.user.subscribe((user) => {
