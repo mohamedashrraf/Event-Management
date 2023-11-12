@@ -3,11 +3,13 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { EventHttpService } from '../services/event-http.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-event-home',
   templateUrl: './event-home.component.html',
   styleUrls: ['./event-home.component.scss'],
 })
+
 export class EventHomeComponent implements OnInit {
   @Input() events: any;
   description: string = '';
@@ -22,11 +24,11 @@ export class EventHomeComponent implements OnInit {
     this.authService.user.subscribe((user) => {
       !user.isAuthenticated && this.authService.redirectToLogin();
     });
-    this.events = [];
+    this.events=[];
   }
-  handleClick(id:string) {
+  handleClick(id:any) {
     // Navigate to the target page when the card is clicked
-    this.router.navigate([`/event/${id}`]);
+    this.router.navigate(['event',id]);
   }
   ngOnInit(): void {
     this.loading = true;
@@ -36,10 +38,12 @@ export class EventHomeComponent implements OnInit {
         this.events = res.data
         console.log(this.events)
         console.log(res);
+
       },
       (error: any) => {
         console.error('Error fetching items', error);
       }
     );
   }
+
 }
