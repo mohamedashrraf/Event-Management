@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-import UserInfo from 'src/app/event/profile/interfaces/userInfo';
+import UserInfo from 'src/app/shared/interfaces/user-info';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +33,7 @@ export class LoginComponent {
       if (res.status === 200) {
         const resData = await res.json();
         console.log('response from login', resData);
-        const userInfo: UserInfo = resData.data._doc;
+        const userInfo: UserInfo = resData.data;
         console.log(userInfo, 'userInfo');
         this.authService.login({
           name: userInfo.name,

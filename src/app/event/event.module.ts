@@ -18,6 +18,7 @@ import { UiModule } from '../ui/ui.module';
 import { HostDetailsComponent } from './host-details/host-details.component';
 import { PlaceCardComponent } from './place-card/place-card.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -38,13 +39,19 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     AppRoutingModule,
     CalendarComponent,
-    SharedModule,
+    // SharedModule,
     UiModule,
     // PlaceCardComponent,
     CommonModule,
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
+
+    ////////////////////
+    // CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class EventModule {}

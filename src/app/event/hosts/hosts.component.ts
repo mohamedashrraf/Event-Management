@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
-import UserInfo from '../profile/interfaces/userInfo';
+import UserInfo from '../../shared/interfaces/user-info';
 
 interface HostDataRes {
   admins: string[];
@@ -27,13 +27,14 @@ export class HostsComponent {
       this.userInfo = user;
     });
     this.hostForm = new FormGroup({
-      name: new FormControl('', [
+      name: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      // plane: new FormControl('not-selected', [
+      //   Validators.required,
+      //   Validators.pattern(/(free|advanced)/),
+      // ]),
+      description: new FormControl('', [
         Validators.required,
-        Validators.pattern('[A-z0-9]{5,}'),
-      ]),
-      plane: new FormControl('not-selected', [
-        Validators.required,
-        Validators.pattern(/(not-selected|free|advanced)/),
+        Validators.minLength(10),
       ]),
     });
 
@@ -42,7 +43,7 @@ export class HostsComponent {
   }
 
   async createHost(form: FormGroup) {
-    delete form.value.plane;
+    // delete form.value.plane;
     console.log('Form Group', form);
 
     // return;
@@ -68,7 +69,10 @@ export class HostsComponent {
         form.reset();
 
         // Get Latest Hosts
-      } else console.log('create Host res not ok', res);
+      } else {
+        console.log('create Host res not ok', res);
+        console.log('create Host res not ok', await res.json());
+      }
     } catch (err) {
       console.log('error from create Host', err);
     }

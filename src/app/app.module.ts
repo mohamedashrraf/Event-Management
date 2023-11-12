@@ -12,7 +12,6 @@ import { InterceptorService } from './shared/services/interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { ShatingModule } from './shating/shating.module';
-import { CalendarModule } from 'angular-calendar';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,7 +27,6 @@ import { CalendarModule } from 'angular-calendar';
     BrowserAnimationsModule,
     HttpClientModule,
     ShatingModule,
-    CalendarModule,
   ],
 
   providers: [

@@ -1,0 +1,23 @@
+<main class=" d-flex flex-row conatiner vw-50 w-100 h-100  ">
+    <div class="row">
+        <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white col  ">
+            <div class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+                <svg class="bi me-2" width="30" height="24">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+                <span class="fs-5 fw-semibold">Events Rooms</span>
+            </div>
+            <div class="list-group list-group-flush border-bottom scrollarea">
+                <a *ngFor="let event of subscribeWith; " [routerLink]="['/shating/',event._id]"
+                    routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                    class="list-group-item list-group-item  py-3 lh-tight" aria-current="true">
+                    <app-room-link [notificationNewMessage]="notificationNewMessage" [event]="event"></app-room-link>
+                </a>
+            </div>
+        </div>
+        <div class="col-8">
+
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</main>

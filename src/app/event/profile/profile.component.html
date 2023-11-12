@@ -1,21 +1,51 @@
-<div class="prof">
-  <div class="container emp-profile">
+<div *ngIf="loading">
+  <app-loading></app-loading>
+</div>
+<div class="prof" *ngIf="!loading">
+  <div class="container">
     <form method="post">
       <div class="row">
-        <div class="col-md-3 me-5">
-          <div class="profile-img d-flex flex-column">
-            <img [src]="imgSrc" class="w-100" />
-            <button class="file btn btn-primary"  (click)="changePhoto($event)">
-              Change Photo
-              <input type="file" name="file"  (change)="sendNewPhoto($event)"/>
-            </button>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="profile-head">
-            <p class="h2">{{ userInfo.name }}</p>
-            <!-- <h6>Web Developer</h6> -->
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <div class="col-md-12">
+          <div class="profile-head emp-profile rounded-3 overflow-hidden">
+            <div class="hed-cont d-flex">
+              <div class="headOfPro col-lg-4 col-md-12">
+                <div class="profile-img d-flex flex-column">
+                  <img
+                    [src]="
+                      imgSrc ? imgSrc : '../../../assets/images/avatar.jpg'
+                    "
+                  />
+                  <button class="file" (click)="changePhoto($event)">
+                    Change Photo
+                    <input
+                      type="file"
+                      name="file"
+                      (change)="sendNewPhoto($event)"
+                    />
+                  </button>
+                </div>
+
+                <h2>{{ userInfo.name }}</h2>
+              </div>
+              <div class="col-lg-6 hihihi">
+                <div class="first-intro">
+                  <div class="intro-fill">
+                    <span class="tf-user-welcome welcome-1">Hi There</span>
+                    <span class="tf-user-welcome welcome-2"
+                      >Welcome to profile</span
+                    >
+                    <span class="tf-user-welcome welcome-3"
+                      >Believe yourself</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ul
+              class="nav nav-tabs d-flex justify-content-center"
+              id="myTab"
+              role="tablist"
+            >
               <li class="nav-item">
                 <a
                   class="nav-link"
@@ -42,18 +72,7 @@
             <router-outlet></router-outlet>
           </div>
         </div>
-        <div class="col-md-2 zer">
-          <input
-            type="submit"
-            class="profile-edit-btn"
-            name="btnAddMore"
-            value="Edit Profile"
-          />
-        </div>
       </div>
-      <!-- <div class="row">
-        <div class="col-md-4"></div>
-      </div> -->
     </form>
   </div>
 </div>

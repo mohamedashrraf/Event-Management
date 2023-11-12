@@ -42,7 +42,7 @@
 
       <!-- User Login -->
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-3" *ngIf="isAuthenticated">
-        <li class="nav-item me-3">
+        <!-- <li class="nav-item me-3">
           <div class="input-group border rounded-pill">
             <input
               type="search"
@@ -61,7 +61,7 @@
               </button>
             </div>
           </div>
-        </li>
+        </li> -->
         <li class="nav-item hoho">
           <a
             class="nav-link"
@@ -71,13 +71,14 @@
             >Home</a
           >
         </li>
+
         <li class="nav-item">
           <a
             class="nav-link popo"
-            routerLink="/profile"
+            routerLink="/shating"
             routerLinkActive="activate"
-            >Profile</a
-          >
+            ><i class="fa-regular fa-message fa-xl"></i
+          ></a>
         </li>
         <li class="nav-item notifi position-relative">
           <button
@@ -88,8 +89,24 @@
             aria-controls="offcanvasRight"
           >
             <i class="fa-regular fa-bell fa-xl"> </i>
-            <span>{{ numberNot }}</span>
+            <span [ngClass]="{ 'd-none': !numberNot }">{{ numberNot }}</span>
           </button>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link popo"
+            routerLink="/profile"
+            routerLinkActive="activate"
+            ><i class="fa-regular fa-user fa-xl"></i
+          ></a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link popo"
+            routerLink="/subscribe"
+            routerLinkActive="activate"
+            >Pro</a
+          >
         </li>
         <li class="nav-item">
           <button

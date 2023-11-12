@@ -1,1 +1,600 @@
-<div class="main">Host-details work</div>
+<!-- // TODO: where put the host name -->
+<div class="d-flex main">
+  <!-- Sidebar start -->
+  <ul
+    class="nav nav-tabs d-flex gap-4 flex-column bg-light pt-5"
+    id="myTab"
+    role="tablist"
+  >
+    <li class="nav-item h3" role="presentation">
+      <button
+        class="nav-link active"
+        id="home-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#home-tab-pane"
+        type="button"
+        role="tab"
+        aria-controls="home-tab-pane"
+        aria-selected="true"
+      >
+        Events
+      </button>
+    </li>
+    <li class="nav-item h3" role="presentation">
+      <button
+        class="nav-link"
+        id="contact-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#admins-tab-pane"
+        type="button"
+        role="tab"
+        aria-controls="admins-tab-pane"
+        aria-selected="false"
+      >
+        Admins
+      </button>
+    </li>
+    <li class="nav-item h3" role="presentation">
+      <button
+        class="nav-link"
+        id="contact-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#contact-tab-pane"
+        type="button"
+        role="tab"
+        aria-controls="contact-tab-pane"
+        aria-selected="false"
+      >
+        About
+      </button>
+    </li>
+  </ul>
+
+  <!-- Content  -->
+  <div class="text-center w-100" *ngIf="loadingGet">
+    <app-spinner />
+  </div>
+  <div
+    *ngIf="hostDetails"
+    class="tab-content flex-grow-1 text-center pt-5"
+    id="myTabContent"
+  >
+    <div
+      class="tab-pane fade show active"
+      id="home-tab-pane"
+      role="tabpanel"
+      aria-labelledby="home-tab"
+      tabindex="0"
+    >
+      <!-- Create Event -->
+      <div
+        class="modal fade"
+        id="exampleModalLive"
+        tabindex="-1"
+        aria-labelledby="exampleModalLiveLabel"
+        style="display: none"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2
+                class="text-center h1 modal-title fs-5 mb-0"
+                id="exampleModalLiveLabel"
+              >
+                Create Event Now
+              </h2>
+              <button
+                type="button"
+                class="btn-close"
+                id="close-event-form"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <!-- Form Start -->
+              <app-spinner *ngIf="loadingPost" />
+              <div class="form-container" *ngIf="!loadingPost">
+                <form
+                  [formGroup]="eventForm"
+                  (ngSubmit)="createEvent(eventForm)"
+                >
+                  <!-- Event Title -->
+                  <div class="input-group has-validation mb-4">
+                    <span class="input-group-text"
+                      ><i class="fa-solid fa-heading"></i
+                    ></span>
+                    <div
+                      class="form-floating"
+                      ngClass="{{
+                        eventForm.controls['title'].touched
+                          ? eventForm.controls['title'].invalid
+                            ? 'is-invalid'
+                            : 'is-valid'
+                          : ''
+                      }}"
+                    >
+                      <input
+                        title="title"
+                        type="text"
+                        class="form-control"
+                        ngClass="{{
+                          eventForm.controls['title'].touched
+                            ? eventForm.controls['title'].invalid
+                              ? 'is-invalid'
+                              : 'is-valid'
+                            : ''
+                        }}"
+                        id="title-input"
+                        formControlName="title"
+                        placeholder="Title"
+                        required
+                      />
+                      <label for="title-input">Event Title</label>
+                    </div>
+                    <div class="invalid-feedback ms-2">
+                      {{
+                        eventForm.controls["title"].hasError("required")
+                          ? "Title is required."
+                          : eventForm.controls["title"].invalid
+                          ? "Title should be more than 5 characters."
+                          : ""
+                      }}
+                    </div>
+                  </div>
+
+                  <!-- Description -->
+                  <div class="input-group has-validation mb-4">
+                    <span class="input-group-text"
+                      ><i class="fa-solid fa-align-left"></i
+                    ></span>
+                    <div
+                      class="form-floating"
+                      ngClass="{{
+                        eventForm.controls['description'].touched
+                          ? eventForm.controls['description'].invalid
+                            ? 'is-invalid'
+                            : 'is-valid'
+                          : ''
+                      }}"
+                    >
+                      <textarea
+                        title="description"
+                        class="form-control"
+                        ngClass="{{
+                          eventForm.controls['description'].touched
+                            ? eventForm.controls['description'].invalid
+                              ? 'is-invalid'
+                              : 'is-valid'
+                            : ''
+                        }}"
+                        id="description-input"
+                        formControlName="description"
+                        placeholder="Description"
+                        required
+                      ></textarea>
+                      <label for="description-input">Description</label>
+                    </div>
+                    <div class="invalid-feedback ms-2">
+                      {{
+                        eventForm.controls["description"].hasError("required")
+                          ? "Description is required."
+                          : eventForm.controls["description"].invalid
+                          ? "Description should be more than 10 characters."
+                          : ""
+                      }}
+                    </div>
+                  </div>
+
+                  <!-- category -->
+                  <div class="input-group has-validation mb-4">
+                    <span class="input-group-text"
+                      ><i class="fa-solid fa-users-rays"></i
+                    ></span>
+                    <div
+                      class="form-floating"
+                      ngClass="{{
+                        eventForm.controls['category'].touched
+                          ? eventForm.controls['category'].invalid
+                            ? 'is-invalid'
+                            : 'is-valid'
+                          : ''
+                      }}"
+                    >
+                      <input
+                        title="category"
+                        type="text"
+                        class="form-control"
+                        ngClass="{{
+                          eventForm.controls['category'].touched
+                            ? eventForm.controls['category'].invalid
+                              ? 'is-invalid'
+                              : 'is-valid'
+                            : ''
+                        }}"
+                        id="category-input"
+                        formControlName="category"
+                        placeholder="Category"
+                        required
+                      />
+                      <label for="category-input">Category</label>
+                    </div>
+                    <div class="invalid-feedback ms-2">
+                      {{
+                        eventForm.controls["category"].hasError("required")
+                          ? "Category is required."
+                          : eventForm.controls["category"].invalid
+                          ? "Category should be more than 5 characters."
+                          : ""
+                      }}
+                    </div>
+                  </div>
+
+                  <!-- Poster -->
+                  <div class="mb-3 text-left">
+                    <label for="formFile" class="form-label"
+                      >Poster Event</label
+                    >
+                    <input
+                      class="form-control"
+                      accept="image/*"
+                      type="file"
+                      id="formFile"
+                      placeholder="Poster Event"
+                      required
+                      (change)="readUrl($event)"
+                    />
+                  </div>
+
+                  <!-- datetime -->
+                  <div class="input-group has-validation mb-4">
+                    <span class="input-group-text"
+                      ><i class="fa-regular fa-clock"></i
+                    ></span>
+                    <div
+                      class="form-floating"
+                      ngClass="{{
+                        eventForm.controls['dateTime'].touched
+                          ? eventForm.controls['dateTime'].invalid
+                            ? 'is-invalid'
+                            : 'is-valid'
+                          : ''
+                      }}"
+                    >
+                      <input
+                        title="Date of Event"
+                        type="datetime-local"
+                        class="form-control"
+                        ngClass="{{
+                          eventForm.controls['dateTime'].touched
+                            ? eventForm.controls['dateTime'].invalid
+                              ? 'is-invalid'
+                              : 'is-valid'
+                            : ''
+                        }}"
+                        id="dateTime-input"
+                        formControlName="dateTime"
+                        placeholder="Date of Event"
+                        required
+                      />
+                      <label for="dateTime-input">Date of Event</label>
+                    </div>
+                    <div class="invalid-feedback ms-2">
+                      {{
+                        eventForm.controls["dateTime"].hasError("required")
+                          ? "Date is required."
+                          : eventForm.controls["dateTime"].invalid
+                          ? "Date should be a valid"
+                          : ""
+                      }}
+                    </div>
+                  </div>
+
+                  <!-- Tickets -->
+                  <div class="input-group has-validation mb-4">
+                    <span class="input-group-text"
+                      ><i class="fa-solid fa-ticket"></i
+                    ></span>
+                    <div
+                      class="form-floating"
+                      ngClass="{{
+                        eventForm.controls['ticketCount'].touched
+                          ? eventForm.controls['ticketCount'].invalid
+                            ? 'is-invalid'
+                            : 'is-valid'
+                          : ''
+                      }}"
+                    >
+                      <input
+                        title="Tickets"
+                        type="number"
+                        class="form-control"
+                        ngClass="{{
+                          eventForm.controls['ticketCount'].touched
+                            ? eventForm.controls['ticketCount'].invalid
+                              ? 'is-invalid'
+                              : 'is-valid'
+                            : ''
+                        }}"
+                        id="ticket-input"
+                        formControlName="ticketCount"
+                        placeholder="Number of tickets"
+                        required
+                      />
+                      <label for="ticket-input">Number of tickets</label>
+                    </div>
+                    <div class="invalid-feedback ms-2">
+                      {{
+                        eventForm.controls["ticketCount"].hasError("required")
+                          ? "Number of tickets is required."
+                          : eventForm.controls["ticketCount"].invalid
+                          ? "Number of tickets should be a number"
+                          : ""
+                      }}
+                    </div>
+                  </div>
+
+                  <!-- Place List -->
+                  <!-- <div class="form-floating">
+                    <select
+                      class="form-select"
+                      id="floatingSelect"
+                      aria-label="Floating label select example"
+                    >
+                      <option selected>Select Place</option>
+                      <option
+                        value="1"
+                        [ngIf]="listOfPlaces"
+                        *ngFor="let place of listOfPlaces"
+                      >
+                        One
+                      </option>
+                    </select>
+                    <label for="floatingSelect">Select Place</label>
+                  </div> -->
+                  <!-- Place -->
+                  <div class="input-group has-validation mb-4">
+                    <span class="input-group-text"
+                      ><i class="fa-solid fa-location-dot"></i
+                    ></span>
+                    <!-- <div
+                      class="form-floating"
+                      ngClass="{{
+                        eventForm.controls['place'].touched
+                          ? eventForm.controls['place'].invalid
+                            ? 'is-invalid'
+                            : 'is-valid'
+                          : ''
+                      }}"
+                    >
+                      <input
+                        title="place"
+                        type="text"
+                        class="form-control"
+                        ngClass="{{
+                          eventForm.controls['place'].touched
+                            ? eventForm.controls['place'].invalid
+                              ? 'is-invalid'
+                              : 'is-valid'
+                            : ''
+                        }}"
+                        id="ticket-input"
+                        formControlName="place"
+                        placeholder="Number of tickets"
+                        required
+                      />
+                      <label for="ticket-input">Place</label>
+                    </div> -->
+
+                    <div class="form-floating" *ngIf="listOfPlaces.length">
+                      <select
+                        required
+                        formControlName="place"
+                        class="form-select"
+                        id="floatingSelect"
+                        aria-label="Floating label select example"
+                      >
+                        <option selected>Select Place</option>
+                        <option
+                          *ngFor="let place of listOfPlaces"
+                          [value]="place._id"
+                        >
+                          <div class="d-flex">
+                            <!-- src="http://localhost:4000/api/v1/place/photo/{{
+                              place._id
+                            }}" -->
+                            <!-- [style]="
+                              'background-image: url(http://localhost:4000/api/v1/place/photo {{place._id}})'
+                            " -->
+                            <div class="place-image"></div>
+
+                            <p>{{ place.address }}</p>
+                          </div>
+                        </option>
+                      </select>
+                      <label for="floatingSelect">Select Place</label>
+                    </div>
+                    <div class="invalid-feedback ms-2">
+                      {{
+                        eventForm.controls["place"].hasError("required")
+                          ? "Place is required."
+                          : eventForm.controls["place"].invalid
+                          ? "Place should be more than 24 characters."
+                          : ""
+                      }}
+                    </div>
+                  </div>
+                  <p
+                    *ngIf="
+                      eventForm.errors && eventForm.errors['notValidRequest']
+                    "
+                    class="text-danger"
+                  >
+                    {{ eventForm.errors["message"] }}
+                  </p>
+                  <div class="d-grid gap-2 col-6 mx-auto">
+                    <button
+                      type="submit"
+                      class="{{
+                        'btn btn-primary' +
+                          (eventForm.invalid ? ' disable' : '')
+                      }}"
+                      [disabled]="!eventForm.valid"
+                    >
+                      Create
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <!-- Form End -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bd-example">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModalLive"
+        >
+          Create New Event
+        </button>
+      </div>
+
+      <p
+        *ngIf="!hostDetails.events.length"
+        class="h3 text-danger text-center mb-0 mt-5 mb-2"
+      >
+        No event has been created yet
+      </p>
+      <div *ngIf="hostDetails.events.length" class="overflow-hidden">
+        <p class="h3 text-primary text-center mb-0 mt-5 mb-4">Events List</p>
+        <div class="page-content page-container" id="page-content">
+          <div class="padding">
+            <div class="row">
+              <div
+                class="list list-row block d-flex flex-column gap-3 align-items-center"
+              >
+                <a
+                  class="list-item col-8"
+                  [routerLink]="'/event/' + event._id"
+                  data-id="19"
+                  *ngFor="let event of hostDetails.events"
+                >
+                  <div>
+                    <p data-abc="true">
+                      <span class="w-48 avatar gd-warning">
+                        <img
+                          [src]="
+                            'http://localhost:4000/api/v1/event/photo/' +
+                            event._id
+                          "
+                        />
+                      </span>
+                    </p>
+                  </div>
+                  <div class="flex">
+                    <p
+                      [routerLink]="event._id"
+                      class="item-author text-color"
+                      data-abc="true"
+                    >
+                      {{ event.title }}
+                    </p>
+                    <div class="item-except text-muted text-sm h-1x">
+                      {{ event.description || "Some description" }}
+                    </div>
+                  </div>
+                  <div class="no-wrap ms-auto">
+                    <div class="item-date text-muted text-sm d-none d-md-block">
+                      {{ event.createdAt | date }}
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div
+      class="tab-pane fade"
+      id="profile-tab-pane"
+      role="tabpanel"
+      aria-labelledby="profile-tab"
+      tabindex="0"
+    >
+      Host Plane
+    </div> -->
+    <div
+      class="tab-pane fade"
+      id="admins-tab-pane"
+      role="tabpanel"
+      aria-labelledby="contact-tab"
+      tabindex="0"
+    >
+      <p *ngFor="let admin of hostDetails.admins">
+        {{ admin.name }}
+      </p>
+
+      <form
+        class="mt-5"
+        #addAdminForm="ngForm"
+        (ngSubmit)="handleAddAdmin(addAdminForm.form)"
+      >
+        <!-- <h3>Add admin</h3> -->
+        <div class="input-group has-validation mb-4 w-25 m-auto">
+          <span class="input-group-text"
+            ><i class="fa-solid fa-envelope"></i
+          ></span>
+          <div
+            class="form-floating"
+            ngClass="{{
+              email.touched ? (email.invalid ? 'is-invalid' : 'is-valid') : ''
+            }}"
+          >
+            <input
+              title="admin"
+              type="email"
+              class="form-control"
+              ngModel
+              name="email"
+              #email="ngModel"
+              ngClass="{{
+                email.touched ? (email.invalid ? 'is-invalid' : 'is-valid') : ''
+              }}"
+              id="name-input"
+              placeholder="Username"
+              required
+              pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+            />
+            <label for="name-input">Email</label>
+          </div>
+          <div class="invalid-feedback ms-2">
+            {{
+              email.hasError("required")
+                ? "Email is required."
+                : email.hasError("pattern")
+                ? "Enter a valid email"
+                : ""
+            }}
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Add admin</button>
+      </form>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="contact-tab-pane"
+      role="tabpanel"
+      aria-labelledby="contact-tab"
+      tabindex="0"
+    >
+      <p>Created By: {{ hostDetails.owner.name }}</p>
+      <p>Created at: {{ hostDetails.createdAt | date }}</p>
+      <p>{{ hostDetails.description }}</p>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+<!-- Create New Host -->
 <div
   class="modal fade"
   id="exampleModalLive"
@@ -64,17 +65,60 @@
                 {{
                   hostForm.controls["name"].hasError("required")
                     ? "Name is required."
-                    : hostForm.controls["name"].hasError("pattern")
+                    : hostForm.controls["name"].invalid
                     ? "Name should be more than 5 characters."
                     : ""
                 }}
               </div>
             </div>
 
-            <!-- Plane -->
+            <!-- HOST DESCRIPTION -->
             <div class="input-group has-validation mb-4">
               <span class="input-group-text"
-                ><i class="fa-solid fa-user"></i
+                ><i class="fa-solid fa-align-left"></i
+              ></span>
+              <div
+                class="form-floating"
+                ngClass="{{
+                  hostForm.controls['description'].touched
+                    ? hostForm.controls['description'].invalid
+                      ? 'is-invalid'
+                      : 'is-valid'
+                    : ''
+                }}"
+              >
+                <textarea
+                  title="name"
+                  class="form-control"
+                  ngClass="{{
+                    hostForm.controls['description'].touched
+                      ? hostForm.controls['description'].invalid
+                        ? 'is-invalid'
+                        : 'is-valid'
+                      : ''
+                  }}"
+                  id="name-input"
+                  formControlName="description"
+                  placeholder="Description"
+                  required
+                ></textarea>
+                <label for="name-input">Description</label>
+              </div>
+              <div class="invalid-feedback ms-2">
+                {{
+                  hostForm.controls["description"].hasError("required")
+                    ? "Description is required."
+                    : hostForm.controls["description"].invalid
+                    ? "Description should be more than 10 characters."
+                    : ""
+                }}
+              </div>
+            </div>
+
+            <!-- Plan -->
+            <!-- <div class="input-group has-validation mb-4">
+              <span class="input-group-text"
+                ><i class="fa-solid fa-dollar-sign"></i
               ></span>
               <div
                 class="form-floating"
@@ -112,13 +156,11 @@
               <div class="invalid-feedback ms-2">
                 {{
                   hostForm.controls["plane"].value == "not-selected"
-                    ? "Name is required."
-                    : hostForm.controls["plane"].hasError("pattern")
-                    ? "Name should be more than 5 characters."
+                    ? "Plane is required."
                     : ""
                 }}
               </div>
-            </div>
+            </div> -->
             <p
               *ngIf="hostForm.errors && hostForm.errors['notValidRequest']"
               class="text-danger"
@@ -144,7 +186,6 @@
     </div>
   </div>
 </div>
-
 <div class="bd-example text-center">
   <button
     type="button"
@@ -156,47 +197,52 @@
   </button>
 </div>
 
-<app-spinner *ngIf="loadingGet" />
-<p *ngIf="!hosts.length" class="h3 text-danger text-center mb-0 mt-5 mb-2">
-  Hosting has not been created yet
-</p>
-<div *ngIf="hosts.length && !loadingGet">
-  <p class="h3 text-primary text-center mb-0 mt-5 mb-2">Hosting List</p>
-  <div class="page-content page-container" id="page-content">
-    <div class="padding">
-      <div class="row">
-        <div class="list list-row block">
-          <a
-            class="list-item"
-            [routerLink]="host._id"
-            data-id="19"
-            *ngFor="let host of hosts"
+<!-- Host list -->
+<div class="main-content py-2">
+  <app-spinner *ngIf="loadingGet" />
+  <p *ngIf="!hosts.length" class="h3 text-danger text-center mb-0 mt-5 mb-2">
+    Hosting has not been created yet
+  </p>
+  <div *ngIf="hosts.length && !loadingGet" class="overflow-hidden">
+    <p class="h3 text-primary text-center mb-0 mt-5 mb-4">Hosting List</p>
+    <div class="page-content page-container" id="page-content">
+      <div class="padding">
+        <div class="row">
+          <div
+            class="list list-row block d-flex flex-column gap-3 align-items-center"
           >
-            <div>
-              <p data-abc="true">
-                <span class="w-48 avatar gd-warning">{{
-                  host.name.at(0)?.toUpperCase()
-                }}</span>
-              </p>
-            </div>
-            <div class="flex">
-              <p
-                [routerLink]="host._id"
-                class="item-author text-color"
-                data-abc="true"
-              >
-                {{ host.name }}
-              </p>
-              <div class="item-except text-muted text-sm h-1x">
-                {{ host.description || "Some description" }}
+            <a
+              class="list-item col-8"
+              [routerLink]="host._id"
+              data-id="19"
+              *ngFor="let host of hosts"
+            >
+              <div>
+                <p data-abc="true">
+                  <span class="w-48 avatar gd-warning">{{
+                    host.name.at(0)?.toUpperCase()
+                  }}</span>
+                </p>
               </div>
-            </div>
-            <div class="no-wrap ms-auto">
-              <div class="item-date text-muted text-sm d-none d-md-block">
-                {{ host.createdAt | date }}
+              <div class="flex">
+                <p
+                  [routerLink]="host._id"
+                  class="item-author text-color"
+                  data-abc="true"
+                >
+                  {{ host.name }}
+                </p>
+                <div class="item-except text-muted text-sm h-1x">
+                  {{ host.description || "Some description" }}
+                </div>
               </div>
-            </div>
-          </a>
+              <div class="no-wrap ms-auto">
+                <div class="item-date text-muted text-sm d-none d-md-block">
+                  {{ host.createdAt | date }}
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     </div>

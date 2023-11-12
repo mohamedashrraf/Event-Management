@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import UserInfo from '../event/profile/interfaces/userInfo';
+import UserInfo from '../shared/interfaces/user-info';
 
 interface User {
   name: string;
@@ -42,7 +42,7 @@ export class AuthService {
       userName: '',
       isAuthenticated: false,
       isVerify: false,
-      phoneNumber: ""
+      phoneNumber: '',
     });
     localStorage.removeItem('whoiam');
   }
