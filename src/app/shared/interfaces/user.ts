@@ -5,7 +5,8 @@ export interface User {
     token: string;
     userName: string;
     subscribeWith: SubscribeWith[];
-    _id: string
+    _id: string;
+    isVip?: boolean;
 
 }
 export interface SubscribeWith { title: string, _id: string };

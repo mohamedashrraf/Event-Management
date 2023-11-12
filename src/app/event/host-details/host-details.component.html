@@ -445,6 +445,13 @@
                       Create
                     </button>
                   </div>
+                  <p
+                    class="text-center text-danger mt-5 h5"
+                    *ngIf="eventForm.errors?.['limited']"
+                  >
+                    {{ eventForm.errors?.['limited'] }}
+                    <a [routerLink]="'/subscribe'">Subscribe Now</a>
+                  </p>
                 </form>
               </div>
               <!-- Form End -->

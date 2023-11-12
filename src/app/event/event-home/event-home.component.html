@@ -1,33 +1,45 @@
-<!-- <div class="container">
+<div *ngIf="loading">
   <app-loading></app-loading>
-</div> -->
-
-<section class="home">
+</div>
+<section class="home" *ngIf="!loading">
   <div class="container">
     <div class="row">
       <!-- <div class="col-md-4 col-5 col-sm-12 col-xs-12 mb-5">
         <app-calendar></app-calendar>
       </div> -->
-          <div *ngIf="events">
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-              <div  *ngFor="let event of events"  (click)="handleClick(event?._id)" class="col car">
-                <div class="card h-100">
-                  <img [src]="URL+'/api/v1/event/photo/'+event._id" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <small class="text-muted">Created at {{event.createdAt}}</small>
-                    <h3 class="card-title">{{event.title}}</h3>
-                    
-                    <h5 class="card-text">T{{event.description}}</h5>
-                  </div>
-                  <div class="card-footer">
-                    <small class="text-muted">Last updated in {{event.updatedAt}}</small>
-                  </div>
-                </div>
+      <div *ngIf="events">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <a
+            *ngFor="let event of events"
+            (click)="handleClick(event._id)"
+            class="col car"
+            routerLink="/event/{{ event._id }}"
+          >
+            <div class="card h-100">
+              <img
+                [src]="'http://localhost:4000/api/v1/event/photo/' + event._id"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <small class="text-muted"
+                  >Created at
+                  {{ event.createdAt | date : "d - MMM - yyyy" }}</small
+                >
+                <h3 class="card-title">{{ event.title }}</h3>
+
+                <h5 class="card-text">T{{ event.description }}</h5>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted"
+                  >Last updated in
+                  {{ event.updatedAt | date : "d - MMM - yyyy" }}</small
+                >
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
-  
-  
+    </div>
+  </div>
 </section>
