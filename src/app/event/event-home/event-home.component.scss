@@ -4,12 +4,14 @@
 
 .car {
   cursor: pointer;
+  transition: all 0.5s scale ease-in-out;
+  transition:  ;
+}
+
+.car:hover{
+  box-shadow: 0px 0px 20px #6e57bc;
+  transform:scaleY(1.2);
   transition: all 0.4s ease-in-out;
   text-decoration: none;
   border-radius: 12px;
-}
-
-.car:hover {
-  box-shadow: 0px 0px 20px #8261ee;
-  transform: scale(1.01);
 }

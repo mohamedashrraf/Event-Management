@@ -17,11 +17,18 @@ export class EventHomeComponent implements OnInit {
   CreatedAt: any;
   URL: any;
 
-  constructor(
-    private authService: AuthService,
-    private eventHttpService: EventHttpService,
-    private router: Router
-  ) {
+export class EventHomeComponent  implements OnInit{
+  @Input() events: any;
+  description : string ="";
+  posterPath:any;
+  updatedAt :any ;
+  title :any ;
+  CreatedAt:any ;
+  URL: any;
+  loading: boolean = true;
+
+
+  constructor(private authService: AuthService , private eventHttpService:EventHttpService ,private router: Router)  {
     this.authService.user.subscribe((user) => {
       !user.isAuthenticated && this.authService.redirectToLogin();
     });
@@ -32,10 +39,12 @@ export class EventHomeComponent implements OnInit {
     // this.router.navigate(['event/:id']);
   }
   ngOnInit(): void {
-    this.eventHttpService.getEvents().subscribe(
-      (res) => {
-        this.events = res.data;
-        console.log(this.events);
+    this.loading = true;
+    this.eventHttpService.getEvents().subscribe((res)=>
+    {
+        this.loading = false;
+        this.events = res.data
+        console.log(this.events)
         console.log(res);
       },
       (error: any) => {
