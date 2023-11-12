@@ -20,4 +20,7 @@ export class EventHttpService {
   getEventPhoto(id: string): Observable<any> {
   return this.http.get(`http://localhost:4000/api/v1/event/photo/${id}`);
 }
+getEvents(): Observable<any> {
+  return this.http.get(`http://localhost:4000/api/v1/event/all`);
+}
 }
