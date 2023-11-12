@@ -5,107 +5,29 @@
 <section class="home">
   <div class="container">
     <div class="row">
-      <div class="col-md-4 col-sm-12 col-xs-12 mb-5">
+      <!-- <div class="col-md-4 col-5 col-sm-12 col-xs-12 mb-5">
         <app-calendar></app-calendar>
-      </div>
-      <div class="col-md-7 col-sm-12 col-xs-12">
-        <div>
-          <div class="card mb-3">
-            <div class="row g-0">
-              <div class="col-md-4 bg-secondary">
-                <img src="..." class="img-fluid rounded-start" alt="..." />
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Event</h5>
-                  <p class="card-text">
-                    These are more localized events where people interested in
-                    technology gather to discuss specific topics, share
-                    knowledge, and network. Meetups can cover a wide range of
-                    tech-related subjects, from artificial intelligence to web
-                    development.
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="card mb-3">
-            <div class="row g-0">
-              <div class="col-md-4 bg-secondary">
-                <img src="..." class="img-fluid rounded-start" alt="..." />
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Event</h5>
-                  <p class="card-text">
-                    These are more localized events where people interested in
-                    technology gather to discuss specific topics, share
-                    knowledge, and network. Meetups can cover a wide range of
-                    tech-related subjects, from artificial intelligence to web
-                    development.
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="card mb-3">
-            <div class="row g-0">
-              <div class="col-md-4 bg-secondary">
-                <img src="..." class="img-fluid rounded-start" alt="..." />
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Event</h5>
-                  <p class="card-text">
-                    These are more localized events where people interested in
-                    technology gather to discuss specific topics, share
-                    knowledge, and network. Meetups can cover a wide range of
-                    tech-related subjects, from artificial intelligence to web
-                    development.
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="card mb-3">
-            <div class="row g-0">
-              <div class="col-md-4 bg-secondary">
-                <img src="..." class="img-fluid rounded-start" alt="..." />
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Event</h5>
-                  <p class="card-text">
-                    These are more localized events where people interested in
-                    technology gather to discuss specific topics, share
-                    knowledge, and network. Meetups can cover a wide range of
-                    tech-related subjects, from artificial intelligence to web
-                    development.
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                  </p>
+      </div> -->
+          <div *ngIf="events">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+              <div  *ngFor="let event of events"  (click)="handleClick()" class="col car">
+                <div class="card h-100">
+                  <img [src]="URL+'/api/v1/event/photo/'+event._id" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <small class="text-muted">Created at {{event.createdAt}}</small>
+                    <h3 class="card-title">{{event.title}}</h3>
+                    
+                    <h5 class="card-text">T{{event.description}}</h5>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted">Last updated in {{event.updatedAt}}</small>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+  
+  
 </section>

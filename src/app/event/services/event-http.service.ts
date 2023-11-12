@@ -18,9 +18,12 @@ export class EventHttpService {
   }
 
   getEventPhoto(id: string): Observable<any> {
-    return this.http.get(`http://localhost:4000/api/v1/event/photo/${id}`);
-  }
-  getPaypal(id: string) {
+  return this.http.get(`http://localhost:4000/api/v1/event/photo/${id}`);
+}
+ getEvents(): Observable<any> {
+  return this.http.get(`http://localhost:4000/api/v1/event/all`);
+}
+ getPaypal(id: string) {
     return this.http.get<any>(`http://localhost:4000/api/v1/user/vip_plane/${id}`)
   }
 

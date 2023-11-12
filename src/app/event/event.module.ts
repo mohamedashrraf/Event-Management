@@ -31,7 +31,6 @@ import { RouterModule } from '@angular/router';
     EventDetailsComponent,
     SubscriptionComponent,
     HostsComponent,
-    // CalendarComponent,
     HostDetailsComponent,
     PlaceCardComponent,
   ],
@@ -39,19 +38,17 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     AppRoutingModule,
     CalendarComponent,
-    // SharedModule,
     UiModule,
-    // PlaceCardComponent,
     CommonModule,
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
-
-    ////////////////////
-    // CommonModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+
   ],
 })
 export class EventModule {}
+
+
