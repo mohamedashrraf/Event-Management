@@ -19,6 +19,7 @@ export class ProfileComponent {
       this.loading = false;
       !user.isAuthenticated && this.authService.redirectToLogin();
       this.userInfo = user;
+      console.log(user);
       if (user.proPicPath) this.profileImgChaged = true;
     });
     const whoiam = localStorage.getItem('whoiam');
@@ -44,6 +45,7 @@ export class ProfileComponent {
 
         reader.onload = (event: any) => {
           this.imgSrc = event.target.result! as string;
+          this.profileImgChaged = true;
         };
 
         reader.readAsDataURL(file);

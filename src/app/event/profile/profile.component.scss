@@ -32,6 +32,11 @@
   transition: 0.3s;
   z-index: 12;
 }
+.profile-img img {
+  height: 250px;
+  width: 100%;
+}
+
 .profile-img button:hover {
   background-color: #15181cb8;
 }

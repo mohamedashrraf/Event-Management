@@ -43,6 +43,7 @@ export class AuthService {
       isAuthenticated: false,
       isVerify: false,
       phoneNumber: '',
+      token: '',
     });
     localStorage.removeItem('whoiam');
   }
