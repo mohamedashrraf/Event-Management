@@ -122,19 +122,25 @@ export class HostDetailsComponent {
         .subscribe(
           (data) => {
             console.log('data from create event', data);
-            this.hostDetails.events.push(data.data);
 
-            console.log(this.hostDetails.events);
-            this.loadingPost = false;
-            const clickEvent = new MouseEvent('click');
-            document
-              .getElementById('close-event-form')
-              ?.dispatchEvent(clickEvent);
-            this.eventForm.reset();
-            this.eventForm.addControl(
-              'host',
-              new FormControl(this.hostDetails._id)
-            );
+            if (data.message === 'event created') {
+              this.hostDetails.events.push(data.data);
+              console.log(this.hostDetails.events);
+              this.loadingPost = false;
+              const clickEvent = new MouseEvent('click');
+              document
+                .getElementById('close-event-form')
+                ?.dispatchEvent(clickEvent);
+              this.eventForm.reset();
+              this.eventForm.addControl(
+                'host',
+                new FormControl(this.hostDetails._id)
+              );
+            } else if (data.message === 'change your plan to add more event') {
+              this.eventForm.setErrors({
+                limited: data.message,
+              });
+            }
           },
           (err) => {
             console.log(err);
