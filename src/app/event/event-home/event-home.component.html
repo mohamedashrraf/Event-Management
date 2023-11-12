@@ -18,13 +18,14 @@
           >
             <div class="card h-100">
               <img
-                [src]="URL + '/api/v1/event/photo/' + event._id"
+                [src]="'http://localhost:4000/api/v1/event/photo/' + event._id"
                 class="card-img-top"
-                alt="Event Poster"
+                alt="..."
               />
               <div class="card-body">
                 <small class="text-muted"
-                  >Created at {{ event.createdAt }}</small
+                  >Created at
+                  {{ event.createdAt | date : "d - MMM - yyyy" }}</small
                 >
                 <h3 class="card-title">{{ event.title }}</h3>
 
@@ -32,7 +33,8 @@
               </div>
               <div class="card-footer">
                 <small class="text-muted"
-                  >Last updated in {{ event.updatedAt }}</small
+                  >Last updated in
+                  {{ event.updatedAt | date : "d - MMM - yyyy" }}</small
                 >
               </div>
             </div>

@@ -15,7 +15,8 @@ export class EventHomeComponent implements OnInit {
   updatedAt: any;
   title: any;
   CreatedAt: any;
-  URL: string = 'http://localhost:4000';
+  URL: any;
+
   constructor(
     private authService: AuthService,
     private eventHttpService: EventHttpService,

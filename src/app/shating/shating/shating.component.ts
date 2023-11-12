@@ -50,7 +50,7 @@ export class ShatingComponent implements OnDestroy, OnInit {
         return false
       });
       if (!isFind) {
-        this.messagesListStore.unshift(messageCreated)
+        this.messagesListStore.push(messageCreated)
       }
 
     })
