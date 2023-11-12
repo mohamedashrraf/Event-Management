@@ -17,10 +17,7 @@
           >
             <div class="card h-100">
               <img
-                [src]="
-                  'https://events-app-api-faar.onrender.com/api/v1/event/photo/' +
-                  event._id
-                "
+                [src]="event.posterPath"
                 class="card-img-top w-100"
                 alt="Event Poster"
               />

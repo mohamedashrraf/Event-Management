@@ -13,4 +13,5 @@ export default interface EventInfo {
   title: string;
   updatedAt: string;
   _id: string;
+  proPicPath?:string;
 }
