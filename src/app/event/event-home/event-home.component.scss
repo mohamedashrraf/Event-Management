@@ -2,16 +2,13 @@
   padding: 130px 0px;
 }
 
-.car {
+.car{
   cursor: pointer;
-  transition: all 0.5s scale ease-in-out;
-  transition:  ;
+  transition: 0.5s ease-in-out;
+  text-decoration: none;
 }
 
 .car:hover{
-  box-shadow: 0px 0px 20px #6e57bc;
+  box-shadow: 0px 0px 20px #8261ee;
   transform:scaleY(1.2);
-  transition: all 0.4s ease-in-out;
-  text-decoration: none;
-  border-radius: 12px;
 }
