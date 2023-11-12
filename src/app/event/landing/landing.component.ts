@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class LandingComponent {
   constructor(private authService: AuthService) {
     this.authService.user.subscribe((user) => {
+      console.log(user);
       user.isAuthenticated && this.authService.redirectToHome();
     });
   }
