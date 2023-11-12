@@ -50,14 +50,22 @@ export class EventDetailsComponent {
       (res) => {
         this.foundEvent = res.data;
         this.loading = false; // Set loading to false on success
-        console.log(this.foundEvent);
 
-        this.foundEvent.subscribers.forEach((user: UserInfo) => {
-          console.log('user on subscripers', user);
-          if (user._id === this.userInfo._id) {
-            this.userAttende = true;
-          } else this.userAttende = false;
-        });
+        // this.foundEvent.subscribers.forEach((user: UserInfo) => {
+        //   console.log('user on subscripers', user);
+        //   if (user._id === this.userInfo._id) {
+        //     this.userAttende = true;
+        //   } else this.userAttende = false;
+        // });
+        const userAttended = this.foundEvent.subscribers.find(
+          (user: UserInfo) => user._id === this.userInfo._id
+        );
+        if (userAttended) {
+          this.userAttende = true;
+        } else this.userAttende = false;
+        console.log(userAttended);
+        console.log('this.foundEvent.subscribers', this.foundEvent.subscribers);
+        console.log('this.userInfo', this.userInfo);
       },
       (error) => {
         console.log(error);
