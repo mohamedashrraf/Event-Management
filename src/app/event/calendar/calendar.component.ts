@@ -21,16 +21,16 @@ import { endOfDay, startOfDay } from 'date-fns';
     events: CalendarEvent[] = [];
     selected: Date | null | undefined;
     todayDate: Date = new Date();
-  
+
     constructor(private authService: AuthService, private eventHttpService: EventHttpService) {}
-  
+
     ngOnInit() {
       this.authService.user.subscribe((user) => {
         if (!user.isAuthenticated) {
           this.authService.redirectToLogin();
         }
       });
-  
+
       this.eventHttpService.getEvents().subscribe(
         (events) => {
           this.events = events.map((event: { title: any; createdAt: string | number | Date; end: string | number | Date; }) => ({
@@ -41,7 +41,7 @@ import { endOfDay, startOfDay } from 'date-fns';
         },
         (error) => {
           console.error('Error fetching items', error);
-    
+
          } );
 }
   }
