@@ -34,9 +34,9 @@ export class EventHomeComponent  implements OnInit{
     });
     this.events = [];
   }
-  handleClick(id: any) {
+  handleClick(id:string) {
     // Navigate to the target page when the card is clicked
-    // this.router.navigate(['event/:id']);
+    this.router.navigate([`/event/${id}`]);
   }
   ngOnInit(): void {
     this.loading = true;
