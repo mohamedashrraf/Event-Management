@@ -10,6 +10,17 @@
       data-bs-toggle="modal"
       data-bs-target="#exampleModal"
       [ngStyle]="{ display: places.length >= 5 ? 'none' : 'block' }"
+      *ngIf="isVIP"
+    >
+      Create
+      <i class="fa-solid fa-circle-plus"></i>
+    </button>
+    <button
+      type="button "
+      class="btn-gra"
+      [ngStyle]="{ display: places.length >= 5 ? 'none' : 'block' }"
+      routerLink="/subscribe"
+      *ngIf="!isVIP"
     >
       Create
       <i class="fa-solid fa-circle-plus"></i>

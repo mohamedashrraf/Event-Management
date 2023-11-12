@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import {
   Component,
@@ -10,6 +11,8 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ResBody } from 'src/app/shared/interfaces/res-body';
 import { GetTokenDataService } from 'src/app/shared/services/get-token-data.service';
+import { User } from 'src/app/shared/interfaces/user';
+
 
 @Component({
   selector: 'app-places',
@@ -23,15 +26,15 @@ export class PlacesComponent {
   userInfo: any;
   morText: boolean = false;
   file: any;
-  constructor(
-    private _athService: AuthService,
-    private httpClint: HttpClient,
-    private getTokenData: GetTokenDataService
-  ) {
+  handleCreate: any;
+  isVIP =this.getTokenData.tokenData.isVIP;
+
+  constructor(private _athService: AuthService, private httpClint: HttpClient, private getTokenData: GetTokenDataService, private router:Router) {
     this._athService.user.subscribe((user) => {
       !user.isAuthenticated && this._athService.redirectToLogin();
       this.userInfo = user;
       console.log(user);
+      console.log(this.isVIP)
     });
   }
 
@@ -61,8 +64,7 @@ export class PlacesComponent {
   }
 
   async createPlace(placeForm: NgForm) {
-    const isVip = this.getTokenData.tokenData.isVip;
-    console.log(isVip);
+
 
     placeForm.control.markAllAsTouched();
     // placeForm.control.valid
@@ -77,40 +79,27 @@ export class PlacesComponent {
       formData.append('placePhoto', this.file);
     }
 
-    //  const res = await fetch(`https://events-app-api-faar.onrender.com/api/v1/place`, {
-    //    method: 'POST',
-    //    headers: {
-    //      Accept: 'application/json',
-    //      'Access-Control-Allow-Origin': '*',
-    //      'Content-Type': 'multipart/form-data',
-    //      Authorization: this.userInfo.token,
-    //     },
-    //     body: JSON.stringify(formData),
-    //   });
-    if (isVip) {
-      this.httpClint
-        .post<ResBody>(
-          'https://events-app-api-faar.onrender.com/api/v1/place',
-          formData,
-          {
-            headers: {
-              Authorization: this.userInfo.token,
-            },
-          }
-        )
-        .subscribe(async (res) => {
-          console.log(res);
-          const data = res;
-          const isLimit = res.message == 'you cant add more then 5 place';
+  try {
+    this.httpClint.post<ResBody>('https://events-app-api-faar.onrender.com/api/v1/place', formData, {
+      headers: {
+        Authorization: this.userInfo.token,
+      },
+    }).subscribe(async (res) => {
+      console.log(res);
+      const data = res;
+      const isLimit = res.message == 'you cant add more than 5 places';
 
-          await this.getPlaces();
-          console.log('data from create host', res);
-          console.log('data from create host data', data);
-          console.log(this.places);
-          console.log('forming', placeForm.value);
-          this.cloas.nativeElement.click();
-        });
+      await this.getPlaces();
+      console.log('data from create host', res);
+      console.log('data from create host data', data);
+      console.log(this.places);
+      console.log('forming', placeForm.value);
+      this.cloas.nativeElement.click();
+    });
+    } catch (error) {
+      console.error("An error occurred outside the observable:", error);
     }
+
   }
 
   getFiles(event: any) {
