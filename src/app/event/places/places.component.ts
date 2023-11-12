@@ -9,6 +9,8 @@ import {
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ResBody } from 'src/app/shared/interfaces/res-body';
+import { GetTokenDataService } from 'src/app/shared/services/get-token-data.service';
+
 
 @Component({
   selector: 'app-places',
@@ -22,7 +24,7 @@ export class PlacesComponent {
   userInfo: any;
   morText: boolean = false;
   file: any;
-  constructor(private _athService: AuthService, private httpClint: HttpClient) {
+  constructor(private _athService: AuthService, private httpClint: HttpClient, private getTokenData: GetTokenDataService) {
     this._athService.user.subscribe((user) => {
       !user.isAuthenticated && this._athService.redirectToLogin();
       this.userInfo = user;
@@ -54,18 +56,22 @@ export class PlacesComponent {
   ngAfterViewInit() {
     console.log(this.cloas.nativeElement);
   }
+
   async createPlace(placeForm: NgForm) {
+    const isVip =this.getTokenData.tokenData.isVip;
+    console.log(isVip);
+
     placeForm.control.markAllAsTouched();
     // placeForm.control.valid
     const formData = new FormData();
     Object.keys(placeForm.controls).forEach((key) => {
       const control = placeForm.controls[key];
-      if (control.value && key != 'placPhoto') {
+      if (control.value && key != 'placePhoto') {
         formData.append(key, control.value);
       }
     });
     if (this.file) {
-      formData.append('placPhoto', this.file);
+      formData.append('placePhoto', this.file);
     }
 
     //  const res = await fetch(`http://localhost:4000/api/v1/place`, {
@@ -78,25 +84,29 @@ export class PlacesComponent {
     //     },
     //     body: JSON.stringify(formData),
     //   });
-    this.httpClint
-      .post<ResBody>('http://localhost:4000/api/v1/place', formData, {
-        headers: {
-          Authorization: this.userInfo.token,
-        },
-      })
-      .subscribe(async (res) => {
-        console.log(res);
-        const data = res;
-        const isLimet = res.message == 'you cant add more then 5 place';
+    if (isVip) {
 
-        await this.getPlaces();
-        console.log('data from create host', res);
-        console.log('data from create host data', data);
-        console.log(this.places);
-        console.log('forming', placeForm.value);
-        this.cloas.nativeElement.click();
-      });
+        this.httpClint.post<ResBody>('http://localhost:4000/api/v1/place', formData, {
+          headers: {
+            Authorization: this.userInfo.token,
+          },
+        })
+          .subscribe(async (res) => {
+            console.log(res);
+            const data = res;
+            const isLimit = res.message == 'you cant add more then 5 place';
+
+            await this.getPlaces();
+            console.log('data from create host', res);
+            console.log('data from create host data', data);
+            console.log(this.places);
+            console.log('forming', placeForm.value);
+            this.cloas.nativeElement.click();
+
+          });
+      }
   }
+
   getFiles(event: any) {
     this.file = event.target.files[0];
   }

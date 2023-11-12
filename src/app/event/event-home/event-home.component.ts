@@ -18,7 +18,7 @@ export class EventHomeComponent  implements OnInit{
    updatedAt :any ;
    title :any ;
    CreatedAt:any ;
-  URL:string="http://localhost:4000"
+
   constructor(private authService: AuthService , private eventHttpService:EventHttpService ,private router: Router)  {
     this.authService.user.subscribe((user) => {
       !user.isAuthenticated && this.authService.redirectToLogin();
@@ -35,12 +35,12 @@ export class EventHomeComponent  implements OnInit{
         this.events = res.data
         console.log(this.events)
         console.log(res);
-        
+
       },
       (error: any) => {
         console.error('Error fetching items', error);
       }
     );
   }
- 
+
 }
