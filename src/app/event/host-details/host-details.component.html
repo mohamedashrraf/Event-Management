@@ -538,17 +538,91 @@
       aria-labelledby="contact-tab"
       tabindex="0"
     >
-      <p *ngFor="let admin of hostDetails.admins">
+      <!-- LIST OF ADMINS -->
+
+      <!-- <section class="vh-100" style="background-color: #eee"> -->
+      <!-- <div class="container py-5 h-100"> -->
+      <!-- <div class="row d-flex justify-content-center align-items-center"> -->
+      <div class="col-md-12 col-xl-10 m-auto" *ngIf="!loadingGet">
+        <div class="card">
+          <!-- <div class="card-header p-3">
+                <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>Task List</h5>
+              </div> -->
+          <!-- style="position: relative; height: 400px" -->
+          <div class="card-body" data-mdb-perfect-scrollbar="true">
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">Admin Member</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="fw-normal" *ngFor="let admin of hostDetails.admins">
+                  <th>
+                    <img
+                      src="https://events-app-api-faar.onrender.com/api/v1/user/ProPicPath/{{
+                        admin._id
+                      }}"
+                      class="shadow-1-strong rounded-circle"
+                      alt="avatar"
+                      style="width: 55px; height: auto"
+                    />
+                    <span class="ms-2">{{ admin.name }}</span>
+                  </th>
+                  <td class="align-middle">
+                    <span>{{ admin.email }}</span>
+                  </td>
+                  <td class="align-middle">
+                    <!-- <h6 class="mb-0"> -->
+                    <p class="">All</p>
+                    <!-- </h6> -->
+                  </td>
+                  <td class="align-middle">
+                    <!-- <a href="#!" data-mdb-toggle="tooltip" title="Done"
+                            ><i class="fas fa-check text-success me-3"></i
+                          ></a> -->
+                    <button
+                      (click)="handleARemoveAdmin(admin._id!)"
+                      [ngStyle]="{
+                        cursor:
+                          admin._id === hostDetails.owner._id
+                            ? 'not-allowed'
+                            : 'hover'
+                      }"
+                      [disabled]="admin._id === hostDetails.owner._id"
+                      class="btn btn-danger"
+                      data-mdb-toggle="tooltip"
+                      title="Remove"
+                    >
+                      <i class="fas fa-trash-alt text-white"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- </div> -->
+      <!-- </div> -->
+      <!-- </section> -->
+
+      <!--  -->
+      <!-- <p *ngFor="let admin of hostDetails.admins">
         {{ admin.name }}
-      </p>
+      </p> -->
 
       <form
-        class="mt-5"
+        *ngIf="!loadingGet"
+        class="m-4"
         #addAdminForm="ngForm"
         (ngSubmit)="handleAddAdmin(addAdminForm.form)"
       >
         <!-- <h3>Add admin</h3> -->
-        <div class="input-group has-validation mb-4 w-25 m-auto">
+        <div class="input-group has-validation mb-2 w-50 mx-auto">
           <span class="input-group-text"
             ><i class="fa-solid fa-envelope"></i
           ></span>
@@ -585,7 +659,16 @@
             }}
           </div>
         </div>
-        <button class="btn btn-primary" type="submit">Add admin</button>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="addAdminForm.invalid"
+        >
+          Add admin
+        </button>
+        <p *ngIf="addAdminForm.errors?.['notFound']" class="text-danger mt-2">
+          {{addAdminForm.errors?.['notFound']}}
+        </p>
       </form>
     </div>
     <div

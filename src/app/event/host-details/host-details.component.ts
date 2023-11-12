@@ -20,7 +20,7 @@ export class HostDetailsComponent {
   userInfo!: UserInfo;
   hostId!: string;
   hostDetails!: HostDetails;
-  addAdminForm!: any;
+  addAdminForm!: FormGroup;
   listOfPlaces: PlaceInfo[] = [];
 
   constructor(
@@ -127,15 +127,23 @@ export class HostDetailsComponent {
                 'host',
                 new FormControl(this.hostDetails._id)
               );
-            } else if (data.message === 'change your plan to add more event') {
+            } else if (data.message === 'chang your plan to add more event') {
               setTimeout(() => {
                 this.eventForm.setErrors({
-                  limited: data.message,
+                  limited: 'Upgrade your plan to create more hosting',
                 });
               });
             }
           },
           (err) => {
+            if (err.error.message === 'chang your plan to add more event') {
+              setTimeout(() => {
+                this.eventForm.setErrors({
+                  limited: 'Upgrade your plan to create more hosting',
+                });
+              });
+            }
+
             console.log('res is not ok from create event', err);
             this.loadingPost = false;
           }
@@ -146,9 +154,68 @@ export class HostDetailsComponent {
   }
 
   // 3) TODO: Add admin
-  handleAddAdmin(form: FormGroup) {}
+  async handleAddAdmin(form: FormGroup) {
+    try {
+      console.log(form.value);
+      console.log(this.userInfo);
+      const res = await fetch(
+        // `https://events-app-api-faar.onrender.com/api/v1/host/add_admin/${this.hostDetails._id}`,
+        `http://localhost:4000/api/v1/host/add_admin/${this.hostDetails._id}`,
+
+        {
+          method: 'PATCH',
+          body: JSON.stringify(form.value),
+          headers: {
+            Authorization: this.userInfo.token!,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      const data: { message: string; data: HostDetails } = await res.json();
+      console.log('data from add admin', data);
+      if (data.message == 'not found user') {
+        form.setErrors({
+          notFound: 'The email you entered does not match any user',
+        });
+      } else if (data.message === 'admin added') {
+        // this.hostDetails.admins.push(data.data);
+        this.getHostDetails(this.hostId);
+        form.reset();
+      } else if ((data.message = 'chang user plan to add more host'))
+        form.setErrors({
+          notFound: 'You cannot add this user to the administrators list',
+        });
+    } catch (err) {
+      console.log('err from add admin', err);
+    }
+  }
   // 4)TODO: Remove admin
-  handleARemoveAdmin() {}
+  async handleARemoveAdmin(id: string) {
+    try {
+      console.log(this.userInfo);
+      const res = await fetch(
+        `https://events-app-api-faar.onrender.com/api/v1/host//remov_admin/${this.hostDetails._id}/${id}`,
+        {
+          method: 'PATCH',
+          headers: {
+            Authorization: this.userInfo.token!,
+          },
+        }
+      );
+
+      const data: { message: string; data: any } = await res.json();
+      console.log('data from remove admin', data);
+      if (data.message === 'admin remove') {
+        this.hostDetails.admins = this.hostDetails.admins.filter(
+          (admin) => admin._id !== id
+        );
+        console.log(this.hostDetails.admins);
+      }
+    } catch (err) {
+      console.log('err from add admin', err);
+    }
+  }
 
   // 5) Get all places
   async getPlaces() {
