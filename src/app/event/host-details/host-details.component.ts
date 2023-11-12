@@ -159,9 +159,7 @@ export class HostDetailsComponent {
       console.log(form.value);
       console.log(this.userInfo);
       const res = await fetch(
-        // `https://events-app-api-faar.onrender.com/api/v1/host/add_admin/${this.hostDetails._id}`,
-        `http://localhost:4000/api/v1/host/add_admin/${this.hostDetails._id}`,
-
+        `https://events-app-api-faar.onrender.com/api/v1/host/add_admin/${this.hostDetails._id}`,
         {
           method: 'PATCH',
           body: JSON.stringify(form.value),
@@ -241,7 +239,6 @@ export class HostDetailsComponent {
 
   handleMin() {
     const dateInput = document.getElementById('dateTime-input');
-
     dateInput?.setAttribute('min', new Date().toISOString().slice(0, 16));
   }
 }

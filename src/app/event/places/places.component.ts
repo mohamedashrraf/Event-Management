@@ -7,12 +7,13 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ResBody } from 'src/app/shared/interfaces/res-body';
 import { GetTokenDataService } from 'src/app/shared/services/get-token-data.service';
 import { User } from 'src/app/shared/interfaces/user';
-
+import UserInfo from 'src/app/shared/interfaces/user-info';
+import PlaceInfo from 'src/app/shared/interfaces/place-info';
 
 @Component({
   selector: 'app-places',
@@ -21,20 +22,25 @@ import { User } from 'src/app/shared/interfaces/user';
 })
 export class PlacesComponent {
   @ViewChild('close') cloas!: ElementRef;
-  places: any[] = [];
+  places: PlaceInfo[] = [];
   isLoding: boolean = true;
-  userInfo: any;
+  userInfo!: UserInfo;
   morText: boolean = false;
   file: any;
   handleCreate: any;
-  isVIP =this.getTokenData.tokenData.isVIP;
+  isVIP = this.getTokenData.tokenData.isVIP;
 
-  constructor(private _athService: AuthService, private httpClint: HttpClient, private getTokenData: GetTokenDataService, private router:Router) {
+  constructor(
+    private _athService: AuthService,
+    private httpClint: HttpClient,
+    private getTokenData: GetTokenDataService,
+    private router: Router
+  ) {
     this._athService.user.subscribe((user) => {
       !user.isAuthenticated && this._athService.redirectToLogin();
       this.userInfo = user;
       console.log(user);
-      console.log(this.isVIP)
+      console.log(this.isVIP);
     });
   }
 
@@ -45,7 +51,7 @@ export class PlacesComponent {
       {
         method: 'GET',
         headers: {
-          Authorization: this.userInfo.token,
+          Authorization: this.userInfo.token!,
         },
       }
     );
@@ -60,48 +66,72 @@ export class PlacesComponent {
     this.getPlaces();
   }
   ngAfterViewInit() {
-    console.log(this.cloas.nativeElement);
+    // console.log(this.cloas.nativeElement);
   }
 
-  async createPlace(placeForm: NgForm) {
-
-    placeForm.control.markAllAsTouched();
+  async createPlace(placeForm: FormGroup) {
+    // placeForm.control.markAllAsTouched();
     // placeForm.control.valid
     const formData = new FormData();
     Object.keys(placeForm.controls).forEach((key) => {
       const control = placeForm.controls[key];
-      if (control.value && key != 'placePhoto') {
+      if (control.value && key != 'placPhoto') {
         formData.append(key, control.value);
       }
     });
     if (this.file) {
-      formData.append('placePhoto', this.file);
+      formData.append('placPhoto', this.file);
     }
 
-  try {
-    this.httpClint.post<ResBody>('https://events-app-api-faar.onrender.com/api/v1/place', formData, {
-      headers: {
-        Authorization: this.userInfo.token,
-      },
-    }).subscribe(async (res) => {
-      console.log(res);
-      const data = res;
-      const isLimit = res.message == 'you cant add more than 5 places';
+    try {
+      this.httpClint
+        .post<ResBody>(
+          'https://events-app-api-faar.onrender.com/api/v1/place/',
+          formData,
+          {
+            headers: {
+              Authorization: this.userInfo.token!,
+            },
+          }
+        )
+        .subscribe(
+          async (res) => {
+            console.log('res from create place', res);
 
-      await this.getPlaces();
-      console.log('data from create host', res);
-      console.log('data from create host data', data);
-      console.log(this.places);
-      console.log('forming', placeForm.value);
-      this.cloas.nativeElement.click();
-    });
+            if (res.message === 'place created') {
+              // await this.getPlaces();
+              this.places.push(res.data);
+              this.removeModal();
+            }
+            if (res.message === 'chang your plan to add more place') {
+              placeForm.setErrors({
+                limited: 'Upgrade your plan to create more places',
+              });
+
+              console.log(placeForm);
+            }
+          },
+          (err) => {
+            console.log('err from create place', err);
+
+            if (err.error.message === 'chang user plan to add more host') {
+              placeForm.setErrors({
+                limited: 'Upgrade your plan to create more places',
+              });
+            }
+          }
+        );
     } catch (error) {
-      console.error("An error occurred outside the observable:", error);
+      console.error('An error occurred outside the observable:', error);
     }
-
   }
 
   getFiles(event: any) {
     this.file = event.target.files[0];
+  }
+
+  removeModal() {
+    const clickEvent = new MouseEvent('click');
+    document.getElementById('close-modal')?.dispatchEvent(clickEvent);
   }
 }
