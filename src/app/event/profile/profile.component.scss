@@ -18,7 +18,7 @@
   height: 400px;
 }
 .headOfPro {
-  padding: 3%;
+  // padding: 3%;
   border-radius: 0.5rem;
   // display: flex;
   // flex-direction: column;
@@ -30,6 +30,7 @@
   border: 0;
   padding: 10px;
   transition: 0.3s;
+  z-index: 12;
 }
 .profile-img button:hover {
   background-color: #15181cb8;
