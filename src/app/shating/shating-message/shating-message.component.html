@@ -1,10 +1,28 @@
-<div class="d-flex" >
-
-    <div class="alert   message p-0 my-1 w-25 " role="alert" [ngClass]="{'alert-primary':isMe,'alert-secondary':!isMe,'ms-auto':!isMe,'me-auto':isMe}">
-        <h4 class="p-0 my-0 fs-6  ">{{isMe ?"Me":message.name}}  <span [ngClass]="{'d-none':!isModified}">modified</span></h4>{{updatedAt|date:"short"}}
-        <div class="d-flex justify-content-between p-0 my-0 ">
-            <p class="p-0 my-0 " >{{message.message}}</p>
-            <a type="button" class="link-opacity-10 w-25 fs-6   " *ngIf="isMe" (click)="activEdeiMod()" >edit</a>
-        </div>
+<div class="messagesNow ">
+  <div class="d-flex">
+    <div
+      class="alert message p-0 my-1 w-25 cont border-0 "
+      role="alert"
+      [ngClass]="{
+        'alert-primary': isMe,
+        'alert-secondary': !isMe,
+        'ms-auto': !isMe,
+        'me-auto': isMe
+      }"
+    >
+      <div class="d-flex justify-content-between dvdov ps-2 pt-1 pe-1">
+        <p class="p-0 my-0">{{ message.message }}</p>
       </div>
+      <div class="textL ps-2 pt-1 pb-2">
+        <h4>
+          {{ isMe ? "Me" : message.name }}
+          <span [ngClass]="{ 'd-none': !isModified }">Modified</span>
+        </h4>
+        <span>{{ updatedAt | date : "short" }}</span>
+				<a type="button" class="w-25  ms-2" *ngIf="isMe" (click)="activEdeiMod()"
+				>Edit</a
+			>
+      </div>
+    </div>
+  </div>
 </div>
