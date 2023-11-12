@@ -2,9 +2,9 @@
   <div class="spinner-border" role="status" *ngIf="isLoding">
     <span class="visually-hidden">Loading...</span>
   </div>
-  <div *ngIf="!isLoding">
+  <div *ngIf="!isLoding" class="">
     <!-- Button trigger modal -->
-    <button
+    <!-- <button
       type="button "
       class="btn-gra"
       data-bs-toggle="modal"
@@ -14,13 +14,12 @@
     >
       Create
       <i class="fa-solid fa-circle-plus"></i>
-    </button>
+    </button> -->
     <button
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
       type="button "
-      class="btn-gra"
-      [ngStyle]="{ display: places.length >= 5 ? 'none' : 'block' }"
-      routerLink="/subscribe"
-      *ngIf="!isVIP"
+      class="btn-gra m-auto"
     >
       Create
       <i class="fa-solid fa-circle-plus"></i>
@@ -56,10 +55,11 @@
               class="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
+              id="close-modal"
             ></button>
           </div>
           <div class="modal-body">
-            <form (ngSubmit)="createPlace(placeForm)" #placeForm="ngForm">
+            <form (ngSubmit)="createPlace(placeForm.form)" #placeForm="ngForm">
               <div class="mb-3">
                 <input
                   type="file"
@@ -168,6 +168,13 @@
               <div class="modal-footer">
                 <button type="submit" class="btn btn-primary">Create</button>
               </div>
+
+              <p class="text-danger mt-1" *ngIf="placeForm.errors?.['limited']">
+                {{placeForm.errors?.['limited']}}
+                <a routerLink="/subscribe" (click)="removeModal()"
+                  >Subscribe Now</a
+                >
+              </p>
             </form>
           </div>
         </div>
