@@ -97,13 +97,16 @@ export class SignupComponent implements OnInit {
 
     console.log('this.registrationForm.value', this.registrationForm.value);
     try {
-      const res = await fetch('http://localhost:4000/api/v1/user/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(this.registrationForm.value),
-      });
+      const res = await fetch(
+        'https://events-app-api-faar.onrender.com/api/v1/user/register',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(this.registrationForm.value),
+        }
+      );
       if (res.status === 201) {
         const data = await res.json();
         console.log('dataRes', data);

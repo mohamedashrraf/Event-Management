@@ -23,13 +23,16 @@ export class LoginComponent {
 
   async handleFormSubmit(form: FormGroup) {
     try {
-      const res = await fetch('http://localhost:4000/api/v1/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(form.value),
-      });
+      const res = await fetch(
+        'https://events-app-api-faar.onrender.com/api/v1/user/login',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(form.value),
+        }
+      );
       if (res.status === 200) {
         const resData = await res.json();
         console.log('response from login', resData);
