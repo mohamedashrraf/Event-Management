@@ -228,6 +228,15 @@
     animation: tans 6s linear infinite;
     animation-delay: 2s;
   }
+  .welcome-3 {
+    font-size: 32px;
+    width: inherit;
+    text-align: center;
+    opacity: 0;
+    color: rgb(255, 255, 255);
+    animation: tans 6s linear infinite;
+    animation-delay: 4s;
+  }
 
   @keyframes tans {
     from {
