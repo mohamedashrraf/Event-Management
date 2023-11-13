@@ -55,12 +55,12 @@ export class PlacesComponent {
         },
       }
     );
-    this.isLoding = false;
     console.log('token', this.userInfo.token);
     console.log(res);
     const data = await res.json();
     console.log('data from back', data);
     this.places = data.data;
+    this.isLoding = false;
   }
   ngOnInit() {
     this.getPlaces();
@@ -133,5 +133,28 @@ export class PlacesComponent {
   removeModal() {
     const clickEvent = new MouseEvent('click');
     document.getElementById('close-modal')?.dispatchEvent(clickEvent);
+  }
+
+  async handleUpdatePlaces(id: string) {
+    console.log(id);
+
+    try {
+      const res = await fetch(
+        'https://events-app-api-faar.onrender.com/api/v1/place/with_admin/' +
+          id,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: this.userInfo.token!,
+          },
+        }
+      );
+      const data = await res.json();
+      console.log('data from remove event', data);
+      if (data.message === 'place deleted') {
+        this.places = this.places.filter((place) => place._id !== id);
+      } else if (data.message === 'You can not delete this place')
+        alert(data.message);
+    } catch (error) {}
   }
 }

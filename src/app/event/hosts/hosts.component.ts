@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
 import UserInfo from '../../shared/interfaces/user-info';
+import HostDetails from 'src/app/shared/interfaces/host-info';
 
 interface HostDataRes {
   admins: string[];
@@ -21,7 +22,7 @@ export class HostsComponent {
   loadingPost: boolean = false;
   hostForm!: FormGroup;
   userInfo!: UserInfo;
-  hosts: HostDataRes[] = [];
+  hosts: HostDetails[] = [];
   constructor(private authService: AuthService) {
     this.authService.user.subscribe((user) => {
       this.userInfo = user;
@@ -52,7 +53,7 @@ export class HostsComponent {
           body: JSON.stringify(this.hostForm.value),
         }
       );
-      const data: { message: string; data: HostDataRes } = await res.json();
+      const data: { message: string; data: HostDetails } = await res.json();
       this.loadingPost = false;
       if (data.message === 'host created') {
         this.hosts.push(data.data);
@@ -85,7 +86,7 @@ export class HostsComponent {
       // console.log('getHosts res', await res.json());
       if (res.ok) {
         const data: {
-          data: HostDataRes[];
+          data: HostDetails[];
           message: string;
         } = await res.json();
 
@@ -99,6 +100,27 @@ export class HostsComponent {
       console.log('host/all_user_host error', error);
     }
     this.loadingGet = false;
+  }
+
+  async handleARemoveHost(e: Event, id: string) {
+    e.stopPropagation();
+    try {
+      const res = await fetch(
+        'https://events-app-api-faar.onrender.com/api/v1/host/' + id,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: this.userInfo.token!,
+          },
+        }
+      );
+      const data = await res.json();
+      console.log('data from remove event', data);
+      if (data.message === 'host deleted')
+        this.hosts = this.hosts.filter((host) => host._id !== id);
+      else if (data.message === 'You can not delete this host')
+        alert(data.message);
+    } catch (error) {}
   }
 
   removeModal() {

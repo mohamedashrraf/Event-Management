@@ -1,17 +1,18 @@
 <div class="messagesNow ">
   <div class="d-flex">
     <div
-      class="alert message p-0 my-1 w-25 cont border-0 "
+      class="alert message p-0 my-1 cont border-0 "
       role="alert"
       [ngClass]="{
         'alert-primary': isMe,
         'alert-secondary': !isMe,
+        'meshAna': !isMe,
         'ms-auto': !isMe,
         'me-auto': isMe
       }"
     >
       <div class="d-flex justify-content-between dvdov ps-2 pt-1 pe-1">
-        <p class="p-0 my-0">{{ message.message }}</p>
+        <p class="p-0 my-0 ">{{ message.message }}</p>
       </div>
       <div class="textL ps-2 pt-1 pb-2">
         <h4>

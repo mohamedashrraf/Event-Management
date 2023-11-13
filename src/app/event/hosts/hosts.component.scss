@@ -331,7 +331,7 @@ a:not([href]):not([tabindex]):focus {
   transition: transform 0.4s ease-in-out;
 }
 .list-item:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 .list-row .list-item {
   -ms-flex-direction: row;

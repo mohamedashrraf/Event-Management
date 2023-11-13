@@ -11,4 +11,5 @@ export default interface HostDetails {
   events: EventInfo[];
   owner: UserInfo;
   place: PlaceInfo;
+  createdBy: string;
 }
