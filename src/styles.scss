@@ -1,9 +1,9 @@
 @import "~@fortawesome/fontawesome-free/css/all.css";
 
 :root {
-  --main-color: #2652d6;
+  --main-color: #3498db;
   --second-color: #8261ee;
-  --thaird-color: #ff589e;
+  --thaird-color: #d86a98;
   --main-alt-color: #3955e0;
   --green-color: #22c55e;
   --red-color: #f44336;
@@ -22,10 +22,11 @@
   background-color: var(--text-color);
 }
 ::-webkit-scrollbar-thumb {
-  background-color: var(--main-color);
+  background-color: #b0b0b0;
+  transition: all 1s ease-in-out;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--main-alt-color);
+  background-color: #888;
 }
 
 html, body { height: 100%; }

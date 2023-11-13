@@ -1,7 +1,7 @@
 <div class="tab-content profile-tab ps-2 pb-2" id="myTabContent">
   <div class="container justify-content-center align-content-center d-flex">
     <div>
-      <h2>About Me</h2>
+      <h2>Profile Information</h2>
       <div class="row">
         <div class="offset-9 col-md-4">
           <button class="btn btn-success" (click)="editProfile()">Edit</button>
@@ -41,7 +41,7 @@
         <div class="col-md-4">
           <label>Phone</label>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 items">
           <ng-container *ngIf="!editMode">{{ user.phoneNumber }}</ng-container>
           <input
             *ngIf="editMode"
