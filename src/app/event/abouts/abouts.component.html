@@ -3,27 +3,51 @@
     <div>
       <h2>About Me</h2>
       <div class="row">
+        <div class="offset-9 col-md-4">
+          <button class="btn btn-success" (click)="editProfile()">Edit</button>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-md-4">
           <label>Name</label>
         </div>
-        <div class="col-md-4">
-          <p>{{ user.name }}</p>
+        <div class="col-md-6 items">
+          <ng-container class="items" *ngIf="!editMode">{{
+            user.name
+          }}</ng-container>
+          <input
+            *ngIf="editMode"
+            [(ngModel)]="user.name"
+            class="form-control"
+          />
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
           <label>Email</label>
         </div>
-        <div class="col-md-4">
-          <p>{{ user.email }}</p>
+        <div class="col-md-6 items">
+          <ng-container class="items" *ngIf="!editMode">{{
+            user.email
+          }}</ng-container>
+          <input
+            *ngIf="editMode"
+            [(ngModel)]="user.email"
+            class="form-control"
+          />
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
           <label>Phone</label>
         </div>
-        <div class="col-md-4">
-          <p>{{ user.phoneNumber }}</p>
+        <div class="col-md-6">
+          <ng-container *ngIf="!editMode">{{ user.phoneNumber }}</ng-container>
+          <input
+            *ngIf="editMode"
+            [(ngModel)]="user.phoneNumber"
+            class="form-control"
+          />
         </div>
       </div>
       <div class="row">
@@ -33,6 +57,13 @@
         <div class="col-md-5">
           <p>Web Developer</p>
         </div> -->
+        </div>
+      </div>
+      <div *ngIf="editMode" class="row">
+        <div class="col-md-4">
+          <button class="btn btn-primary" (click)="saveChanges()">
+            Submit
+          </button>
         </div>
       </div>
     </div>

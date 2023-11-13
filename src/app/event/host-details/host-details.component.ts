@@ -22,7 +22,7 @@ export class HostDetailsComponent {
   hostDetails!: HostDetails;
   addAdminForm!: FormGroup;
   listOfPlaces: PlaceInfo[] = [];
-
+  avtarImg = './assets/images/avatar.jpg'
   constructor(
     private authService: AuthService,
     private activeRoute: ActivatedRoute,

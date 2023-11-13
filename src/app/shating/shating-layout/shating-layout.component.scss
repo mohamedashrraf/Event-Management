@@ -13,3 +13,25 @@
   padding: 8px 0px 0px 14px;
   margin-bottom: 10px;
 }
+.accordion-button{
+  text-align: center;
+  padding: 10px;
+}
+.accordion{
+  position: sticky;
+  top: 80px;
+}
+@media (max-width:787px) {
+  .accordion{
+    position: fixed;
+    top: 27px;
+    width: 112%;
+    padding: 20px;
+    margin: 20px;
+    right: -46px;
+  }
+  .accordion-button{
+    text-align: center;
+    padding-left: 30px;
+  }
+}

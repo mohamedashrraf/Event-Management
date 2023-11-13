@@ -1,21 +1,53 @@
-<div class="conatiner ">
-    <div class="row col-12">
-        <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white col-md-2 ">
-            <div class="sider ">
-                <div class="list-group list-group-flush border-bottom scrollarea">
-                    <div class="d-flex align-items-center rooming ">
-                        <span class="fs-4 mb-2 mb-2">Rooms</span>
-                    </div>
-                    <a *ngFor="let event of subscribeWith; " [routerLink]="['/shating/',event._id]"
-                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-                        class="list-group-item list-group-item lh-tight" aria-current="true">
-                        <app-room-link [notificationNewMessage]="notificationNewMessage" [event]="event"></app-room-link>
-                    </a>
-                </div>
+<div class="conatiner">
+  <div class="row col-12">
+    <div
+      class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white col-md-2"
+    >
+      <div class="sider">
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button
+                class="accordion-button "
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+								Rooms
+              </button>
+            </h2>
+            <div
+              id="collapseOne"
+              class="accordion-collapse collapse show"
+              aria-labelledby="headingOne"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+								<div class="list-group list-group-flush border-bottom scrollarea">
+									<a
+										*ngFor="let event of subscribeWith"
+										[routerLink]="['/shating/', event._id]"
+										routerLinkActive="active"
+										[routerLinkActiveOptions]="{ exact: true }"
+										class="list-group-item list-group-item lh-tight"
+										aria-current="true"
+									>
+										<app-room-link
+											[notificationNewMessage]="notificationNewMessage"
+											[event]="event"
+										></app-room-link>
+									</a>
+								</div>
+              </div>
             </div>
+          </div>
         </div>
-        <div class="col-10 min-vh-100">
-            <router-outlet></router-outlet>
-        </div>
+      </div>
     </div>
+    <div class="col-10 min-vh-100">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>

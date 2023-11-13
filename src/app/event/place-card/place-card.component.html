@@ -11,13 +11,7 @@
   >
     <i class="fas fa-trash-alt text-white"></i>
   </button>
-  <img
-    src="https://events-app-api-faar.onrender.com/api/v1/place/photo/{{
-      place._id
-    }}"
-    class="card-img-top"
-    alt="place photo"
-  />
+  <img [src]="place.placPhoto" class="card-img-top" alt="place photo" />
   <div class="card-body">
     <h2 class="card-title">{{ place.address }}</h2>
     <p class="card-text text-secondary m-0">
