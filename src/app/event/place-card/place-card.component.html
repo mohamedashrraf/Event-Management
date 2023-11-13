@@ -1,9 +1,17 @@
-<div class="card w-75 mb-3 mt-3">
-  <img
-    [src]="place.placPhoto"
-    class="card-img-top"
-    alt="place photo"
-  />
+<div class="card w-75 mb-3 mt-3 position-relative">
+  <!-- [ngStyle]="{
+    cursor: !(userInfo._id === place.createdBy) ? 'not-allowed' : 'pointer'
+  }"
+  [disabled]="!(userInfo._id === place.createdBy)" -->
+  <button
+    (click)="handleARemovePlace(place._id)"
+    class="btn btn-danger position-absolute remove-btn"
+    data-mdb-toggle="tooltip"
+    title="Remove"
+  >
+    <i class="fas fa-trash-alt text-white"></i>
+  </button>
+  <img [src]="place.placPhoto" class="card-img-top" alt="place photo" />
   <div class="card-body">
     <h2 class="card-title">{{ place.address }}</h2>
     <p class="card-text text-secondary m-0">

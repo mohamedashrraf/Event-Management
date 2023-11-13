@@ -6,8 +6,8 @@
   margin-top: 6rem;
 }
 .disable {
-  cursor: not-allowed;
-  pointer-events: unset;
+  // cursor: not-allowed;
+  // pointer-events: unset;
 }
 
 .place-image {
@@ -279,7 +279,7 @@ a:not([href]):not([tabindex]):focus {
   transition: transform 0.4s ease-in-out;
 }
 .list-item:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 .list-row .list-item {
   -ms-flex-direction: row;
