@@ -232,8 +232,8 @@
                   </div>
 
                   <!-- Poster -->
-                  <div class="mb-3 text-left">
-                    <label for="formFile" class="form-label"
+                  <div class="mb-4">
+                    <label for="formFile" class="form-label w-100 text-start"
                       >Poster Event</label
                     >
                     <input
@@ -336,89 +336,46 @@
                     </div>
                   </div>
 
-                  <!-- Place List -->
-                  <!-- <div class="form-floating">
-                    <select
-                      class="form-select"
-                      id="floatingSelect"
-                      aria-label="Floating label select example"
-                    >
-                      <option selected>Select Place</option>
-                      <option
-                        value="1"
-                        [ngIf]="listOfPlaces"
-                        *ngFor="let place of listOfPlaces"
-                      >
-                        One
-                      </option>
-                    </select>
-                    <label for="floatingSelect">Select Place</label>
-                  </div> -->
                   <!-- Place -->
-                  <div class="input-group has-validation mb-4">
-                    <span class="input-group-text"
-                      ><i class="fa-solid fa-location-dot"></i
-                    ></span>
-                    <!-- <div
-                      class="form-floating"
-                      ngClass="{{
-                        eventForm.controls['place'].touched
-                          ? eventForm.controls['place'].invalid
-                            ? 'is-invalid'
-                            : 'is-valid'
-                          : ''
-                      }}"
-                    >
-                      <input
-                        title="place"
-                        type="text"
-                        class="form-control"
-                        ngClass="{{
-                          eventForm.controls['place'].touched
-                            ? eventForm.controls['place'].invalid
-                              ? 'is-invalid'
-                              : 'is-valid'
-                            : ''
-                        }}"
-                        id="ticket-input"
-                        formControlName="place"
-                        placeholder="Number of tickets"
-                        required
-                      />
-                      <label for="ticket-input">Place</label>
-                    </div> -->
-
-                    <div class="form-floating" *ngIf="listOfPlaces.length">
-                      <select
-                        required
-                        formControlName="place"
-                        class="form-select"
-                        id="floatingSelect"
-                        aria-label="Floating label select example"
+                  <div class="mb-4" *ngIf="listOfPlaces.length">
+                    <p>
+                      <span class="h5 me-2"
+                        ><i class="fa-solid fa-location-dot"></i
+                      ></span>
+                      <span>Select Your Place</span>
+                    </p>
+                    <div class="place-container">
+                      <div
+                        *ngFor="let place of listOfPlaces"
+                        class="place-item"
                       >
-                        <option selected>Select Place</option>
-                        <option
-                          *ngFor="let place of listOfPlaces"
-                          [value]="place._id"
+                        <p>
+                          {{
+                            place.address.length > 15
+                              ? place.address.slice(0, 15) + "..."
+                              : place.address
+                          }}
+                        </p>
+                        <a
+                          href="{{ place.googleMapUrl }}"
+                          target="_blank"
+                          title="Google Map"
+                          ><img src="{{ place.placPhoto }}" class="w-100"
+                        /></a>
+                        <div
+                          class="select-btn d-inline"
+                          (click)="selectPlaceHandle(place._id)"
                         >
-                          <div class="d-flex">
-                            <!-- TODO: place card -->
-                            <div class="place-image"></div>
-
-                            <p>{{ place.address }}</p>
-                          </div>
-                        </option>
-                      </select>
-                      <label for="floatingSelect">Select Place</label>
-                    </div>
-                    <div class="invalid-feedback ms-2">
-                      {{
-                        eventForm.controls["place"].hasError("required")
-                          ? "Place is required."
-                          : eventForm.controls["place"].invalid
-                          ? "Place should be more than 24 characters."
-                          : ""
-                      }}
+                          <span
+                            *ngIf="!(placeSelected === place._id)"
+                            class="h2"
+                            ><i class="fa-regular fa-circle-check"></i
+                          ></span>
+                          <span *ngIf="placeSelected === place._id" class="h2"
+                            ><i class="fa-regular fa-circle-xmark"></i
+                          ></span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <p
@@ -488,9 +445,7 @@
                   <div>
                     <p data-abc="true">
                       <span class="w-48 avatar gd-warning">
-                        <img
-                          [src]="event.posterPath"
-                        />
+                        <img [src]="event.posterPath" />
                       </span>
                     </p>
                   </div>
@@ -581,7 +536,7 @@
                 <tr class="fw-normal" *ngFor="let admin of hostDetails.admins">
                   <th>
                     <img
-                      [src]="admin.proPicPath||avtarImg"
+                      [src]="admin.proPicPath || avtarImg"
                       class="shadow-1-strong rounded-circle"
                       alt="avatar"
                       style="width: 55px; height: auto"
@@ -694,9 +649,26 @@
       aria-labelledby="contact-tab"
       tabindex="0"
     >
-      <p>Created By: {{ hostDetails.owner.name }}</p>
-      <p>Created at: {{ hostDetails.createdAt | date : "yyyy-MM-dd" }}</p>
-      <p>{{ hostDetails.description }}</p>
+      <p class="w-25 mx-auto text-start">
+        <span class="h5 text-black me-2">Host name: </span>
+        <span class="h6">{{ hostDetails.name }}</span>
+      </p>
+      <p class="w-25 mx-auto text-start">
+        <span class="h5 text-black me-2">Created By: </span>
+        <span class="h6">{{ hostDetails.owner.name }}</span>
+      </p>
+      <p class="w-25 mx-auto text-start">
+        <span class="h5 text-black me-2">Created at: </span>
+        <span class="h6">{{
+          hostDetails.createdAt | date : "yyyy-MM-dd"
+        }}</span>
+      </p>
+
+      <hr class="w-25 mx-auto" />
+      <p class="w-25 mx-auto text-start">
+        <!-- <span class="h5 text-info">Created at: </span> -->
+        <span class="h6">{{ hostDetails.description }}</span>
+      </p>
     </div>
   </div>
 </div>

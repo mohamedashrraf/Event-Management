@@ -22,7 +22,8 @@ export class HostDetailsComponent {
   hostDetails!: HostDetails;
   addAdminForm!: FormGroup;
   listOfPlaces: PlaceInfo[] = [];
-  avtarImg = './assets/images/avatar.jpg'
+  avtarImg = './assets/images/avatar.jpg';
+  placeSelected = '';
   constructor(
     private authService: AuthService,
     private activeRoute: ActivatedRoute,
@@ -264,5 +265,10 @@ export class HostDetailsComponent {
       else if (data.message === 'You can not delete this event')
         alert(data.message);
     } catch (error) {}
+  }
+
+  selectPlaceHandle(id: string) {
+    this.placeSelected = id;
+    this.eventForm.setControl('place', new FormControl(id));
   }
 }

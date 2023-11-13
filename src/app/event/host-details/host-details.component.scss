@@ -9,6 +9,24 @@
   // cursor: not-allowed;
   // pointer-events: unset;
 }
+.place-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.place-item {
+  padding: 5px;
+  width: 32%;
+  background-color: #14bae44e;
+  border-radius: 12px;
+}
+.place-item img {
+  height: 100px;
+}
+.select-btn {
+  cursor: pointer;
+}
+///////////////////////
 
 .place-image {
   width: 50px;

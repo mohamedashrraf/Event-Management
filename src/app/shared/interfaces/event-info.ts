@@ -1,4 +1,5 @@
 import PlaceInfo from './place-info';
+import UserInfo from './user-info';
 
 export default interface EventInfo {
   tegory: string;
@@ -8,7 +9,7 @@ export default interface EventInfo {
   host: string;
   place: PlaceInfo;
   posterPath: string;
-  subscribers: [];
+  subscribers: UserInfo[];
   ticketCount: number;
   title: string;
   updatedAt: string;
