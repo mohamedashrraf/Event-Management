@@ -130,7 +130,7 @@ export class HostDetailsComponent {
             } else if (data.message === 'chang your plan to add more event') {
               setTimeout(() => {
                 this.eventForm.setErrors({
-                  limited: 'Upgrade your plan to create more hosting',
+                  limited: 'Upgrade your plan to create more events',
                 });
               });
             }
@@ -240,5 +240,29 @@ export class HostDetailsComponent {
   handleMin() {
     const dateInput = document.getElementById('dateTime-input');
     dateInput?.setAttribute('min', new Date().toISOString().slice(0, 16));
+  }
+
+  async handleARemoveEvent(e: Event, id: string) {
+    e.stopPropagation();
+    e.preventDefault();
+    try {
+      const res = await fetch(
+        'https://events-app-api-faar.onrender.com/api/v1/event/' + id,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: this.userInfo.token!,
+          },
+        }
+      );
+      const data = await res.json();
+      console.log('data from remove host', data);
+      if (data.message === 'delete event')
+        this.hostDetails.events = this.hostDetails.events.filter(
+          (host) => host._id !== id
+        );
+      else if (data.message === 'You can not delete this event')
+        alert(data.message);
+    } catch (error) {}
   }
 }

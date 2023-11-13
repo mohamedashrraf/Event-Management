@@ -176,7 +176,6 @@
             <a
               class="list-item col-8"
               [routerLink]="host._id"
-              data-id="19"
               *ngFor="let host of hosts"
             >
               <div>
@@ -187,11 +186,7 @@
                 </p>
               </div>
               <div class="flex">
-                <p
-                  [routerLink]="host._id"
-                  class="item-author text-color"
-                  data-abc="true"
-                >
+                <p class="item-author text-color" data-abc="true">
                   {{ host.name }}
                 </p>
                 <div class="item-except text-muted text-sm h-1x">
@@ -200,7 +195,25 @@
               </div>
               <div class="no-wrap ms-auto">
                 <div class="item-date text-muted text-sm d-none d-md-block">
-                  {{ host.createdAt | date }}
+                  {{ host.createdAt | date : "yyyy-MM-dd" }}
+                </div>
+              </div>
+              <div class="no-wrap">
+                <div class="item-date text-muted text-sm d-none d-md-block">
+                  <button
+                    (click)="handleARemoveHost($event, host._id)"
+                    [ngStyle]="{
+                      cursor: !(userInfo._id === host.createdBy)
+                        ? 'not-allowed'
+                        : 'pointer'
+                    }"
+                    [disabled]="!(userInfo._id === host.createdBy)"
+                    class="btn btn-danger"
+                    data-mdb-toggle="tooltip"
+                    title="Remove"
+                  >
+                    <i class="fas fa-trash-alt text-white"></i>
+                  </button>
                 </div>
               </div>
             </a>
