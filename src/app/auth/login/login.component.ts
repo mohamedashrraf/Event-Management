@@ -45,7 +45,7 @@ export class LoginComponent {
           isAuthenticated: true,
           token: resData.token,
           isVerify: userInfo.isVerify,
-          subscripeWith: userInfo.subscripeWith,
+          subscribeWith: userInfo.subscribeWith,
           _id: userInfo._id,
           proPicPath: userInfo.proPicPath,
         });
