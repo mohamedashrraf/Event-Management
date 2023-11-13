@@ -1,7 +1,9 @@
 .conatiner {
   padding-top: 66px;
 }
-
+.dedo{
+  background-image: url(../../../assets/images/3bo.jpg);  
+}
 .sider {
   box-shadow: 3px 0px 10px #666;
   padding: 20px;
@@ -33,5 +35,8 @@
   .accordion-button{
     text-align: center;
     padding-left: 30px;
+  }
+  .dedo{
+    background: none;
   }
 }
