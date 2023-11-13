@@ -27,10 +27,14 @@
   .accordion{
     position: fixed;
     top: 27px;
-    width: 112%;
+    width: 86%;
     padding: 20px;
     margin: 20px;
-    right: -46px;
+    left: -3px;
+  }
+  .sider{
+    padding: 0;
+  }
   }
   .accordion-button{
     text-align: center;
@@ -39,4 +43,3 @@
   .dedo{
     background: none;
   }
-}
