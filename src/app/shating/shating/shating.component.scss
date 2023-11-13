@@ -44,11 +44,6 @@ body {
   font-weight: bold;
   margin-right: 5px;
   transition: 0.3s;
-  @media only screen and (max-width: 480px) {
-    & {
-      width: 100vw !important;
-    }
-  }
 }
 .form > button:hover {
   color: #dbd8d8;
@@ -65,7 +60,7 @@ body {
 }
 @media (max-width:787px) {
   .form{
-    width: 450px;
-    margin-right: 10px;
+    width: 400px;
+    // margin-right: 10px;
   }
 }
