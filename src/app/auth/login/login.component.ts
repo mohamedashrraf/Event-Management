@@ -39,15 +39,9 @@ export class LoginComponent {
         const userInfo: UserInfo = resData.data;
         console.log(userInfo, 'userInfo');
         this.authService.login({
-          name: userInfo.name,
-          email: userInfo.email,
-          userName: userInfo.userName,
+          ...userInfo,
           isAuthenticated: true,
           token: resData.token,
-          isVerify: userInfo.isVerify,
-          subscribeWith: userInfo.subscribeWith,
-          _id: userInfo._id,
-          proPicPath: userInfo.proPicPath,
         });
         this.authService.redirectToHome();
       } else {

@@ -12,11 +12,7 @@ import UserInfo from 'src/app/shared/interfaces/user-info';
 })
 export class EventHomeComponent implements OnInit {
   events: EventInfo[];
-  // description: string = '';
-  // posterPath: any;
-  // updatedAt: any;
-  // title: any;
-  // CreatedAt: any;
+  allEvents!: EventInfo[];
   userInfo!: UserInfo;
   URL: any;
   loading: boolean = true;
@@ -29,6 +25,7 @@ export class EventHomeComponent implements OnInit {
     this.authService.user.subscribe((user) => {
       !user.isAuthenticated && this.authService.redirectToLogin();
       this.userInfo = user;
+      console.log(this.userInfo);
     });
     this.events = [];
   }
@@ -41,9 +38,9 @@ export class EventHomeComponent implements OnInit {
     this.eventHttpService.getEvents().subscribe(
       (res) => {
         this.loading = false;
-        this.events = res.data;
+        this.events = this.allEvents = res.data;
         console.log(this.events);
-        console.log(res);
+        console.log(this.allEvents);
       },
       (error: any) => {
         console.error('Error fetching items', error);
@@ -53,5 +50,18 @@ export class EventHomeComponent implements OnInit {
 
   isAteende(id: string) {
     return this.userInfo.subscribeWith?.find((sub) => sub._id === id);
+  }
+
+  selectDateHandel(data: Date) {
+    this.events = this.allEvents;
+    const selectedDate = new Date(data).toISOString().slice(0, 10);
+    this.events = this.events.filter((event) => {
+      const eventDate = new Date(event.dateTime).toISOString().slice(0, 10);
+      return selectedDate === eventDate;
+    });
+  }
+
+  resetDate() {
+    this.events = this.allEvents;
   }
 }

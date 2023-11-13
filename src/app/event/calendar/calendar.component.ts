@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
@@ -22,9 +22,11 @@ import { endOfDay, startOfDay } from 'date-fns';
   ],
 })
 export class CalendarComponent implements OnInit {
-  events: CalendarEvent[] = [];
-  selected: Date | null | undefined;
+  // events: CalendarEvent[] = [];
+  selected!: Date;
   todayDate: Date = new Date();
+  now = new Date();
+  @Output() userSelectDate: EventEmitter<Date> = new EventEmitter();
 
   constructor(
     private authService: AuthService,
@@ -38,23 +40,30 @@ export class CalendarComponent implements OnInit {
       }
     });
 
-    this.eventHttpService.getEvents().subscribe(
-      (events) => {
-        this.events = events.map(
-          (event: {
-            title: any;
-            createdAt: string | number | Date;
-            end: string | number | Date;
-          }) => ({
-            title: event.title,
-            start: startOfDay(new Date(event.createdAt)),
-            end: event.end ? endOfDay(new Date(event.end)) : undefined,
-          })
-        );
-      },
-      (error) => {
-        console.error('Error fetching items', error);
-      }
-    );
+    // this.eventHttpService.getEvents().subscribe(
+    //   (events) => {
+    //     this.events = events.map(
+    //       (event: {
+    //         title: any;
+    //         createdAt: string | number | Date;
+    //         end: string | number | Date;
+    //       }) => ({
+    //         title: event.title,
+    //         start: startOfDay(new Date(event.createdAt)),
+    //         end: event.end ? endOfDay(new Date(event.end)) : undefined,
+    //       })
+    //     );
+    //   },
+    //   (error) => {
+    //     console.error('Error fetching items', error);
+    //   }
+    // );
+  }
+
+  selectDate(date: Date) {
+    // console.log(e);
+    this.selected = date;
+
+    this.userSelectDate.emit(date);
   }
 }

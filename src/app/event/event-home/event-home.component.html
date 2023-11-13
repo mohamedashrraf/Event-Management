@@ -4,11 +4,23 @@
 <section class="home" *ngIf="!loading">
   <div class="container">
     <div class="row">
-      <!-- <div class="col-md-4 col-5 col-sm-12 col-xs-12 mb-5">
-        <app-calendar></app-calendar>
-      </div> -->
       <div *ngIf="events">
         <div class="row row-cols-1 row-cols-md-3 g-4">
+          <div class="col-md-4 col-5 col-sm-12 col-xs-12 text-center">
+            <app-calendar (userSelectDate)="selectDateHandel($event)" />
+            <button
+              class="btn btn bg-primary text-white mt-1"
+              (click)="resetDate()"
+            >
+              All Events
+            </button>
+          </div>
+          <p
+            *ngIf="!events.length"
+            class="h3 text-danger text-center no-events"
+          >
+            Sorry!; No events were found that match this date 😞
+          </p>
           <a
             *ngFor="let event of events"
             (click)="handleClick(event._id)"
@@ -23,8 +35,7 @@
               />
               <div class="card-body">
                 <small class="text-muted"
-                  >Created at
-                  {{ event.createdAt | date : "d - MMM - yyyy" }}</small
+                  >At {{ event.dateTime | date : "d - MMM - yyyy" }}</small
                 >
                 <h3 class="card-title">{{ event.title }}</h3>
 

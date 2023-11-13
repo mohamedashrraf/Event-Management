@@ -17,10 +17,7 @@ interface User {
 export class AuthService {
   private whoiam = new BehaviorSubject<UserInfo>(
     JSON.parse(localStorage.getItem('whoiam')!) || {
-      name: '',
-      email: '',
       isAuthenticated: false,
-      userName: '',
     }
   );
 
@@ -37,12 +34,7 @@ export class AuthService {
 
   logout() {
     this.whoiam.next({
-      name: '',
-      email: '',
-      userName: '',
       isAuthenticated: false,
-      isVerify: false,
-      phoneNumber: '',
       token: '',
     });
     localStorage.removeItem('whoiam');
