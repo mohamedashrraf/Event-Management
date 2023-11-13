@@ -1,8 +1,4 @@
-<section
-  class="section colored pb-5 main"
-  style="background: #f2f2fe"
-  id="pricing-plans"
->
+<section class="section colored pb-5 main" style="background: #f2f2fe" id="pricing-plans">
   <div class="container">
     <!-- ***** Section Title Start ***** -->
     <div class="row">
@@ -27,13 +23,9 @@
 
     <div class="row">
       <!-- ***** Pricing Item Start ***** -->
-      <div
-        class="col-lg-5 col-md-6 col-sm-12 free-plan"
-        data-scroll-reveal="enter bottom move 50px over 0.6s after 0.2s"
-        data-scroll-reveal-id="6"
-        data-scroll-reveal-initialized="true"
-        data-scroll-reveal-complete="true"
-      >
+      <div class="col-lg-5 col-md-6 col-sm-12 free-plan"
+        data-scroll-reveal="enter bottom move 50px over 0.6s after 0.2s" data-scroll-reveal-id="6"
+        data-scroll-reveal-initialized="true" data-scroll-reveal-complete="true">
         <div class="pricing-item">
           <div class="pricing-header">
             <h3 class="pricing-title">Starter</h3>
@@ -46,8 +38,6 @@
               <li class="active">1 Host</li>
               <li class="active">1 Place</li>
               <li class="active">3 Events</li>
-              <li class="active">Technical Support</li>
-              <li class="active">Unlimited Emails</li>
               <li class="active">Security</li>
             </ul>
           </div>
@@ -56,13 +46,9 @@
       <!-- ***** Pricing Item End ***** -->
 
       <!-- ***** Pricing Item Start ***** -->
-      <div
-        class="offset-lg-2 col-lg-5 col-md-6 col-sm-12"
-        data-scroll-reveal="enter bottom move 50px over 0.6s after 0.6s"
-        data-scroll-reveal-id="8"
-        data-scroll-reveal-initialized="true"
-        data-scroll-reveal-complete="true"
-      >
+      <div class="offset-lg-2 col-lg-5 col-md-6 col-sm-12"
+        data-scroll-reveal="enter bottom move 50px over 0.6s after 0.6s" data-scroll-reveal-id="8"
+        data-scroll-reveal-initialized="true" data-scroll-reveal-complete="true">
         <div class="pricing-item">
           <div class="pricing-header">
             <h3 class="pricing-title">Premium</h3>
@@ -76,20 +62,13 @@
             <ul class="list">
               <li class="active">5 Host</li>
               <li class="active">5 Places</li>
-              <li class="active">Unlimited Events</li>
-              <li class="active">Technical Support</li>
-              <li class="active">Unlimited Emails</li>
+              <li class="active"><strong>Unlimited</strong> Events</li>
               <li class="active">Security</li>
             </ul>
           </div>
           <div class="pricing-footer">
-            <button
-              (click)="VIPPaypal()"
-              class="btn main-button"
-              [ngClass]="{ disabled: isGitLink }"
-              class="{{ 'btn btn-primary' + (isSubscribe ? ' disable' : '') }}"
-              [disabled]="isSubscribe"
-            >
+            <button (click)="VIPPaypal()" class="btn main-button" [ngClass]="{ disabled: isGitLink }"
+              class="{{ 'btn btn-primary' + (isSubscribe ? ' disable' : '') }}" [disabled]="isSubscribe">
               {{ isSubscribe ? "Already subscribed" : "Subscribe Now" }}
             </button>
           </div>
