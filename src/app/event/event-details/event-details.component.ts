@@ -48,9 +48,11 @@ export class EventDetailsComponent {
     console.log(this.foundPhoto);
     this.eventHttp.getEventDetails(this.activeId.value).subscribe(
       (res) => {
+        console.log(res)
         this.foundEvent = res.data;
         this.loading = false;
         console.log(this.foundEvent);
+        this.foundEvent.posterPath =  `'${this.foundEvent.posterPath}'`
 
         // this.foundEvent.subscribers.forEach((user: UserInfo) => {
         //   console.log('user on subscripers', user);
