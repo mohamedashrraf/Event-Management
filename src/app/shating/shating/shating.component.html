@@ -22,6 +22,7 @@
             maxlength="2000"
             formControlName="shat_text"
             placeholder="Write here"
+            
           /><button>Send</button>
         </form>
         <form
@@ -38,9 +39,10 @@
             aria-describedby="shating-text"
             formControlName="shat_text_edit"
             maxlength="2000"
+            [value]="messageEdit.message"
           /><button>Edit</button>
         </form>
-        <div class="text-dark" [ngClass]="{ 'd-none': !editMod }">{{ messageEdit.message }}</div>
+        <!-- <div class="text-dark" [ngClass]="{ 'd-none': !editMod }">{{ messageEdit.message }}</div> -->
       </section>
     </div>
   </div>
