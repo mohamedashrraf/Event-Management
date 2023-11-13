@@ -85,11 +85,12 @@
           <div class="pricing-footer">
             <button
               (click)="VIPPaypal()"
-              style="cursor: pointer"
               class="btn main-button"
               [ngClass]="{ disabled: isGitLink }"
+              class="{{ 'btn btn-primary' + (isSubscribe ? ' disable' : '') }}"
+              [disabled]="isSubscribe"
             >
-              Subscribe Now
+              {{ isSubscribe ? "Already subscribed" : "Subscribe Now" }}
             </button>
           </div>
         </div>

@@ -6,6 +6,11 @@
   height: 200px;
 }
 
+.disable {
+  cursor: not-allowed;
+  pointer-events: unset;
+}
+
 .center-text {
   text-align: center;
   font-weight: 400;

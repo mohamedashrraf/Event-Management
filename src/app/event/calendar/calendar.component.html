@@ -1,13 +1,13 @@
 <section class="calendar">
   <div class="container">
-    <div class="date bg-success text-center" *ngIf="selected">
-      {{ selected | date : "d - MMM - yyyy" }}
+    <div class="date bg-success text-center rounded-top-2">
+      {{ (selected ? selected : now) | date : "d - MMM - yyyy" }}
     </div>
-    <div class="date bg-success text-center" *ngIf="!selected">
-      {{ selected | date : "d - MMM - yyyy" }}
-    </div>
-    <mat-card class="demo-inline-calendar-card">
-      <mat-calendar [(selected)]="selected"></mat-calendar>
+    <mat-card class="demo-inline-calendar-card rounded-bottom-2">
+      <mat-calendar
+        [(selected)]="selected"
+        (click)="selectDate(selected)"
+      ></mat-calendar>
     </mat-card>
   </div>
 </section>
