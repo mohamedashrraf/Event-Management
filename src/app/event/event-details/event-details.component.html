@@ -303,9 +303,7 @@
           <div class="event-item">
             <img
               class="img-fluid w-100"
-              src="https://events-app-api-faar.onrender.com/v1/event/photo/{{
-                event._id
-              }}"
+              [src]="event.posterPath"
               alt=""
             />
             <div class="overlay-text">

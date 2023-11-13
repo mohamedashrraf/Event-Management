@@ -82,6 +82,7 @@ export class ShatingComponent implements OnDestroy, OnInit {
     console.log(this.formEditer.valid)
     console.log(this.formEditer)
     if (this.formEditer.valid) {
+      console.log("valid")
       const message = this.formEditer.value.shat_text_edit
       console.log(message)
       const userName = this.getTokenData.tokenData.userName
