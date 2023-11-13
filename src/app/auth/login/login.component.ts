@@ -55,6 +55,10 @@ export class LoginComponent {
           form.setErrors({
             invalidLogin: 'Please verify your email',
           });
+        else if (resErr.message === 'your account is banned')
+          form.setErrors({
+            invalidLogin: 'Your account is banned',
+          });
       }
     } catch (err) {
       console.log('Unexpected error', err);
