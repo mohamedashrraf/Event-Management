@@ -20,7 +20,6 @@ export class EventDetailsComponent {
   userAttende = false;
   userInfo!: UserInfo;
   allEvents!: EventInfo[];
-
   constructor(
     private activeRoute: ActivatedRoute,
     private router: Router,
@@ -44,13 +43,16 @@ export class EventDetailsComponent {
 
   async getEventInfo() {
     this.loading = true;
-    this.foundPhoto = `https://events-app-api-faar.onrender.com/api/v1/event/photo/${this.activeId.value}`;
-    console.log(this.foundPhoto);
+    // this.foundPhoto = `https://events-app-api-faar.onrender.com/api/v1/event/photo/${this.activeId.value}`;
+    // console.log(this.foundPhoto);
     this.eventHttp.getEventDetails(this.activeId.value).subscribe(
       (res) => {
+        console.log(res)
         this.foundEvent = res.data;
         this.loading = false;
         console.log(this.foundEvent);
+        this.foundPhoto = this.foundEvent.posterPath
+        this.foundEvent.posterPath =  `'${this.foundEvent.posterPath}'`
 
         // this.foundEvent.subscribers.forEach((user: UserInfo) => {
         //   console.log('user on subscripers', user);

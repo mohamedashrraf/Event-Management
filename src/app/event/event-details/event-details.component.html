@@ -24,9 +24,7 @@
   <div
     id="hero-area"
     class="hero-area-bg"
-    [style]="{
-      backgroundImage: 'url(' + foundEvent.proPicPath + ')'
-    }"
+    [ngStyle]="{'background-image':' url(' + foundEvent.posterPath + ')'}"
   >
     <div class="overlay"></div>
     <div class="container position-relative z-3">
