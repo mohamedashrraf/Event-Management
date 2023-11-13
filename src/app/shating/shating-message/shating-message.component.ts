@@ -18,7 +18,7 @@ updatedAt!:Date
   this.socket.messageToEdit.subscribe((message)=>{
     if(message._id==this.message?._id){
       if( this.message.message != message.message){
-
+        this.updatedAt = new Date()
         this.isModified=true
       }
       this.message.message = message.message
