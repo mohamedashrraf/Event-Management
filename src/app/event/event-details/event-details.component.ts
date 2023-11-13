@@ -47,12 +47,12 @@ export class EventDetailsComponent {
     // console.log(this.foundPhoto);
     this.eventHttp.getEventDetails(this.activeId.value).subscribe(
       (res) => {
-        console.log(res)
+        console.log(res);
         this.foundEvent = res.data;
         this.loading = false;
         console.log(this.foundEvent);
-        this.foundPhoto = this.foundEvent.posterPath
-        this.foundEvent.posterPath =  `'${this.foundEvent.posterPath}'`
+        this.foundPhoto = this.foundEvent.posterPath;
+        this.foundEvent.posterPath = `'${this.foundEvent.posterPath}'`;
 
         // this.foundEvent.subscribers.forEach((user: UserInfo) => {
         //   console.log('user on subscripers', user);
@@ -116,6 +116,10 @@ export class EventDetailsComponent {
         if (res.ok) {
           console.log('res ok ', await res.json());
           this.userAttende = true;
+          this.userInfo.subscribeWith?.push({
+            title: this.foundEvent.title,
+            _id: this.foundEvent._id,
+          });
         } else {
           console.log('res not ok ', await res.json());
         }
@@ -133,6 +137,9 @@ export class EventDetailsComponent {
         if (res.ok) {
           console.log('res ok ', await res.json());
           this.userAttende = false;
+          this.userInfo.subscribeWith = this.userInfo.subscribeWith?.filter(
+            (sub) => sub._id !== this.foundEvent._id
+          );
         } else {
           console.log('res not ok ', await res.json());
         }
