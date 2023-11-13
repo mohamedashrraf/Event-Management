@@ -563,9 +563,7 @@
                 <tr class="fw-normal" *ngFor="let admin of hostDetails.admins">
                   <th>
                     <img
-                      src="https://events-app-api-faar.onrender.com/api/v1/user/ProPicPath/{{
-                        admin._id
-                      }}"
+                      [src]="admin.proPicPath||avtarImg"
                       class="shadow-1-strong rounded-circle"
                       alt="avatar"
                       style="width: 55px; height: auto"
