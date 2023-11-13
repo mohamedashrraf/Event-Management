@@ -13,3 +13,18 @@
     text-decoration: none;
     font-size: 13px;
 }
+@media (max-width:787px) {
+    .messagesNow{
+        padding-top: 50px;
+    }
+    .cont h4,.cont span{
+        font-size: 11px;
+    }
+    .dvdov p{
+        font-size: 13px;
+    }
+    .textL a{
+        text-decoration: none;
+        font-size: 10px;
+    }
+}

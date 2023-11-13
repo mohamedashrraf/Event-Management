@@ -14,10 +14,10 @@ body {
 .form {
   display: flex;
   width: 100%;
-  // padding: 5px;
-  // height: 5rem;
-background-color: #ccc;
-
+  background-color: #78a0dc;
+  position: sticky;
+  bottom: 5px;
+  border-radius: 10px;
 }
 
 .input {
@@ -43,7 +43,7 @@ background-color: #ccc;
   color: #fff;
   font-weight: bold;
   margin-right: 5px;
-  transition: .3s;
+  transition: 0.3s;
   @media only screen and (max-width: 480px) {
     & {
       width: 100vw !important;
@@ -51,8 +51,7 @@ background-color: #ccc;
   }
 }
 .form > button:hover {
-  color: #000
-
+  color: #dbd8d8;
 }
 .messages {
   min-height: 82vh;
@@ -62,5 +61,11 @@ background-color: #ccc;
       min-height: 30vh;
       width: 99vw !important ;
     }
+  }
+}
+@media (max-width:787px) {
+  .form{
+    width: 450px;
+    margin-right: 10px;
   }
 }
