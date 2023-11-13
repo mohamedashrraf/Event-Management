@@ -30,11 +30,9 @@
           <ng-container class="items" *ngIf="!editMode">{{
             user.email
           }}</ng-container>
-          <input
-            *ngIf="editMode"
-            [(ngModel)]="user.email"
-            class="form-control"
-          />
+          <ng-container *ngIf="editMode" class="form-control">{{
+            user.email
+          }}</ng-container>
         </div>
       </div>
       <div class="row">
