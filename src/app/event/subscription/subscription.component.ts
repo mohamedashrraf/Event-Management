@@ -40,6 +40,7 @@ export class SubscriptionComponent {
         console.log(res.data.link);
         const link = res.data.link;
         location.href = link;
+
         // this.isGitLink = false
       });
   }
