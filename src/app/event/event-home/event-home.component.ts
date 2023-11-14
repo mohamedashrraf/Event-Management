@@ -57,6 +57,7 @@ export class EventHomeComponent implements OnInit {
     const selectedDate = new Date(data).toISOString().slice(0, 10);
     this.events = this.events.filter((event) => {
       const eventDate = new Date(event.dateTime).toISOString().slice(0, 10);
+      console.log('selectedDate ', selectedDate, 'eventDate', eventDate);
       return selectedDate === eventDate;
     });
   }
