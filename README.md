@@ -17,12 +17,13 @@ Website that can serve all users who need to organize or attend events.
 
 ## Overview
 
-This is the final project of Intensive Code Camp(ICC) - Full Stack using MERN - IT Institute
+This is the graduation project of Intensive Code Camp(ICC) - Full Stack using MERN - IT Institute
 
 ### Features
 
 - Registration, which includes email verification messages
-- Authentcation with tell the user why they are not logged in
+- Authentication with tell the user why they are not logged in
+- Data validation in all levels (Frontend, Backend, Database)
 - Find all events that interest the user filtered by date
 - Chat room for all users attending the event
 - Notification system
@@ -53,7 +54,7 @@ This is the final project of Intensive Code Camp(ICC) - Full Stack using MERN - 
 
 ### Built with
 
-- Angular framework
+- Angular
 - SCSS
 - Bootstrap
 - Font Awesome
