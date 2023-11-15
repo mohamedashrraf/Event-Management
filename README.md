@@ -40,8 +40,8 @@ This is the final project of Intensive Code Camp(ICC) - Full Stack using MERN - 
 
 ### Links
 
-- [GitHub URL](https://github.com/monasr1997/food-order-app/)
-- [Live URL](https://github.com/mohamedashrraf/Event-Management)
+- [GitHub URL](https://github.com/mohamedashrraf/Event-Management)
+- [Live URL](https://eventazia.vercel.app/)
 
 ## Processes
 
