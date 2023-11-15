@@ -1,27 +1,83 @@
-# App
+# Eventazia
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.0.
+Website that can serve all users who need to organize or attend events.
 
-## Development server
+## Taple of contents
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Eventazia](#eventazia)
+  - [Taple of contents](#taple-of-contents)
+  - [Overview](#overview)
+    - [Features](#features)
+    - [Screenshot](#screenshot)
+    - [Links](#links)
+  - [Processes](#processes)
+    - [Built with](#built-with)
+    - [Installation](#installation)
+  - [Author](#author)
 
-## Code scaffolding
+## Overview
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+This is the final project of Intensive Code Camp(ICC) - Full Stack using MERN - IT Institute
 
-## Build
+### Features
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Registration, which includes email verification messages
+- Authentcation with tell the user why they are not logged in
+- Find all events that interest the user filtered by date
+- Chat room for all users attending the event
+- Notification system
+- Creating a hosting that enables the user to create and control all the events that interest him
+- Create a place to allow the event creator to host it there
+- Upgrade plan for unlimited features
 
-## Running unit tests
+### Screenshot
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- ![Desktop design](./screenshots/home.png)
+- ![Events Details](./screenshots/events-details.png)
+- ![Chat Room](./screenshots/chat.png)
+- ![Event list](./screenshots/event-list.png)
+- ![Admin list of the host](./screenshots/admins-list.png)
 
-## Running end-to-end tests
+### Links
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- [GitHub URL](https://github.com/monasr1997/food-order-app/)
+- [Live URL](https://github.com/mohamedashrraf/Event-Management)
 
-## Further help
+## Processes
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Brainstorming & Data Collection
+- Website colors & Design
+- Front end & Back end development cycle
+- Testing
+- Deployment
+
+### Built with
+
+- Angular framework
+- SCSS
+- Bootstrap
+- Font Awesome
+- ngx-socket-io
+- jwt-decode
+- date-fns
+- angular-calendar
+- zone.js
+
+### Installation
+
+```shell
+# Example commands
+git clone https://github.com/mohamedashrraf/Event-Management.git
+cd Event-Management.git
+npm install
+npm run start
+```
+
+## Author
+
+- [Mohamed Ashraf](https://www.linkedin.com/in/mohamedashrraf/)
+- [Abdelrhman Sherif](https://www.linkedin.com/in/abdelrhman-sherif/)
+- [Esraa Mohsen](https://www.linkedin.com/in/esraa-mohsen-356687233/)
+- [Muhammad Al-kilany](https://www.linkedin.com/in/muhammadalkilany/)
+- [Omar Gamal](https://www.linkedin.com/in/omar-gamal-98ab57219/)
+- [Mohamed Nasr](https://www.linkedin.com/in/mhmdnsr-dev)
