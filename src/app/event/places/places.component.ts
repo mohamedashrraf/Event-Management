@@ -14,6 +14,7 @@ import { GetTokenDataService } from 'src/app/shared/services/get-token-data.serv
 import { User } from 'src/app/shared/interfaces/user';
 import UserInfo from 'src/app/shared/interfaces/user-info';
 import PlaceInfo from 'src/app/shared/interfaces/place-info';
+import { Whoiam } from 'src/app/shared/interfaces/whoiam';
 
 @Component({
   selector: 'app-places',
@@ -30,18 +31,24 @@ export class PlacesComponent {
   handleCreate: any;
   isVIP = this.getTokenData.tokenData.isVIP;
 
+  whoiam!: Whoiam;
+
   constructor(
-    private _athService: AuthService,
+    private authService: AuthService,
     private httpClint: HttpClient,
     private getTokenData: GetTokenDataService,
     private router: Router
   ) {
-    this._athService.user.subscribe((user) => {
-      !user.isAuthenticated && this._athService.redirectToLogin();
-      this.userInfo = user;
-      console.log(user);
-      console.log(this.isVIP);
+    this.authService.whoiam.subscribe((value) => {
+      this.whoiam = value;
+      !this.whoiam.isAuthenticated && this.authService.redirectToLogin();
     });
+  }
+
+  async ngOnInit() {
+    this.getPlaces();
+    const user = await this.authService.user();
+    this.userInfo = user!;
   }
 
   async getPlaces() {
@@ -51,22 +58,13 @@ export class PlacesComponent {
       {
         method: 'GET',
         headers: {
-          Authorization: this.userInfo.token!,
+          Authorization: this.whoiam.token!,
         },
       }
     );
-    console.log('token', this.userInfo.token);
-    console.log(res);
     const data = await res.json();
-    console.log('data from back', data);
     this.places = data.data;
     this.isLoding = false;
-  }
-  ngOnInit() {
-    this.getPlaces();
-  }
-  ngAfterViewInit() {
-    // console.log(this.cloas.nativeElement);
   }
 
   async createPlace(placeForm: FormGroup) {
@@ -90,16 +88,13 @@ export class PlacesComponent {
           formData,
           {
             headers: {
-              Authorization: this.userInfo.token!,
+              Authorization: this.whoiam.token!,
             },
           }
         )
         .subscribe(
           async (res) => {
-            console.log('res from create place', res);
-
             if (res.message === 'place created') {
-              // await this.getPlaces();
               this.places.push(res.data);
               this.removeModal();
             }
@@ -107,8 +102,6 @@ export class PlacesComponent {
               placeForm.setErrors({
                 limited: 'Upgrade your plan to create more places',
               });
-
-              console.log(placeForm);
             }
           },
           (err) => {
@@ -136,8 +129,6 @@ export class PlacesComponent {
   }
 
   async handleUpdatePlaces(id: string) {
-    console.log(id);
-
     try {
       const res = await fetch(
         'https://events-app-api-faar.onrender.com/api/v1/place/with_admin/' +
@@ -145,12 +136,11 @@ export class PlacesComponent {
         {
           method: 'DELETE',
           headers: {
-            Authorization: this.userInfo.token!,
+            Authorization: this.whoiam.token!,
           },
         }
       );
       const data = await res.json();
-      console.log('data from remove event', data);
       if (data.message === 'place deleted') {
         this.places = this.places.filter((place) => place._id !== id);
       } else if (data.message === 'You can not delete this place')

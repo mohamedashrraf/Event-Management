@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import HostDetails from 'src/app/shared/interfaces/host-info';
 import EventInfo from 'src/app/shared/interfaces/event-info';
 import PlaceInfo from 'src/app/shared/interfaces/place-info';
+import { Whoiam } from 'src/app/shared/interfaces/whoiam';
 
 @Component({
   selector: 'app-host-details',
@@ -24,14 +25,16 @@ export class HostDetailsComponent {
   listOfPlaces: PlaceInfo[] = [];
   avtarImg = './assets/images/avatar.jpg';
   placeSelected = '';
+
+  whoiam!: Whoiam;
   constructor(
     private authService: AuthService,
     private activeRoute: ActivatedRoute,
     private httpClint: HttpClient
   ) {
-    this.authService.user.subscribe((user) => {
-      this.userInfo = user;
-      !user.isAuthenticated && this.authService.redirectToLogin();
+    this.authService.whoiam.subscribe((value) => {
+      this.whoiam = value;
+      !this.whoiam.isAuthenticated && this.authService.redirectToLogin();
     });
 
     this.eventForm = new FormGroup({
@@ -66,6 +69,11 @@ export class HostDetailsComponent {
     }
   }
 
+  async ngOnInit() {
+    const user = await this.authService.user();
+    this.userInfo = user!;
+  }
+
   //1) Get details of host
   async getHostDetails(hostId: string) {
     this.loadingGet = true;
@@ -75,7 +83,7 @@ export class HostDetailsComponent {
         {
           method: 'GET',
           headers: {
-            Authorization: this.userInfo.token!,
+            Authorization: this.whoiam.token!,
           },
         }
       );
@@ -84,7 +92,6 @@ export class HostDetailsComponent {
 
       const data: { message: string; data: HostDetails } = await res.json();
       this.hostDetails = data.data;
-      console.log('this.hostDetails', this.hostDetails);
 
       this.eventForm.addControl('host', new FormControl(this.hostDetails._id));
     } catch (err) {
@@ -108,17 +115,15 @@ export class HostDetailsComponent {
           formData,
           {
             headers: {
-              Authorization: this.userInfo.token!,
+              Authorization: this.whoiam.token!,
             },
           }
         )
         .subscribe(
           (data) => {
-            console.log('data from create event', data);
             this.loadingPost = false;
             if (data.message === 'event created') {
               this.hostDetails.events.push(data.data);
-              console.log(this.hostDetails.events);
               const clickEvent = new MouseEvent('click');
               document
                 .getElementById('close-event-form')
@@ -144,8 +149,6 @@ export class HostDetailsComponent {
                 });
               });
             }
-
-            console.log('res is not ok from create event', err);
             this.loadingPost = false;
           }
         );
@@ -157,22 +160,19 @@ export class HostDetailsComponent {
   // 3) TODO: Add admin
   async handleAddAdmin(form: FormGroup) {
     try {
-      console.log(form.value);
-      console.log(this.userInfo);
       const res = await fetch(
         `https://events-app-api-faar.onrender.com/api/v1/host/add_admin/${this.hostDetails._id}`,
         {
           method: 'PATCH',
           body: JSON.stringify(form.value),
           headers: {
-            Authorization: this.userInfo.token!,
+            Authorization: this.whoiam.token!,
             'Content-Type': 'application/json',
           },
         }
       );
 
       const data: { message: string; data: HostDetails } = await res.json();
-      console.log('data from add admin', data);
       if (data.message == 'not found user') {
         form.setErrors({
           notFound: 'The email you entered does not match any user',
@@ -185,31 +185,26 @@ export class HostDetailsComponent {
         form.setErrors({
           notFound: 'You cannot add this user to the administrators list',
         });
-    } catch (err) {
-      console.log('err from add admin', err);
-    }
+    } catch (err) {}
   }
   // 4)TODO: Remove admin
   async handleARemoveAdmin(id: string) {
     try {
-      console.log(this.userInfo);
       const res = await fetch(
         `https://events-app-api-faar.onrender.com/api/v1/host//remov_admin/${this.hostDetails._id}/${id}`,
         {
           method: 'PATCH',
           headers: {
-            Authorization: this.userInfo.token!,
+            Authorization: this.whoiam.token!,
           },
         }
       );
 
       const data: { message: string; data: any } = await res.json();
-      console.log('data from remove admin', data);
       if (data.message === 'admin remove') {
         this.hostDetails.admins = this.hostDetails.admins.filter(
           (admin) => admin._id !== id
         );
-        console.log(this.hostDetails.admins);
       }
     } catch (err) {
       console.log('err from add admin', err);
@@ -223,13 +218,12 @@ export class HostDetailsComponent {
       {
         method: 'GET',
         headers: {
-          Authorization: this.userInfo.token!,
+          Authorization: this.whoiam.token!,
         },
       }
     );
 
     if (res.ok) {
-      // console.log('get all places ok', await res.json());
       const data: { message: string; data: PlaceInfo[] } = await res.json();
 
       this.listOfPlaces = data.data;
@@ -252,7 +246,7 @@ export class HostDetailsComponent {
         {
           method: 'DELETE',
           headers: {
-            Authorization: this.userInfo.token!,
+            Authorization: this.whoiam.token!,
           },
         }
       );

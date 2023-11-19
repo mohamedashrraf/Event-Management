@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
 import UserInfo from '../../shared/interfaces/user-info';
 import HostDetails from 'src/app/shared/interfaces/host-info';
+import { Whoiam } from 'src/app/shared/interfaces/whoiam';
 
 interface HostDataRes {
   admins: string[];
@@ -23,9 +24,12 @@ export class HostsComponent {
   hostForm!: FormGroup;
   userInfo!: UserInfo;
   hosts: HostDetails[] = [];
+
+  whoiam!: Whoiam;
   constructor(private authService: AuthService) {
-    this.authService.user.subscribe((user) => {
-      this.userInfo = user;
+    this.authService.whoiam.subscribe((value) => {
+      this.whoiam = value;
+      !this.whoiam.isAuthenticated && this.authService.redirectToLogin();
     });
     this.hostForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),
@@ -39,6 +43,11 @@ export class HostsComponent {
     this.getHosts();
   }
 
+  async ngOnInit() {
+    const user = await this.authService.user();
+    this.userInfo = user!;
+  }
+
   async createHost(form: FormGroup) {
     try {
       this.loadingPost = true;
@@ -48,7 +57,7 @@ export class HostsComponent {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: this.userInfo.token!,
+            Authorization: this.whoiam.token!,
           },
           body: JSON.stringify(this.hostForm.value),
         }
@@ -79,22 +88,16 @@ export class HostsComponent {
         {
           method: 'GET',
           headers: {
-            Authorization: this.userInfo.token!,
+            Authorization: this.whoiam.token!,
           },
         }
       );
-      // console.log('getHosts res', await res.json());
       if (res.ok) {
         const data: {
           data: HostDetails[];
           message: string;
         } = await res.json();
-
-        console.log('get Hosts res data', data);
-
         this.hosts.push(...data.data);
-
-        console.log(this.hosts, 'my hosts');
       } else console.log('get Hosts res not ok', await res.json());
     } catch (error) {
       console.log('host/all_user_host error', error);
@@ -110,12 +113,11 @@ export class HostsComponent {
         {
           method: 'DELETE',
           headers: {
-            Authorization: this.userInfo.token!,
+            Authorization: this.whoiam.token!,
           },
         }
       );
       const data = await res.json();
-      console.log('data from remove event', data);
       if (data.message === 'host deleted')
         this.hosts = this.hosts.filter((host) => host._id !== id);
       else if (data.message === 'You can not delete this host')

@@ -8,6 +8,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { Whoiam } from 'src/app/shared/interfaces/whoiam';
 
 // matching passwords
 function passwordMatchValidator(
@@ -30,6 +31,7 @@ function passwordMatchValidator(
 })
 export class SignupComponent implements OnInit {
   registrationForm!: FormGroup;
+  whoiam!: Whoiam;
   foucusInput = {
     password: false,
     confirmPassword: false,
@@ -42,8 +44,9 @@ export class SignupComponent implements OnInit {
     private router: Router,
     private authService: AuthService
   ) {
-    this.authService.user.subscribe((user) => {
-      user.isAuthenticated && this.authService.redirectToHome();
+    this.authService.whoiam.subscribe((value) => {
+      this.whoiam = value;
+      this.whoiam.isAuthenticated && this.authService.redirectToHome();
     });
   }
 
@@ -94,8 +97,6 @@ export class SignupComponent implements OnInit {
       const { value } = this.registrationForm.controls[key];
       formData.append(key, value);
     }
-
-    console.log('this.registrationForm.value', this.registrationForm.value);
     try {
       const res = await fetch(
         'https://events-app-api-faar.onrender.com/api/v1/user/register',
@@ -109,19 +110,15 @@ export class SignupComponent implements OnInit {
       );
       if (res.status === 201) {
         const data = await res.json();
-        console.log('dataRes', data);
         this.authService.redirectToLogin();
       } else {
         const resErr = await res.json();
-        console.log('Unexpected response', resErr);
         if (resErr.message === 'unique err')
           this.registrationForm.setErrors({
             userExists: true,
           });
       }
-    } catch (err) {
-      console.log('Unexpected error', err);
-    }
+    } catch (err) {}
   }
 
   focusInput(e: Event) {

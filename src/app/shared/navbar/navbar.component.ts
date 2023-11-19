@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { SocketService } from '../socket.service';
 import { NotificationNewMessage } from '../interfaces/user';
+import { Whoiam } from '../interfaces/whoiam';
 
 @Component({
   selector: 'app-navbar',
@@ -9,24 +10,23 @@ import { NotificationNewMessage } from '../interfaces/user';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnDestroy {
-  isAuthenticated = false;
   numberNot: number = 0;
   arrayOfNotifi!: any[];
   notificationNewMessage!: NotificationNewMessage[];
+  whoiam!: Whoiam;
   constructor(private authService: AuthService, private socket: SocketService) {
+    this.authService.whoiam.subscribe((value) => {
+      this.whoiam = value;
+    });
     this.socket.notificationNewMessage.subscribe((notificationNewMessage) => {
       this.notificationNewMessage = notificationNewMessage;
     });
     this.socket.on('new_event', (event: any) => {
-      console.log(event);
       this.socket.numNot.next(this.numberNot + 1);
       this.arrayOfNotifi.push(event);
-      console.log(this.arrayOfNotifi);
       this.socket.arrayOfNotifi.next(this.arrayOfNotifi);
     });
-    this.authService.user.subscribe((user) => {
-      this.isAuthenticated = user.isAuthenticated;
-    });
+
     this.socket.on('connect_error', (err: any) => {
       console.log(`connect_error due to ${err}`);
     });
@@ -51,6 +51,7 @@ export class NavbarComponent implements OnDestroy {
   logout() {
     setTimeout(() => {
       this.authService.logout();
+      this.authService.redirectToLogin();
     }, 400);
   }
   ngOnInit() {

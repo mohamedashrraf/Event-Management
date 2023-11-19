@@ -8,14 +8,14 @@
           <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
               <button
-                class="accordion-button "
+                class="accordion-button"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseOne"
                 aria-expanded="true"
                 aria-controls="collapseOne"
               >
-								Rooms
+                Rooms
               </button>
             </h2>
             <div
@@ -25,21 +25,23 @@
               data-bs-parent="#accordionExample"
             >
               <div class="accordion-body">
-								<div class="list-group list-group-flush border-bottom scrollarea">
-									<a
-										*ngFor="let event of subscribeWith"
-										[routerLink]="['/shating/', event._id]"
-										routerLinkActive="active"
-										[routerLinkActiveOptions]="{ exact: true }"
-										class="list-group-item list-group-item lh-tight"
-										aria-current="true"
-									>
-										<app-room-link
-											[notificationNewMessage]="notificationNewMessage"
-											[event]="event"
-										></app-room-link>
-									</a>
-								</div>
+                <div
+                  class="list-group list-group-flush border-bottom scrollarea"
+                >
+                  <a
+                    *ngFor="let event of subscribeWith"
+                    [routerLink]="['/chat/', event._id]"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    class="list-group-item list-group-item lh-tight"
+                    aria-current="true"
+                  >
+                    <app-room-link
+                      [notificationNewMessage]="notificationNewMessage"
+                      [event]="event"
+                    ></app-room-link>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

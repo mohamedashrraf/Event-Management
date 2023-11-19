@@ -3,13 +3,8 @@ export default interface UserInfo {
   name?: string;
   email?: string;
   userName?: string;
-  subscribeWith?: {
-    title: string;
-    _id: string;
-  }[];
+  subscribeWith?: string[];
   isVerify?: boolean;
-  token?: string;
-  isAuthenticated: boolean;
   _id?: string;
   proPicPath?: string;
   isVIP?: boolean;

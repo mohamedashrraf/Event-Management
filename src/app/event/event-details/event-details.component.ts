@@ -5,6 +5,7 @@ import EventInfo from 'src/app/shared/interfaces/event-info';
 import { AuthService } from 'src/app/auth/auth.service';
 import UserInfo from 'src/app/shared/interfaces/user-info';
 import { BehaviorSubject } from 'rxjs';
+import { Whoiam } from 'src/app/shared/interfaces/whoiam';
 
 @Component({
   selector: 'app-event-details',
@@ -18,6 +19,8 @@ export class EventDetailsComponent {
   foundPhoto!: string;
   loading: boolean = true;
   userAttende = false;
+
+  whoiam!: Whoiam;
   userInfo!: UserInfo;
   allEvents!: EventInfo[];
   constructor(
@@ -26,10 +29,16 @@ export class EventDetailsComponent {
     private eventHttp: EventHttpService,
     private authService: AuthService
   ) {
-    this.authService.user.subscribe((user) => {
-      this.userInfo = user;
-      !user.isAuthenticated && this.authService.redirectToLogin();
+    this.authService.whoiam.subscribe((value) => {
+      this.whoiam = value;
+      !this.whoiam.isAuthenticated && this.authService.redirectToLogin();
     });
+  }
+
+  async ngOnInit() {
+    const user = await this.authService.user();
+    this.userInfo = user!;
+
     this.activeRoute.params.subscribe((queryParams) => {
       this.activeId.next(queryParams['id']);
 
@@ -39,40 +48,23 @@ export class EventDetailsComponent {
     });
   }
 
-  async ngOnInit() {}
-
   async getEventInfo() {
     this.loading = true;
-    // this.foundPhoto = `https://events-app-api-faar.onrender.com/api/v1/event/photo/${this.activeId.value}`;
-    // console.log(this.foundPhoto);
     this.eventHttp.getEventDetails(this.activeId.value).subscribe(
       (res) => {
-        console.log(res);
         this.foundEvent = res.data;
         this.loading = false;
-        console.log(this.foundEvent);
         this.foundPhoto = this.foundEvent.posterPath;
         this.foundEvent.posterPath = `'${this.foundEvent.posterPath}'`;
-
-        // this.foundEvent.subscribers.forEach((user: UserInfo) => {
-        //   console.log('user on subscripers', user);
-        //   if (user._id === this.userInfo._id) {
-        //     this.userAttende = true;
-        //   } else this.userAttende = false;
-        // });
         const userAttended = this.foundEvent.subscribers.find(
           (user: UserInfo) => user._id === this.userInfo._id
         );
         if (userAttended) {
           this.userAttende = true;
         } else this.userAttende = false;
-        console.log(userAttended);
-        console.log('this.foundEvent.subscribers', this.foundEvent.subscribers);
-        console.log('this.userInfo', this.userInfo);
       },
       (error) => {
-        console.log(error);
-        this.loading = false; // Set loading to false on error
+        this.loading = false;
         this.router.navigate(['/notfound']);
       }
     );
@@ -84,7 +76,7 @@ export class EventDetailsComponent {
         `https://events-app-api-faar.onrender.com/api/v1/event/all`,
         {
           headers: {
-            Authorization: this.userInfo.token!,
+            Authorization: this.whoiam.token!,
           },
         }
       );
@@ -109,20 +101,14 @@ export class EventDetailsComponent {
           {
             method: 'PATCH',
             headers: {
-              Authorization: this.userInfo.token!,
+              Authorization: this.whoiam.token!,
             },
           }
         );
         if (res.ok) {
-          console.log('res ok ', await res.json());
           this.userAttende = true;
-          this.userInfo.subscribeWith?.push({
-            title: this.foundEvent.title,
-            _id: this.foundEvent._id,
-          });
-        } else {
-          console.log('res not ok ', await res.json());
-        }
+          this.userInfo.subscribeWith?.push(this.foundEvent._id);
+        } else console.log('res not ok ', await res.json());
       } else {
         const res = await fetch(
           `https://events-app-api-faar.onrender.com/api/v1/event/unsubscribe/${this.activeId.value}`,
@@ -130,7 +116,7 @@ export class EventDetailsComponent {
           {
             method: 'PATCH',
             headers: {
-              Authorization: this.userInfo.token!,
+              Authorization: this.whoiam.token!,
             },
           }
         );
@@ -138,7 +124,7 @@ export class EventDetailsComponent {
           console.log('res ok ', await res.json());
           this.userAttende = false;
           this.userInfo.subscribeWith = this.userInfo.subscribeWith?.filter(
-            (sub) => sub._id !== this.foundEvent._id
+            (eventId) => eventId !== this.foundEvent._id
           );
         } else {
           console.log('res not ok ', await res.json());

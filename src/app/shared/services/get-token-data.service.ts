@@ -3,14 +3,13 @@ import { jwtDecode } from 'jwt-decode';
 import { User } from '../interfaces/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GetTokenDataService {
-
-  get tokenData(){
+  get tokenData() {
     const whoiam = localStorage.getItem('whoiam');
-  const token = JSON.parse(whoiam!).token;
+    const token = JSON.parse(whoiam!).token;
 
-      return jwtDecode(token!) as User
+    return jwtDecode(token!) as User;
   }
 }

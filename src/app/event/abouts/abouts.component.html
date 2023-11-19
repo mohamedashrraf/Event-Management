@@ -1,4 +1,8 @@
-<div class="tab-content profile-tab ps-2 pb-2" id="myTabContent">
+<div
+  class="tab-content profile-tab ps-2 pb-2"
+  id="myTabContent"
+  *ngIf="userInfo"
+>
   <div class="container justify-content-center align-content-center d-flex">
     <div>
       <h2>Profile Information</h2>
@@ -13,11 +17,11 @@
         </div>
         <div class="col-md-6 items">
           <ng-container class="items" *ngIf="!editMode">{{
-            user.name
+            userInfo.name
           }}</ng-container>
           <input
             *ngIf="editMode"
-            [(ngModel)]="user.name"
+            [(ngModel)]="userInfo.name"
             class="form-control"
           />
         </div>
@@ -28,10 +32,10 @@
         </div>
         <div class="col-md-6 items">
           <ng-container class="items" *ngIf="!editMode">{{
-            user.email
+            userInfo.email
           }}</ng-container>
           <ng-container *ngIf="editMode" class="form-control">{{
-            user.email
+            userInfo.email
           }}</ng-container>
         </div>
       </div>
@@ -40,10 +44,12 @@
           <label>Phone</label>
         </div>
         <div class="col-md-6 items">
-          <ng-container *ngIf="!editMode">{{ user.phoneNumber }}</ng-container>
+          <ng-container *ngIf="!editMode">{{
+            userInfo.phoneNumber
+          }}</ng-container>
           <input
             *ngIf="editMode"
-            [(ngModel)]="user.phoneNumber"
+            [(ngModel)]="userInfo.phoneNumber"
             class="form-control"
           />
         </div>
