@@ -2,42 +2,64 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import UserInfo from '../shared/interfaces/user-info';
-
-interface User {
-  name: string;
-  email: string;
-  username: string;
-  isAuthenticated: boolean;
-  token?: string;
-}
+import { Whoiam } from '../shared/interfaces/whoiam';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private whoiam = new BehaviorSubject<UserInfo>(
+  private auth = new BehaviorSubject<Whoiam>(
     JSON.parse(localStorage.getItem('whoiam')!) || {
       isAuthenticated: false,
+      token: '',
     }
   );
 
   constructor(private router: Router) {}
 
-  get user(): BehaviorSubject<UserInfo> {
-    return this.whoiam;
+  async user() {
+    const whoiam: Whoiam = JSON.parse(localStorage.getItem('whoiam')!);
+    if (!whoiam?.token) {
+      this.logout();
+    }
+    const res = await fetch(
+      'https://events-app-api-faar.onrender.com/api/v1/user/',
+      {
+        method: 'GET',
+        headers: {
+          Authorization: whoiam.token!,
+        },
+      }
+    );
+    if (res.status === 200) {
+      const userData: { message: string; data: UserInfo } = await res.json();
+      return userData.data;
+    } else {
+      return this.logout();
+    }
   }
 
-  login(user: UserInfo) {
-    this.whoiam.next(user);
-    localStorage.setItem('whoiam', JSON.stringify(user));
+  get whoiam() {
+    return this.auth;
+  }
+
+  login(token: string) {
+    const whoiam = {
+      isAuthenticated: true,
+      token,
+    };
+    this.auth.next(whoiam);
+    localStorage.setItem('whoiam', JSON.stringify(whoiam));
+    this.redirectToHome();
   }
 
   logout() {
-    this.whoiam.next({
+    this.auth.next({
       isAuthenticated: false,
       token: '',
     });
     localStorage.removeItem('whoiam');
+    this.redirectToLogin();
   }
 
   redirectToHome() {

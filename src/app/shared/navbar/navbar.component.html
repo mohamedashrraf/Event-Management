@@ -2,7 +2,7 @@
   <div class="container">
     <a class="navbar-brand" routerLink="/">
       <img class="logo" src="../../../assets/images/logo.png" alt="Eventazia" />
-      <span class=" ms-1">Eventazia</span>
+      <span class="ms-1">Eventazia</span>
     </a>
     <button
       class="navbar-toggler"
@@ -19,7 +19,7 @@
       <!-- User Logout -->
       <ul
         class="navbar-nav ms-auto mb-2 mb-lg-0 gap-3"
-        *ngIf="!isAuthenticated"
+        *ngIf="!whoiam.isAuthenticated"
       >
         <li class="nav-item">
           <a
@@ -42,7 +42,10 @@
       </ul>
 
       <!-- User Login -->
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-3" *ngIf="isAuthenticated">
+      <ul
+        class="navbar-nav ms-auto mb-2 mb-lg-0 gap-3"
+        *ngIf="whoiam.isAuthenticated"
+      >
         <li class="nav-item hoho">
           <a
             class="nav-link"
@@ -56,7 +59,7 @@
         <li class="nav-item">
           <a
             class="nav-link popo"
-            routerLink="/shating"
+            routerLink="/chat"
             routerLinkActive="activate"
             ><i class="fa-regular fa-message fa-xl"></i
           ></a>

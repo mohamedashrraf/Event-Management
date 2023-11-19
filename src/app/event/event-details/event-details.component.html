@@ -2,29 +2,11 @@
   <app-loading></app-loading>
 </div>
 <div class="main" *ngIf="!loading">
-  <!-- <div class="bg-body-secondary p-3 rounded-1">
-    <h1 class="h1">DEVELOPERS CONFERENCE</h1>
-    <div class="d-flex gap-3 mb-4">
-      <div class="hosted-img rounded-5 overflow-hidden">
-        <img
-          class="w-100"
-          src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        />
-      </div>
-      <div>
-        <p class="mb-1 h6">Hosted by:</p>
-        <a class="h5 text-decoration-none text-dark">{{
-          foundEvent.data.title
-        }}</a>
-      </div>
-    </div>
-  </div> -->
-
   <!-- Hero Area Start -->
   <div
     id="hero-area"
     class="hero-area-bg"
-    [ngStyle]="{'background-image':' url(' + foundEvent.posterPath + ')'}"
+    [ngStyle]="{ 'background-image': ' url(' + foundEvent.posterPath + ')' }"
   >
     <div class="overlay"></div>
     <div class="container position-relative z-3">
@@ -58,11 +40,6 @@
       <div class="row">
         <div class="col-lg-6 col-md-12 col-xs-12">
           <div class="img-thumb">
-            <!-- <img
-              class="img-fluid"
-              src="https://images.squarespace-cdn.com/content/5898e29c725e25e7132d5a5a/1487546591045-NJLLE20UXLVGZ9XHL47Y/600x400-Image-Placeholder.jpg?content-type=image%2Fjpeg"
-              alt=""
-            /> -->
             <img class="img-fluid" [src]="foundPhoto" alt="" />
           </div>
         </div>
@@ -87,7 +64,6 @@
                   Get Inspired by Amazing Speakers
                 </li>
               </ul>
-              <!-- <a class="btn btn-common" href="#">Learn More</a> -->
             </div>
           </div>
         </div>
@@ -127,43 +103,10 @@
             </li>
           </ul>
         </div>
-        <!-- <div class="col-lg-4 col-md-6 col-xs-12">
-          <ul>
-            <li>
-              <span class="icon">
-                <i class="fa-solid fa-people-roof"></i>
-              </span>
-            </li>
-            <li>
-              <span
-                ><b>Attendees</b>
-                <ul class="gap-2 align-items-center">
-                  <li>
-                    <img src="https://randomuser.me/api/portraits/men/22.jpg" />
-                    <p class="attendee-name">Ahmed</p>
-                  </li>
-                  <li>
-                    <img src="https://randomuser.me/api/portraits/men/12.jpg" />
-                    <p class="attendee-name">Mohamed</p>
-                  </li>
-                  <li>
-                    <img
-                      src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-                    />
-                    <p class="attendee-name">Mona</p>
-                  </li>
-                  <li class="h1">
-                    <p class="attendee-all">+30</p>
-                  </li>
-                </ul></span
-              >
-            </li>
-          </ul>
-        </div> -->
+
         <div class="col-lg-4 col-md-6 col-xs-12">
           <ul>
             <li>
-              <!-- <i class="lni-user"></i> -->
               <span class="icon">
                 <i class="fa-solid fa-users"></i>
               </span>
@@ -302,7 +245,7 @@
         >
           <div class="event-item">
             <img
-              class="img-fluid w-100"
+              class="img-fluid w-100 h-100"
               [src]="event.posterPath"
               alt=""
             />
@@ -314,51 +257,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="col-lg-3 col-md-6 col-xs-12">
-          <div class="event-item">
-            <img
-              class="img-fluid"
-              src="https://images.squarespace-cdn.com/content/5898e29c725e25e7132d5a5a/1487546591045-NJLLE20UXLVGZ9XHL47Y/600x400-Image-Placeholder.jpg?content-type=image%2Fjpeg"
-              alt=""
-            />
-            <div class="overlay-text">
-              <div class="content">
-                <h3>Designer Event</h3>
-                <a href="#">View details</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-xs-12">
-          <div class="event-item">
-            <img
-              class="img-fluid"
-              src="https://images.squarespace-cdn.com/content/5898e29c725e25e7132d5a5a/1487546591045-NJLLE20UXLVGZ9XHL47Y/600x400-Image-Placeholder.jpg?content-type=image%2Fjpeg"
-              alt=""
-            />
-            <div class="overlay-text">
-              <div class="content">
-                <h3>Marketer Event</h3>
-                <a href="#">View details</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-xs-12">
-          <div class="event-item">
-            <img
-              class="img-fluid"
-              src="https://images.squarespace-cdn.com/content/5898e29c725e25e7132d5a5a/1487546591045-NJLLE20UXLVGZ9XHL47Y/600x400-Image-Placeholder.jpg?content-type=image%2Fjpeg"
-              alt=""
-            />
-            <div class="overlay-text">
-              <div class="content">
-                <h3>JS Event</h3>
-                <a href="#">View details</a>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
       <div class="row mt-5">
         <div class="col-12 text-center">

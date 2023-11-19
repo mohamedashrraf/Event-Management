@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import UserInfo from 'src/app/shared/interfaces/user-info';
+import { Whoiam } from 'src/app/shared/interfaces/whoiam';
 
 @Component({
   selector: 'app-place-card',
@@ -10,12 +11,13 @@ import UserInfo from 'src/app/shared/interfaces/user-info';
 export class PlaceCardComponent {
   userInfo!: UserInfo;
   @Input() place: any;
+  whoiam!: Whoiam;
   // @Input() updatePlaces: any;
   @Output() updatePlaces = new EventEmitter();
   constructor(private authService: AuthService) {
-    this.authService.user.subscribe((user) => {
-      this.userInfo = user;
-      !user.isAuthenticated && this.authService.redirectToLogin();
+    this.authService.whoiam.subscribe((value) => {
+      this.whoiam = value;
+      !this.whoiam.isAuthenticated && this.authService.redirectToLogin();
     });
   }
   morText: boolean = true;

@@ -21,49 +21,13 @@ import { endOfDay, startOfDay } from 'date-fns';
     CommonModule,
   ],
 })
-export class CalendarComponent implements OnInit {
-  // events: CalendarEvent[] = [];
+export class CalendarComponent {
   selected!: Date;
-  todayDate: Date = new Date();
   now = new Date();
   @Output() userSelectDate: EventEmitter<Date> = new EventEmitter();
 
-  constructor(
-    private authService: AuthService,
-    private eventHttpService: EventHttpService
-  ) {}
-
-  ngOnInit() {
-    this.authService.user.subscribe((user) => {
-      if (!user.isAuthenticated) {
-        this.authService.redirectToLogin();
-      }
-    });
-
-    // this.eventHttpService.getEvents().subscribe(
-    //   (events) => {
-    //     this.events = events.map(
-    //       (event: {
-    //         title: any;
-    //         createdAt: string | number | Date;
-    //         end: string | number | Date;
-    //       }) => ({
-    //         title: event.title,
-    //         start: startOfDay(new Date(event.createdAt)),
-    //         end: event.end ? endOfDay(new Date(event.end)) : undefined,
-    //       })
-    //     );
-    //   },
-    //   (error) => {
-    //     console.error('Error fetching items', error);
-    //   }
-    // );
-  }
-
   selectDate(date: Date) {
-    // console.log(e);
     this.selected = date;
-
     this.userSelectDate.emit(date);
   }
 }

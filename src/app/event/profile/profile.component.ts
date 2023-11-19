@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import UserInfo from '../../shared/interfaces/user-info';
 import { jwtDecode } from 'jwt-decode';
 import { HttpClient } from '@angular/common/http';
+import { Whoiam } from 'src/app/shared/interfaces/whoiam';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -10,33 +11,41 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProfileComponent {
   userInfo!: UserInfo;
-  loading: boolean = true;
+  loading: boolean = false;
   profileImgChaged = true;
-  imgSrc: string =
-    '';
+  imgSrc: string = '';
+  whoiam!: Whoiam;
+
   constructor(private authService: AuthService, private httpClint: HttpClient) {
-    this.authService.user.subscribe((user) => {
-      this.loading = false;
-      !user.isAuthenticated && this.authService.redirectToLogin();
-      this.userInfo = user;
-      if (user.proPicPath) this.profileImgChaged = true;
+    this.authService.whoiam.subscribe((value) => {
+      this.whoiam = value;
+      !this.whoiam.isAuthenticated && this.authService.redirectToLogin();
     });
-    const whoiam = localStorage.getItem('whoiam');
-    const token = JSON.parse(whoiam!).token;
-    const tokenData = jwtDecode(token!) as any;
-    console.log(tokenData)
-    this.httpClint.get<{data:{proPicPath:string}}>('https://events-app-api-faar.onrender.com/api/v1/user',{
-      headers:{
-        Authorization:token,
-      }}).subscribe((res)=>{
-        this.imgSrc = res.data.proPicPath;
-        this.userInfo = res.data as UserInfo
-        if(!this.imgSrc)this.profileImgChaged = false;
-      
-      },(err)=>{
-        console.log(err)
-      })
-    
+    this.loading = true;
+    this.httpClint
+      .get<{ data: { proPicPath: string } }>(
+        'https://events-app-api-faar.onrender.com/api/v1/user',
+        {
+          headers: {
+            Authorization: this.whoiam.token!,
+          },
+        }
+      )
+      .subscribe(
+        (res) => {
+          this.imgSrc = res.data.proPicPath;
+          if (!this.imgSrc) this.profileImgChaged = false;
+        },
+        (err) => {}
+      );
+    this.loading = false;
+  }
+
+  async ngOnInit() {
+    this.loading = true;
+    const user = await this.authService.user();
+    this.loading = false;
+    this.userInfo = user!;
   }
 
   changePhoto(event: any) {
@@ -51,12 +60,10 @@ export class ProfileComponent {
     this.httpClint
       .patch('https://events-app-api-faar.onrender.com/api/v1/user/', formData)
       .subscribe((res) => {
-        console.log(res);
         const reader = new FileReader();
 
         reader.onload = (event: any) => {
           this.imgSrc = event.target.result! as string;
-          console.log(this.imgSrc)
           this.profileImgChaged = true;
         };
 

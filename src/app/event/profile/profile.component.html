@@ -1,7 +1,7 @@
 <div *ngIf="loading">
   <app-loading></app-loading>
 </div>
-<div class="prof" *ngIf="!loading">
+<div class="prof" *ngIf="!loading && userInfo">
   <div class="container">
     <form method="post">
       <div class="row">

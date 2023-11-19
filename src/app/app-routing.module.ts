@@ -51,7 +51,7 @@ const routes: Routes = [
     component: SubscriptionComponent,
   },
   {
-    path: 'shating',
+    path: 'chat',
     component: ShatingLayoutComponent,
     children: [{ path: ':id', component: ShatingComponent }],
   },

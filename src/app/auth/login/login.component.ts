@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import UserInfo from 'src/app/shared/interfaces/user-info';
+import { Whoiam } from 'src/app/shared/interfaces/whoiam';
 
 @Component({
   selector: 'app-login',
@@ -11,15 +12,17 @@ import UserInfo from 'src/app/shared/interfaces/user-info';
 })
 export class LoginComponent {
   showPass = false;
+  whoiam!: Whoiam;
   constructor(private router: Router, private authService: AuthService) {
-    this.authService.user.subscribe((user) => {
-      user.isAuthenticated && this.authService.redirectToHome();
+    this.authService.whoiam.subscribe((value) => {
+      this.whoiam = value;
+      this.whoiam.isAuthenticated && this.authService.redirectToHome();
     });
   }
 
-  redirectToSignup() {
-    this.router.navigate(['signup']);
-  }
+  // redirectToSignup() {
+  //   this.router.navigate(['signup']);
+  // }
 
   async handleFormSubmit(form: FormGroup) {
     try {
@@ -34,19 +37,10 @@ export class LoginComponent {
         }
       );
       if (res.status === 200) {
-        const resData = await res.json();
-        console.log('response from login', resData);
-        const userInfo: UserInfo = resData.data;
-        console.log(userInfo, 'userInfo');
-        this.authService.login({
-          ...userInfo,
-          isAuthenticated: true,
-          token: resData.token,
-        });
-        this.authService.redirectToHome();
+        const data = await res.json();
+        this.authService.login(data.token);
       } else {
         const resErr = await res.json();
-        console.log('Unexpected response', resErr);
         if (resErr.message === 'email or password is wrong')
           form.setErrors({
             invalidLogin: 'Email or password is wrong',
@@ -60,20 +54,18 @@ export class LoginComponent {
             invalidLogin: 'Your account is banned',
           });
       }
-    } catch (err) {
-      console.log('Unexpected error', err);
-    }
+    } catch (err) {}
   }
 
   toggleShowPass(e: Event) {
     this.showPass = !this.showPass;
-
-    console.log(e.target);
-
-    console.log(this.showPass);
     const input = document.getElementById('password-input');
     const inputType = input?.getAttribute('type');
     if (inputType === 'password') input?.setAttribute('type', 'text');
     else input?.setAttribute('type', 'password');
+  }
+
+  goToSignup() {
+    this.router.navigate(['signup']);
   }
 }

@@ -5,6 +5,7 @@ import { GetTokenDataService } from 'src/app/shared/services/get-token-data.serv
 import { EventHttpService } from '../services/event-http.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import UserInfo from 'src/app/shared/interfaces/user-info';
+import { Whoiam } from 'src/app/shared/interfaces/whoiam';
 
 @Component({
   selector: 'app-subscription',
@@ -16,6 +17,7 @@ export class SubscriptionComponent {
   activeId: any;
   userInfo!: UserInfo;
   isSubscribe = false;
+  whoiam!: Whoiam;
   constructor(
     private activeRoute: ActivatedRoute,
     private router: Router,
@@ -25,23 +27,26 @@ export class SubscriptionComponent {
     private authService: AuthService
   ) {
     this.activeId = this.getTokenData.tokenData._id;
-    console.log(this.activeId);
-    this.authService.user.subscribe((user) => {
-      !user.isAuthenticated && this.authService.redirectToLogin();
-      this.userInfo = user;
-      if (this.userInfo.isVIP) this.isSubscribe = true;
+
+    this.authService.whoiam.subscribe((value) => {
+      this.whoiam = value;
+      !this.whoiam.isAuthenticated && this.authService.redirectToLogin();
     });
   }
+
+  async ngOnInit() {
+    const user = await this.authService.user();
+    this.userInfo = user!;
+    if (this.userInfo.isVIP) this.isSubscribe = true;
+  }
+
   VIPPaypal() {
     this.isGitLink = true;
     this.eventHttp
       .getPaypal(this.getTokenData.tokenData._id)
       .subscribe((res) => {
-        console.log(res.data.link);
         const link = res.data.link;
         location.href = link;
-
-        // this.isGitLink = false
       });
   }
 }
