@@ -8,6 +8,7 @@ import HostDetails from 'src/app/shared/interfaces/host-info';
 import EventInfo from 'src/app/shared/interfaces/event-info';
 import PlaceInfo from 'src/app/shared/interfaces/place-info';
 import { Whoiam } from 'src/app/shared/interfaces/whoiam';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-host-details',
@@ -78,15 +79,12 @@ export class HostDetailsComponent {
   async getHostDetails(hostId: string) {
     this.loadingGet = true;
     try {
-      const res = await fetch(
-        `https://events-app-api-faar.onrender.com/api/v1/host/hosts/${hostId}`,
-        {
-          method: 'GET',
-          headers: {
-            Authorization: this.whoiam.token!,
-          },
-        }
-      );
+      const res = await fetch(environment.API_URL + `/host/hosts/${hostId}`, {
+        method: 'GET',
+        headers: {
+          Authorization: this.whoiam.token!,
+        },
+      });
 
       const data: { message: string; data: HostDetails } = await res.json();
 
@@ -112,7 +110,7 @@ export class HostDetailsComponent {
     try {
       this.httpClint
         .post<{ message: string; data: EventInfo }>(
-          'https://events-app-api-faar.onrender.com/api/v1/event',
+          environment.API_URL + '/event',
           formData,
           {
             headers: {
@@ -162,7 +160,7 @@ export class HostDetailsComponent {
   async handleAddAdmin(form: FormGroup) {
     try {
       const res = await fetch(
-        `https://events-app-api-faar.onrender.com/api/v1/host/add_admin/${this.hostDetails._id}`,
+        environment.API_URL + `/host/add_admin/${this.hostDetails._id}`,
         {
           method: 'PATCH',
           body: JSON.stringify(form.value),
@@ -192,7 +190,8 @@ export class HostDetailsComponent {
   async handleARemoveAdmin(id: string) {
     try {
       const res = await fetch(
-        `https://events-app-api-faar.onrender.com/api/v1/host//remov_admin/${this.hostDetails._id}/${id}`,
+        environment.API_URL +
+          `/host//remov_admin/${this.hostDetails._id}/${id}`,
         {
           method: 'PATCH',
           headers: {
@@ -214,15 +213,12 @@ export class HostDetailsComponent {
 
   // 5) Get all places
   async getPlaces() {
-    const res = await fetch(
-      'https://events-app-api-faar.onrender.com/api/v1/place/all',
-      {
-        method: 'GET',
-        headers: {
-          Authorization: this.whoiam.token!,
-        },
-      }
-    );
+    const res = await fetch(environment.API_URL + '/place/all', {
+      method: 'GET',
+      headers: {
+        Authorization: this.whoiam.token!,
+      },
+    });
 
     if (res.ok) {
       const data: { message: string; data: PlaceInfo[] } = await res.json();
@@ -242,15 +238,12 @@ export class HostDetailsComponent {
     e.stopPropagation();
     e.preventDefault();
     try {
-      const res = await fetch(
-        'https://events-app-api-faar.onrender.com/api/v1/event/' + id,
-        {
-          method: 'DELETE',
-          headers: {
-            Authorization: this.whoiam.token!,
-          },
-        }
-      );
+      const res = await fetch(environment.API_URL + '/event/' + id, {
+        method: 'DELETE',
+        headers: {
+          Authorization: this.whoiam.token!,
+        },
+      });
       const data = await res.json();
       console.log('data from remove host', data);
       if (data.message === 'delete event')

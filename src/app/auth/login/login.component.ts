@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -18,16 +19,13 @@ export class LoginComponent {
 
   async handleFormSubmit(form: FormGroup) {
     try {
-      const res = await fetch(
-        'https://events-app-api-faar.onrender.com/api/v1/user/login',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(form.value),
-        }
-      );
+      const res = await fetch(environment.API_URL + '/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form.value),
+      });
       if (res.status === 200) {
         const data = await res.json();
         this.authService.login(data.token);

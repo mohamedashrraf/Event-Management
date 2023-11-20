@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import UserInfo from '../shared/interfaces/user-info';
 import { Whoiam } from '../shared/interfaces/whoiam';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -22,15 +23,12 @@ export class AuthService {
     if (!whoiam?.token) {
       this.logout();
     }
-    const res = await fetch(
-      'https://events-app-api-faar.onrender.com/api/v1/user/',
-      {
-        method: 'GET',
-        headers: {
-          Authorization: whoiam.token!,
-        },
-      }
-    );
+    const res = await fetch(environment.API_URL + '/user/', {
+      method: 'GET',
+      headers: {
+        Authorization: whoiam.token!,
+      },
+    });
     if (res.status === 200) {
       const userData: { message: string; data: UserInfo } = await res.json();
       return userData.data;

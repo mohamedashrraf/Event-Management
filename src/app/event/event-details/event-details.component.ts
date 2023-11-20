@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import UserInfo from 'src/app/shared/interfaces/user-info';
 import { BehaviorSubject } from 'rxjs';
 import { Whoiam } from 'src/app/shared/interfaces/whoiam';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-event-details',
@@ -75,14 +76,11 @@ export class EventDetailsComponent {
 
   async getRelatedEvents() {
     try {
-      const res = await fetch(
-        `https://events-app-api-faar.onrender.com/api/v1/event/all`,
-        {
-          headers: {
-            Authorization: this.whoiam.token!,
-          },
-        }
-      );
+      const res = await fetch(environment.API_URL + `/event/all`, {
+        headers: {
+          Authorization: this.whoiam.token!,
+        },
+      });
       if (res.ok) {
         const data: { message: string; data: EventInfo[] } = await res.json();
         const randomNum = Math.round(Math.random() * 10) + 1;
@@ -99,7 +97,7 @@ export class EventDetailsComponent {
     try {
       if (!this.userAttende) {
         const res = await fetch(
-          `https://events-app-api-faar.onrender.com/api/v1/event/subscribe/${this.activeId.value}`,
+          environment.API_URL + `/event/subscribe/${this.activeId.value}`,
 
           {
             method: 'PATCH',
@@ -114,7 +112,7 @@ export class EventDetailsComponent {
         } else console.log('res not ok ', await res.json());
       } else {
         const res = await fetch(
-          `https://events-app-api-faar.onrender.com/api/v1/event/unsubscribe/${this.activeId.value}`,
+          environment.API_URL + `/event/unsubscribe/${this.activeId.value}`,
 
           {
             method: 'PATCH',

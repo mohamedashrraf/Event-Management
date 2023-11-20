@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import UserInfo from '../../shared/interfaces/user-info';
 import HostDetails from 'src/app/shared/interfaces/host-info';
 import { Whoiam } from 'src/app/shared/interfaces/whoiam';
+import { environment } from 'src/environments/environment';
 
 interface HostDataRes {
   admins: string[];
@@ -50,17 +51,14 @@ export class HostsComponent {
   async createHost(form: FormGroup) {
     try {
       this.loadingPost = true;
-      const res = await fetch(
-        'https://events-app-api-faar.onrender.com/api/v1/host',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: this.whoiam.token!,
-          },
-          body: JSON.stringify(this.hostForm.value),
-        }
-      );
+      const res = await fetch(environment.API_URL + '/host', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: this.whoiam.token!,
+        },
+        body: JSON.stringify(this.hostForm.value),
+      });
       const data: { message: string; data: HostDetails } = await res.json();
       this.loadingPost = false;
       if (data.message === 'host created') {
@@ -82,15 +80,12 @@ export class HostsComponent {
   async getHosts() {
     try {
       this.loadingGet = true;
-      const res = await fetch(
-        'https://events-app-api-faar.onrender.com/api/v1/host/all_user_host',
-        {
-          method: 'GET',
-          headers: {
-            Authorization: this.whoiam.token!,
-          },
-        }
-      );
+      const res = await fetch(environment.API_URL + '/host/all_user_host', {
+        method: 'GET',
+        headers: {
+          Authorization: this.whoiam.token!,
+        },
+      });
       if (res.ok) {
         const data: {
           data: HostDetails[];
@@ -107,15 +102,12 @@ export class HostsComponent {
   async handleARemoveHost(e: Event, id: string) {
     e.stopPropagation();
     try {
-      const res = await fetch(
-        'https://events-app-api-faar.onrender.com/api/v1/host/' + id,
-        {
-          method: 'DELETE',
-          headers: {
-            Authorization: this.whoiam.token!,
-          },
-        }
-      );
+      const res = await fetch(environment.API_URL + '/host/' + id, {
+        method: 'DELETE',
+        headers: {
+          Authorization: this.whoiam.token!,
+        },
+      });
       const data = await res.json();
       if (data.message === 'host deleted')
         this.hosts = this.hosts.filter((host) => host._id !== id);

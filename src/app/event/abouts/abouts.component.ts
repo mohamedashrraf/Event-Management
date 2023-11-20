@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import UserInfo from '../../shared/interfaces/user-info';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-abouts',
@@ -36,10 +37,7 @@ export class AboutsComponent implements OnInit {
     };
 
     this.httpClient
-      .patch(
-        'https://events-app-api-faar.onrender.com/api/v1/user/',
-        updatedData
-      )
+      .patch(environment.API_URL + '/user/', updatedData)
       .pipe(
         catchError((error) => {
           return throwError(error);
