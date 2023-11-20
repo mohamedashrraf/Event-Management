@@ -14,45 +14,54 @@ import { HostDetailsComponent } from './event/host-details/host-details.componen
 import { SubscriptionComponent } from './event/subscription/subscription.component';
 import { ShatingComponent } from './shating/shating/shating.component';
 import { ShatingLayoutComponent } from './shating/shating-layout/shating-layout.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: LandingComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'home',
     component: EventHomeComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'signup',
     component: SignupComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', component: AboutsComponent },
       { path: 'hosts', component: HostsComponent },
+      { path: 'hosts/:hostId', component: HostDetailsComponent },
       { path: 'places', component: PlacesComponent },
     ],
   },
   {
-    path: 'profile/hosts/:hostId',
-    component: HostDetailsComponent,
+    path: 'event/:id',
+    component: EventDetailsComponent,
+    canActivate: [AuthGuard],
   },
-  { path: 'event/:id', component: EventDetailsComponent },
   {
     path: 'subscribe',
     component: SubscriptionComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'chat',
     component: ShatingLayoutComponent,
+    canActivate: [AuthGuard],
     children: [{ path: ':id', component: ShatingComponent }],
   },
   {

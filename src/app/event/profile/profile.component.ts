@@ -19,7 +19,6 @@ export class ProfileComponent {
   constructor(private authService: AuthService, private httpClint: HttpClient) {
     this.authService.whoiam.subscribe((value) => {
       this.whoiam = value;
-      !this.whoiam.isAuthenticated && this.authService.redirectToLogin();
     });
     this.loading = true;
     this.httpClint

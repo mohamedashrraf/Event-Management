@@ -17,21 +17,12 @@ export class SubscriptionComponent {
   activeId: any;
   userInfo!: UserInfo;
   isSubscribe = false;
-  whoiam!: Whoiam;
   constructor(
-    private activeRoute: ActivatedRoute,
-    private router: Router,
     private getTokenData: GetTokenDataService,
     private eventHttp: EventHttpService,
-
     private authService: AuthService
   ) {
     this.activeId = this.getTokenData.tokenData._id;
-
-    this.authService.whoiam.subscribe((value) => {
-      this.whoiam = value;
-      !this.whoiam.isAuthenticated && this.authService.redirectToLogin();
-    });
   }
 
   async ngOnInit() {

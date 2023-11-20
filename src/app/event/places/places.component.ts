@@ -30,18 +30,14 @@ export class PlacesComponent {
   file: any;
   handleCreate: any;
   isVIP = this.getTokenData.tokenData.isVIP;
-
   whoiam!: Whoiam;
-
   constructor(
     private authService: AuthService,
     private httpClint: HttpClient,
-    private getTokenData: GetTokenDataService,
-    private router: Router
+    private getTokenData: GetTokenDataService
   ) {
     this.authService.whoiam.subscribe((value) => {
       this.whoiam = value;
-      !this.whoiam.isAuthenticated && this.authService.redirectToLogin();
     });
   }
 
