@@ -14,34 +14,33 @@ import { HostDetailsComponent } from './event/host-details/host-details.componen
 import { SubscriptionComponent } from './event/subscription/subscription.component';
 import { ShatingComponent } from './shating/shating/shating.component';
 import { ShatingLayoutComponent } from './shating/shating-layout/shating-layout.component';
-import { LogoutGuard } from './auth/Logout.guard';
-import { LoginGuard } from './auth/login.guard';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: LandingComponent,
-    canActivate: [LogoutGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'home',
     component: EventHomeComponent,
-    canActivate: [LoginGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [LogoutGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'signup',
     component: SignupComponent,
-    canActivate: [LogoutGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'profile',
     component: ProfileComponent,
-    canActivate: [LoginGuard],
+    canActivate: [AuthGuard],
     children: [
       { path: '', component: AboutsComponent },
       { path: 'hosts', component: HostsComponent },
@@ -49,24 +48,20 @@ const routes: Routes = [
       { path: 'places', component: PlacesComponent },
     ],
   },
-  // {
-  //   path: 'profile/hosts/:hostId',
-  //   component: HostDetailsComponent,
-  // },
   {
     path: 'event/:id',
     component: EventDetailsComponent,
-    canActivate: [LoginGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'subscribe',
     component: SubscriptionComponent,
-    canActivate: [LoginGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'chat',
     component: ShatingLayoutComponent,
-    canActivate: [LoginGuard],
+    canActivate: [AuthGuard],
     children: [{ path: ':id', component: ShatingComponent }],
   },
   {
