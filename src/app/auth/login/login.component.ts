@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-import UserInfo from 'src/app/shared/interfaces/user-info';
-import { Whoiam } from 'src/app/shared/interfaces/whoiam';
 
 @Component({
   selector: 'app-login',
@@ -12,13 +10,7 @@ import { Whoiam } from 'src/app/shared/interfaces/whoiam';
 })
 export class LoginComponent {
   showPass = false;
-  whoiam!: Whoiam;
-  constructor(private router: Router, private authService: AuthService) {
-    this.authService.whoiam.subscribe((value) => {
-      this.whoiam = value;
-      this.whoiam.isAuthenticated && this.authService.redirectToHome();
-    });
-  }
+  constructor(private router: Router, private authService: AuthService) {}
 
   // redirectToSignup() {
   //   this.router.navigate(['signup']);

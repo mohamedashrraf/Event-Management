@@ -29,7 +29,6 @@ export class HostsComponent {
   constructor(private authService: AuthService) {
     this.authService.whoiam.subscribe((value) => {
       this.whoiam = value;
-      !this.whoiam.isAuthenticated && this.authService.redirectToLogin();
     });
     this.hostForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(5)]),

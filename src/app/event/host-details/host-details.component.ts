@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
 import UserInfo from '../../shared/interfaces/user-info';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import HostDetails from 'src/app/shared/interfaces/host-info';
 import EventInfo from 'src/app/shared/interfaces/event-info';
@@ -30,11 +30,11 @@ export class HostDetailsComponent {
   constructor(
     private authService: AuthService,
     private activeRoute: ActivatedRoute,
-    private httpClint: HttpClient
+    private httpClint: HttpClient,
+    private router: Router
   ) {
     this.authService.whoiam.subscribe((value) => {
       this.whoiam = value;
-      !this.whoiam.isAuthenticated && this.authService.redirectToLogin();
     });
 
     this.eventForm = new FormGroup({
@@ -87,13 +87,14 @@ export class HostDetailsComponent {
           },
         }
       );
-      if (!res.ok)
-        console.log('res from get dpecific host in not ok', await res.json());
 
       const data: { message: string; data: HostDetails } = await res.json();
-      this.hostDetails = data.data;
 
-      this.eventForm.addControl('host', new FormControl(this.hostDetails._id));
+      if (!res.ok || !data.data) {
+        this.router.navigate(['not-found']);
+      } else this.hostDetails = data.data;
+
+      this.eventForm.addControl('host', new FormControl(this.hostDetails?._id));
     } catch (err) {
       console.log('err from get specific host', err);
     }

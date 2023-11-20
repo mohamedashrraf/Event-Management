@@ -31,7 +31,6 @@ export class EventDetailsComponent {
   ) {
     this.authService.whoiam.subscribe((value) => {
       this.whoiam = value;
-      !this.whoiam.isAuthenticated && this.authService.redirectToLogin();
     });
   }
 
@@ -52,20 +51,24 @@ export class EventDetailsComponent {
     this.loading = true;
     this.eventHttp.getEventDetails(this.activeId.value).subscribe(
       (res) => {
-        this.foundEvent = res.data;
-        this.loading = false;
-        this.foundPhoto = this.foundEvent.posterPath;
-        this.foundEvent.posterPath = `'${this.foundEvent.posterPath}'`;
-        const userAttended = this.foundEvent.subscribers.find(
-          (user: UserInfo) => user._id === this.userInfo._id
-        );
-        if (userAttended) {
-          this.userAttende = true;
-        } else this.userAttende = false;
+        if (res.message === 'not find events')
+          this.router.navigate(['not-found']);
+        else {
+          this.foundEvent = res.data;
+          this.loading = false;
+          this.foundPhoto = this.foundEvent.posterPath;
+          this.foundEvent.posterPath = `'${this.foundEvent.posterPath}'`;
+          const userAttended = this.foundEvent.subscribers.find(
+            (user: UserInfo) => user._id === this.userInfo._id
+          );
+          if (userAttended) {
+            this.userAttende = true;
+          } else this.userAttende = false;
+        }
       },
       (error) => {
         this.loading = false;
-        this.router.navigate(['/notfound']);
+        this.router.navigate(['not-found']);
       }
     );
   }

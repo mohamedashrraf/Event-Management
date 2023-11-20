@@ -14,45 +14,59 @@ import { HostDetailsComponent } from './event/host-details/host-details.componen
 import { SubscriptionComponent } from './event/subscription/subscription.component';
 import { ShatingComponent } from './shating/shating/shating.component';
 import { ShatingLayoutComponent } from './shating/shating-layout/shating-layout.component';
+import { LogoutGuard } from './auth/Logout.guard';
+import { LoginGuard } from './auth/login.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: LandingComponent,
+    canActivate: [LogoutGuard],
   },
   {
     path: 'home',
     component: EventHomeComponent,
+    canActivate: [LoginGuard],
   },
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [LogoutGuard],
   },
   {
     path: 'signup',
     component: SignupComponent,
+    canActivate: [LogoutGuard],
   },
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [LoginGuard],
     children: [
       { path: '', component: AboutsComponent },
       { path: 'hosts', component: HostsComponent },
+      { path: 'hosts/:hostId', component: HostDetailsComponent },
       { path: 'places', component: PlacesComponent },
     ],
   },
+  // {
+  //   path: 'profile/hosts/:hostId',
+  //   component: HostDetailsComponent,
+  // },
   {
-    path: 'profile/hosts/:hostId',
-    component: HostDetailsComponent,
+    path: 'event/:id',
+    component: EventDetailsComponent,
+    canActivate: [LoginGuard],
   },
-  { path: 'event/:id', component: EventDetailsComponent },
   {
     path: 'subscribe',
     component: SubscriptionComponent,
+    canActivate: [LoginGuard],
   },
   {
     path: 'chat',
     component: ShatingLayoutComponent,
+    canActivate: [LoginGuard],
     children: [{ path: ':id', component: ShatingComponent }],
   },
   {

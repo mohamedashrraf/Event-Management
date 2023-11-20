@@ -31,7 +31,6 @@ function passwordMatchValidator(
 })
 export class SignupComponent implements OnInit {
   registrationForm!: FormGroup;
-  whoiam!: Whoiam;
   foucusInput = {
     password: false,
     confirmPassword: false,
@@ -43,12 +42,7 @@ export class SignupComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService
-  ) {
-    this.authService.whoiam.subscribe((value) => {
-      this.whoiam = value;
-      this.whoiam.isAuthenticated && this.authService.redirectToHome();
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group(

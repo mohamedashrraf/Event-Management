@@ -15,7 +15,6 @@ export class EventHomeComponent implements OnInit {
   events: EventInfo[];
   allEvents!: EventInfo[];
   userInfo!: UserInfo;
-  whoiam!: Whoiam;
   URL: any;
   loading: boolean = true;
 
@@ -24,10 +23,6 @@ export class EventHomeComponent implements OnInit {
     private eventHttpService: EventHttpService,
     private router: Router
   ) {
-    this.authService.whoiam.subscribe((value) => {
-      this.whoiam = value;
-      !this.whoiam.isAuthenticated && this.authService.redirectToLogin();
-    });
     this.events = [];
   }
   handleClick(id: string) {

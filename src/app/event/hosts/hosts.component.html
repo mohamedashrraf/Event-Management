@@ -201,6 +201,7 @@
               <div class="no-wrap">
                 <div class="item-date text-muted text-sm d-none d-md-block">
                   <button
+                    *ngIf="userInfo"
                     (click)="handleARemoveHost($event, host._id)"
                     [ngStyle]="{
                       cursor: !(userInfo._id === host.createdBy)
