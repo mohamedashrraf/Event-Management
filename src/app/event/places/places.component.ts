@@ -15,6 +15,7 @@ import { User } from 'src/app/shared/interfaces/user';
 import UserInfo from 'src/app/shared/interfaces/user-info';
 import PlaceInfo from 'src/app/shared/interfaces/place-info';
 import { Whoiam } from 'src/app/shared/interfaces/whoiam';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-places',
@@ -49,15 +50,12 @@ export class PlacesComponent {
 
   async getPlaces() {
     this.isLoding = true;
-    const res = await fetch(
-      `https://events-app-api-faar.onrender.com/api/v1/place/all_user_place`,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: this.whoiam.token!,
-        },
-      }
-    );
+    const res = await fetch(environment.API_URL + `/place/all_user_place`, {
+      method: 'GET',
+      headers: {
+        Authorization: this.whoiam.token!,
+      },
+    });
     const data = await res.json();
     this.places = data.data;
     this.isLoding = false;
@@ -79,15 +77,11 @@ export class PlacesComponent {
 
     try {
       this.httpClint
-        .post<ResBody>(
-          'https://events-app-api-faar.onrender.com/api/v1/place/',
-          formData,
-          {
-            headers: {
-              Authorization: this.whoiam.token!,
-            },
-          }
-        )
+        .post<ResBody>(environment.API_URL + '/place/', formData, {
+          headers: {
+            Authorization: this.whoiam.token!,
+          },
+        })
         .subscribe(
           async (res) => {
             if (res.message === 'place created') {
@@ -126,16 +120,12 @@ export class PlacesComponent {
 
   async handleUpdatePlaces(id: string) {
     try {
-      const res = await fetch(
-        'https://events-app-api-faar.onrender.com/api/v1/place/with_admin/' +
-          id,
-        {
-          method: 'DELETE',
-          headers: {
-            Authorization: this.whoiam.token!,
-          },
-        }
-      );
+      const res = await fetch(environment.API_URL + '/place/with_admin/' + id, {
+        method: 'DELETE',
+        headers: {
+          Authorization: this.whoiam.token!,
+        },
+      });
       const data = await res.json();
       if (data.message === 'place deleted') {
         this.places = this.places.filter((place) => place._id !== id);

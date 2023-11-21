@@ -4,6 +4,7 @@ import UserInfo from '../../shared/interfaces/user-info';
 import { jwtDecode } from 'jwt-decode';
 import { HttpClient } from '@angular/common/http';
 import { Whoiam } from 'src/app/shared/interfaces/whoiam';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -22,14 +23,11 @@ export class ProfileComponent {
     });
     this.loading = true;
     this.httpClint
-      .get<{ data: { proPicPath: string } }>(
-        'https://events-app-api-faar.onrender.com/api/v1/user',
-        {
-          headers: {
-            Authorization: this.whoiam.token!,
-          },
-        }
-      )
+      .get<{ data: { proPicPath: string } }>(environment.API_URL + '/user', {
+        headers: {
+          Authorization: this.whoiam.token!,
+        },
+      })
       .subscribe(
         (res) => {
           this.imgSrc = res.data.proPicPath;
@@ -57,7 +55,7 @@ export class ProfileComponent {
     const formData = new FormData();
     formData.append('proPic', file);
     this.httpClint
-      .patch('https://events-app-api-faar.onrender.com/api/v1/user/', formData)
+      .patch(environment.API_URL + '/user/', formData)
       .subscribe((res) => {
         const reader = new FileReader();
 

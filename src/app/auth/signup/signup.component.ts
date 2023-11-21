@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Whoiam } from 'src/app/shared/interfaces/whoiam';
+import { environment } from 'src/environments/environment';
 
 // matching passwords
 function passwordMatchValidator(
@@ -92,16 +93,13 @@ export class SignupComponent implements OnInit {
       formData.append(key, value);
     }
     try {
-      const res = await fetch(
-        'https://events-app-api-faar.onrender.com/api/v1/user/register',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(this.registrationForm.value),
-        }
-      );
+      const res = await fetch(environment.API_URL + '/user/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(this.registrationForm.value),
+      });
       if (res.status === 201) {
         const data = await res.json();
         this.authService.redirectToLogin();
